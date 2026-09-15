@@ -682,7 +682,7 @@
   isolation: isolate;
   min-height: calc(100svh - 60px);
   overflow: hidden;
-  background: #f7fbf8;
+  background: #03152b url("/V-poster.jpg") center / cover no-repeat;
   color: #12382b;
 }
 .bio-hero-video,
@@ -1208,12 +1208,12 @@
 
 @media (max-width: 800px) {
   .bio-hero {
-    min-height: 0;
+    min-height: calc(100svh - 60px);
   }
   .bio-hero-grid {
     grid-template-columns: 1fr;
     gap: 30px;
-    min-height: 0;
+    min-height: calc(100svh - 60px);
     padding-block: 58px 64px;
   }
   .bio-hero-video-overlay {

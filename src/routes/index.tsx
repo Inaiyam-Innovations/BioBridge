@@ -59,6 +59,7 @@ function Home() {
           muted
           playsInline
           preload="auto"
+          poster="/V-poster.jpg"
           aria-hidden="true"
         >
           <source src="/V.mp4" type="video/mp4" />
