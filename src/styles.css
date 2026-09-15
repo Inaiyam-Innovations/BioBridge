@@ -1,0 +1,750 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── BioBridge 2026 ─── Premium light biotech identity */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-glow: var(--glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ── Light mode design tokens ── */
+:root {
+  --radius: 0.75rem;
+
+  /* Backgrounds */
+  --background: #F8FCF8;
+  --foreground: #0E2F25;
+  --surface: #EAF7EF;
+  --surface-foreground: #0E2F25;
+
+  /* Cards */
+  --card: #FFFFFF;
+  --card-foreground: #0E2F25;
+  --popover: #FFFFFF;
+  --popover-foreground: #0E2F25;
+
+  /* Brand greens */
+  --primary: #18A957;
+  --primary-foreground: #FFFFFF;
+  --glow: #22C46A;
+
+  /* Secondaries */
+  --secondary: #EAF7EF;
+  --secondary-foreground: #087A43;
+  --muted: #F0F8F3;
+  --muted-foreground: #4A7A60;
+
+  /* Accent — cyan */
+  --accent: #DCEFF0;
+  --accent-foreground: #163D50;
+
+  /* Destructive */
+  --destructive: #D84040;
+  --destructive-foreground: #FFFFFF;
+
+  /* Borders & inputs */
+  --border: #CDEDD8;
+  --input: #CDEDD8;
+  --ring: #18A957;
+
+  /* Charts */
+  --chart-1: #18A957;
+  --chart-2: #38BFC4;
+  --chart-3: #087A43;
+  --chart-4: #163D50;
+  --chart-5: #CDEDD8;
+
+  /* Sidebar */
+  --sidebar: #F0F8F3;
+  --sidebar-foreground: #0E2F25;
+  --sidebar-primary: #18A957;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EAF7EF;
+  --sidebar-accent-foreground: #087A43;
+  --sidebar-border: #CDEDD8;
+  --sidebar-ring: #18A957;
+}
+
+/* ── Base layer ── */
+@layer base {
+  * {
+    border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--color-foreground);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a, button, input, select, textarea {
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease,
+      color 0.18s ease,
+      transform 0.18s ease,
+      opacity 0.18s ease;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
+    color: var(--foreground);
+  }
+
+  select, option {
+    background-color: var(--color-card);
+    color: var(--color-foreground);
+  }
+
+  img, svg {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* ════════════════════════════════════
+   UTILITY CLASSES
+════════════════════════════════════ */
+
+/* ── Glow shadows ── */
+@utility bio-glow {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 25%, transparent),
+    0 8px 32px -8px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+@utility bio-glow-strong {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--primary) 35%, transparent),
+    0 16px 48px -12px color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+/* ── Gradient text ── */
+@utility bio-gradient-text {
+  background-image: linear-gradient(
+    125deg,
+    var(--primary) 0%,
+    var(--glow) 50%,
+    #38BFC4 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Background textures ── */
+@utility bio-mesh {
+  background-image:
+    radial-gradient(ellipse 70% 55% at 5% -5%,
+      color-mix(in srgb, var(--primary) 14%, transparent),
+      transparent 60%),
+    radial-gradient(ellipse 55% 45% at 98% 5%,
+      color-mix(in srgb, #38BFC4 10%, transparent),
+      transparent 65%),
+    radial-gradient(ellipse 40% 30% at 50% 105%,
+      color-mix(in srgb, var(--primary) 6%, transparent),
+      transparent 70%);
+}
+
+@utility bio-grid {
+  background-image:
+    linear-gradient(to right,
+      color-mix(in srgb, var(--border) 60%, transparent) 1px,
+      transparent 1px),
+    linear-gradient(to bottom,
+      color-mix(in srgb, var(--border) 60%, transparent) 1px,
+      transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black 30%, transparent 92%);
+}
+
+/* ── Card surfaces ── */
+@utility card-surface {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 1px 0 0 color-mix(in srgb, white 90%, transparent) inset,
+    0 4px 24px -8px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+@utility card-surface-hover {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 1px 0 0 color-mix(in srgb, white 90%, transparent) inset,
+    0 4px 24px -8px color-mix(in srgb, var(--primary) 12%, transparent);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  &:hover {
+    border-color: color-mix(in srgb, var(--primary) 50%, transparent);
+    box-shadow:
+      0 1px 0 0 color-mix(in srgb, white 90%, transparent) inset,
+      0 8px 32px -8px color-mix(in srgb, var(--primary) 22%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@utility soft-panel {
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 75%, transparent);
+}
+
+/* ── Section spacing helpers ── */
+@utility section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@utility section-pad-sm {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+/* ════════════════════════════════════
+   HERO — 3D BIO STAGE
+════════════════════════════════════ */
+
+@utility bio-stage {
+  position: relative;
+  isolation: isolate;
+  min-height: 380px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 50% 36%,
+      color-mix(in srgb, white 97%, transparent),
+      transparent 38%),
+    linear-gradient(145deg, #F0FAF4, #DDF2E7);
+  box-shadow:
+    0 32px 72px -32px color-mix(in srgb, var(--primary) 35%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 95%, transparent);
+  transform: perspective(1000px) rotateX(1.5deg);
+}
+
+@utility bio-stage-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--primary) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--primary) 14%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 78%, transparent);
+}
+
+@utility bio-orbit {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border-radius: 999px;
+  transform: translate(-50%, -50%) rotateX(68deg) rotateZ(-18deg);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--glow) 20%, transparent);
+}
+
+@utility bio-orbit-one {
+  width: 74%;
+  height: 44%;
+  animation: bio-orbit-drift 9s ease-in-out infinite;
+}
+
+@utility bio-orbit-two {
+  width: 56%;
+  height: 70%;
+  transform: translate(-50%, -50%) rotateX(68deg) rotateZ(62deg);
+  opacity: 0.6;
+  animation: bio-orbit-drift 11s ease-in-out infinite reverse;
+}
+
+@utility bio-pedestal {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  width: 60%;
+  height: 20%;
+  transform: translateX(-50%) perspective(500px) rotateX(62deg);
+  transform-style: preserve-3d;
+}
+
+@utility bio-pedestal-top {
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  border-radius: 50%;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, white 92%, transparent),
+    color-mix(in srgb, var(--accent) 60%, white));
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--glow) 38%, transparent),
+    inset 0 0 18px color-mix(in srgb, white 88%, transparent);
+}
+
+@utility bio-pedestal-face {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40%;
+  height: 54%;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  border-top: 0;
+  border-radius: 0 0 50% 50%;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary) 18%, white),
+    color-mix(in srgb, var(--primary) 38%, white));
+  transform: translateZ(-10px);
+}
+
+@utility bio-molecule {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 42%;
+  height: 60%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%) translateZ(40px);
+  transform-style: preserve-3d;
+  animation: bio-molecule-float 5.5s ease-in-out infinite;
+}
+
+@utility bio-dna {
+  position: relative;
+  z-index: 2;
+  width: 70%;
+  height: 70%;
+  color: var(--primary);
+  filter:
+    drop-shadow(0 12px 18px color-mix(in srgb, var(--primary) 28%, transparent))
+    drop-shadow(0 2px 4px color-mix(in srgb, var(--primary) 18%, transparent));
+}
+
+/* Hero logo PNG — replaces the Dna icon inside the bio-stage */
+@utility bio-logo-hero {
+  position: relative;
+  z-index: 2;
+  width: 62%;
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 14px 22px color-mix(in srgb, var(--primary) 32%, transparent))
+    drop-shadow(0 2px 6px color-mix(in srgb, var(--primary) 18%, transparent));
+}
+
+@utility bio-molecule-halo {
+  position: absolute;
+  width: 88%;
+  height: 76%;
+  border: 1px solid color-mix(in srgb, var(--glow) 45%, transparent);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    color-mix(in srgb, white 58%, transparent),
+    transparent 68%);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--glow) 28%, transparent);
+  transform: rotateY(65deg);
+}
+
+@utility bio-molecule-leaf {
+  position: absolute;
+  z-index: 3;
+  width: 28%;
+  height: 13%;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, #38BFC4, var(--primary));
+  box-shadow: 0 8px 14px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+@utility bio-molecule-leaf-one {
+  top: 8%;
+  right: 2%;
+  transform: rotate(-28deg);
+}
+
+@utility bio-molecule-leaf-two {
+  bottom: 16%;
+  left: -1%;
+  transform: rotate(148deg);
+}
+
+/* Floating data chips on the hero visual */
+@utility bio-data-card {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, white 82%, transparent);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  box-shadow: 0 12px 22px -14px color-mix(in srgb, var(--primary) 50%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@layer components {
+  .bio-data-card strong {
+    color: var(--primary);
+    font-size: 0.78rem;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+}
+
+@utility bio-data-card-one {
+  left: 7%;
+  top: 22%;
+  animation: bio-card-float 4.2s ease-in-out infinite;
+}
+
+@utility bio-data-card-two {
+  right: 6%;
+  top: 14%;
+  animation: bio-card-float 5s ease-in-out infinite reverse;
+}
+
+@utility bio-data-card-three {
+  left: 10%;
+  bottom: 24%;
+  animation: bio-card-float 3.8s ease-in-out 0.6s infinite;
+}
+
+@utility bio-data-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--glow);
+  box-shadow: 0 0 7px var(--glow);
+  flex-shrink: 0;
+}
+
+@utility bio-data-dot-cyan {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #38BFC4;
+  box-shadow: 0 0 7px #38BFC4;
+  flex-shrink: 0;
+}
+
+/* ── Particle dots ── */
+@utility bio-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--primary);
+  opacity: 0.35;
+}
+
+/* ════════════════════════════════════
+   KEYFRAME ANIMATIONS
+════════════════════════════════════ */
+
+@keyframes bio-molecule-float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotateY(-5deg); }
+  50%       { transform: translate(-50%, -50%) translateY(-12px) rotateY(5deg); }
+}
+
+@keyframes bio-card-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-9px); }
+}
+
+@keyframes bio-orbit-drift {
+  0%, 100% { margin-left: -1%; }
+  50%       { margin-left: 1%; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+@keyframes check-draw {
+  from { stroke-dashoffset: 100; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ── Animation utilities ── */
+@utility animate-fade-up {
+  animation: fade-up 0.55s ease both;
+}
+
+@utility animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+@utility animate-scale-in {
+  animation: scale-in 0.35s ease both;
+}
+
+/* ════════════════════════════════════
+   BIO BRIDGE LANDING THEME
+════════════════════════════════════ */
+
+.bio-home {
+  --bio-ink: #12382b;
+  --bio-muted: #557568;
+  --bio-green: #138a4b;
+  --bio-lime: #8dcc4f;
+  --bio-line: #cfe4d6;
+  color: var(--bio-ink);
+  background: #f7fbf8;
+}
+
+.bio-site-header {
+  border-color: #cfe4d6 !important;
+  background: rgba(255, 255, 255, .96) !important;
+  color: #12382b;
+  backdrop-filter: blur(14px);
+}
+.bio-site-header .text-\[\#0E2F25\] { color: #12382b !important; }
+.bio-site-header .text-\[\#4A7A60\] { color: #557568 !important; }
+.bio-site-header .border-\[\#CDEDD8\] { border-color: #cfe4d6 !important; }
+.bio-site-header .bg-\[\#EAF7EF\] { background: rgba(184, 230, 108, .15) !important; }
+.bio-site-header .hover\:bg-\[\#F0F8F3\]:hover { background: rgba(184, 230, 108, .12) !important; }
+.bio-site-header .bio-gradient-text { color: #138a4b; background-image: none; }
+
+.bio-container { width: min(1280px, calc(100% - 56px)); margin-inline: auto; }
+.bio-hero { position: relative; isolation: isolate; min-height: calc(100svh - 60px); overflow: hidden; background: #f7fbf8; color: #12382b; }
+.bio-hero-video, .bio-hero-video-overlay { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bio-hero-video { z-index: -3; object-fit: cover; object-position: center; }
+.bio-hero-video-overlay { z-index: -2; background: linear-gradient(90deg, rgba(247,251,248,.96) 0%, rgba(247,251,248,.84) 42%, rgba(247,251,248,.44) 100%), linear-gradient(0deg, rgba(247,251,248,.3), rgba(247,251,248,.3)); }
+.bio-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .42; background-image: linear-gradient(rgba(19,138,75,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(19,138,75,.08) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(to bottom, black, transparent 90%); pointer-events: none; }
+.bio-hero-grid { display: grid; grid-template-columns: minmax(0, 900px); align-items: center; min-height: calc(100svh - 60px); padding-block: 100px 82px; }
+.bio-eyebrow, .bio-section-tag { margin: 0; color: var(--bio-lime); font: 600 11px/1.2 var(--font-mono); letter-spacing: .22em; text-transform: uppercase; }
+.bio-hero h1 { margin: 24px 0 28px; color: #12382b; font-size: clamp(4.5rem, 8vw, 8rem); line-height: .94; letter-spacing: -.07em; }
+.bio-wordmark-title { max-width: min(900px, 100%); }
+.bio-wordmark { display: block; width: min(900px, 100%); height: auto; object-fit: contain; object-position: left center; }
+.bio-hero h1 span, .bio-section h2 span, .bio-register h2 span { color: var(--bio-lime); }
+.bio-hero-description { max-width: 680px; color: #557568; font-size: 18px; line-height: 1.75; }
+.bio-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.bio-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 47px; padding: 0 21px; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: .01em; }
+.bio-button-primary { color: #0d2721; background: var(--bio-lime); box-shadow: 0 10px 28px rgba(184,230,108,.18); }
+.bio-button-primary:hover { background: #d0f592; transform: translateY(-2px); }
+.bio-button-ghost { color: #12382b; border: 1px solid #b8d3c1; }
+.bio-button-ghost:hover { border-color: var(--bio-lime); color: var(--bio-lime); }
+.bio-highlights { display: flex; gap: 32px; margin-top: 62px; }
+.bio-highlights > div { display: flex; align-items: center; gap: 10px; }
+.bio-highlights svg { width: 18px; color: var(--bio-lime); }
+.bio-highlights strong, .bio-highlights small { display: block; }
+.bio-highlights strong { font-size: 13px; }
+.bio-highlights small { margin-top: 2px; color: #557568; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; }
+.bio-hero-art { position: relative; min-height: 510px; display: grid; place-items: center; }
+.bio-hero-panel { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; width: min(100%, 500px); min-height: 420px; padding: 54px; border: 1px solid #cfe4d6; border-radius: 12px; background: rgba(255,255,255,.78); box-shadow: 0 28px 70px rgba(19,138,75,.1); }
+.bio-hero-panel img { width: 150px; height: 150px; object-fit: contain; margin-bottom: 26px; }
+.bio-hero-panel .bio-panel-label { color: #557568; font: 9px var(--font-mono); letter-spacing: .14em; }
+.bio-hero-panel b { color: var(--bio-green); }
+.bio-hero-panel strong { margin-top: 42px; color: var(--bio-green); font: 600 clamp(1.1rem, 2vw, 1.5rem) var(--font-mono); letter-spacing: .08em; }
+.bio-hero-panel p { max-width: 270px; margin: 12px 0 0; color: #557568; font-size: 14px; line-height: 1.6; }
+.bio-orbit { position: absolute; left: 50%; top: 48%; border: 1px solid rgba(184,230,108,.42); border-radius: 50%; transform: translate(-50%,-50%) rotate(-22deg); }
+.bio-orbit-a { width: 90%; height: 40%; }
+.bio-orbit-b { width: 50%; height: 90%; transform: translate(-50%,-50%) rotate(38deg); opacity: .55; }
+.bio-dna { position: absolute; left: 50%; top: 50%; width: 170px; height: 340px; transform: translate(-50%,-50%) rotate(13deg); }
+.bio-dna-strand { position: absolute; inset: 0 26%; border: 4px solid var(--bio-lime); border-top-color: transparent; border-bottom-color: transparent; border-radius: 50%; filter: drop-shadow(0 0 10px rgba(184,230,108,.45)); }
+.bio-dna-strand-a { transform: rotateY(55deg); }.bio-dna-strand-b { transform: rotateY(-55deg); }
+.bio-dna i { position: absolute; left: 16%; width: 68%; height: 2px; background: var(--bio-lime); box-shadow: 0 0 8px rgba(184,230,108,.5); }
+.bio-logo-card { position: absolute; z-index: 2; left: 50%; top: 50%; display: grid; place-items: center; width: 170px; height: 155px; padding: 20px; transform: translate(-50%,-50%); border: 1px solid rgba(19,138,75,.28); border-radius: 8px; background: rgba(255,255,255,.82); box-shadow: 0 20px 60px rgba(19,138,75,.14); backdrop-filter: blur(10px); }
+.bio-logo-card img { width: 82px; height: 82px; object-fit: contain; }.bio-logo-card span { color: #557568; font: 8px var(--font-mono); letter-spacing: .1em; white-space: nowrap; }.bio-logo-card b { color: var(--bio-green); }
+.bio-floating { position: absolute; z-index: 3; padding: 8px 10px; border: 1px solid rgba(19,138,75,.3); border-radius: 3px; color: var(--bio-green); background: rgba(255,255,255,.8); font: 9px var(--font-mono); letter-spacing: .1em; }
+.bio-floating-one { top: 20%; left: 2%; }.bio-floating-two { right: 2%; bottom: 23%; }
+.bio-platform { position: absolute; left: 50%; bottom: 10%; width: 68%; height: 48px; transform: translateX(-50%) perspective(200px) rotateX(60deg); border: 1px solid rgba(184,230,108,.45); border-radius: 50%; background: rgba(24,169,87,.2); box-shadow: 0 0 35px rgba(24,169,87,.35); }
+.bio-scroll { position: absolute; bottom: 25px; left: 50%; display: flex; align-items: center; gap: 11px; transform: translateX(-50%); color: #557568; font: 10px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }.bio-scroll span { display: block; width: 32px; height: 1px; background: var(--bio-green); }
+.bio-code { color: #138a4b; font-family: var(--font-mono); text-shadow: 0 0 8px rgba(19,138,75,.35); }
+.bio-title, .bio-revealed { color: #12382b; }
+.bio-revealed { text-shadow: 0 0 12px rgba(19,138,75,.22); }
+@media (prefers-reduced-motion: reduce) {
+  .bio-hero-video { display: none; }
+}
+.bio-section { padding: 105px 0; }.bio-about { background: #f7fbf8; text-align: center; }.bio-narrow { max-width: 680px; }.bio-section h2 { margin: 15px 0 16px; font-size: clamp(2.3rem, 4vw, 4rem); line-height: 1; letter-spacing: -.055em; }.bio-section p:not(.bio-section-tag) { color: var(--bio-muted); font-size: 16px; line-height: 1.75; }
+.bio-tracks { background: #eaf5ee; }.bio-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; }.bio-text-link { display: inline-flex; align-items: center; gap: 6px; color: var(--bio-green); font-size: 13px; font-weight: 700; }
+.bio-track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 42px; }.bio-track-card { position: relative; display: flex; flex-direction: column; min-height: 270px; padding: 26px; border: 1px solid var(--bio-line); background: #f7fbf8; transition: transform .2s, border-color .2s, box-shadow .2s; }.bio-track-card:hover { border-color: var(--bio-green); box-shadow: 0 16px 35px rgba(16,44,37,.08); transform: translateY(-5px); }.bio-track-card svg { width: 26px; margin: 34px 0 21px; color: var(--bio-green); }.bio-track-number { position: absolute; top: 22px; right: 24px; color: #8fac9f; font: 11px var(--font-mono); }.bio-track-card h3 { margin: 0 0 9px; font-size: 21px; }.bio-track-card p { flex: 1; margin: 0 !important; font-size: 13px !important; }.bio-track-card small { display: flex; align-items: center; gap: 5px; margin-top: 18px; color: var(--bio-green); font: 10px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }.bio-more-tracks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }.bio-more-tracks span { padding: 7px 11px; border: 1px solid var(--bio-line); color: var(--bio-muted); font: 10px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+.bio-schedule { background: #f7fbf8; }.bio-schedule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }.bio-schedule-item { display: flex; gap: 17px; padding: 22px 0; border-top: 1px solid var(--bio-line); }.bio-schedule-item > b { color: var(--bio-green); font: 12px var(--font-mono); }.bio-schedule-item h3 { margin: 0 0 7px; font-size: 16px; }.bio-schedule-item p { margin: 0 !important; font-size: 13px !important; }
+.bio-faq { background: #eaf5ee; }.bio-faq details { border-top: 1px solid var(--bio-line); padding: 19px 0; }.bio-faq details:last-child { border-bottom: 1px solid var(--bio-line); }.bio-faq summary { cursor: pointer; list-style: none; font-weight: 700; }.bio-faq summary::-webkit-details-marker { display: none; }.bio-faq summary::after { float: right; content: "+"; color: var(--bio-green); font: 20px var(--font-mono); }.bio-faq details[open] summary::after { content: "−"; }.bio-faq details p { max-width: 580px; margin: 12px 0 0 !important; font-size: 14px !important; }
+.bio-register { padding: 60px 0; background: #0d2721; color: #f5fbf6; }.bio-register-card { display: flex; align-items: center; justify-content: space-between; gap: 24px; }.bio-register h2 { margin: 13px 0 0; color: #f5fbf6; font-size: clamp(2.4rem, 4vw, 4rem); line-height: .95; }
+
+@media (max-width: 800px) {
+  .bio-hero-grid { grid-template-columns: 1fr; gap: 30px; padding-top: 70px; }.bio-hero { min-height: 0; }.bio-hero-grid { min-height: 0; }.bio-highlights { margin-top: 42px; gap: 18px; }.bio-track-grid, .bio-schedule-grid { grid-template-columns: 1fr; }.bio-section { padding: 76px 0; }.bio-section-heading { align-items: start; flex-direction: column; }.bio-register-card { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .bio-container { width: min(100% - 28px, 1280px); }.bio-hero h1 { font-size: 3.5rem; }.bio-highlights { flex-wrap: wrap; }.bio-highlights > div { min-width: 28%; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ════════════════════════════════════
+   PRINT STYLES (submission slip)
+════════════════════════════════════ */
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  header,
+  footer,
+  nav {
+    display: none !important;
+  }
+
+  .print\:border-0 {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ════════════════════════════════════
+   FORM / INPUT UTILITIES
+════════════════════════════════════ */
+
+@utility form-field {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--input);
+  background: color-mix(in srgb, white 65%, transparent);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  &:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+  }
+}
+
+/* ════════════════════════════════════
+   SCROLLBAR
+════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--primary) 50%, var(--border));
+}
