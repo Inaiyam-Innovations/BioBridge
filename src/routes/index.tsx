@@ -8,10 +8,6 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "BIO BRIDGE | Hackathon 2026" },
-      {
-        name: "description",
-        content: "BIO BRIDGE Hackathon 2026 — bridging biology, technology, and innovation.",
-      },
     ],
   }),
   component: Home,

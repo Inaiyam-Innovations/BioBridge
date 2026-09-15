@@ -15,11 +15,6 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About BioBridge 2026" },
-      {
-        name: "description",
-        content:
-          "Learn about BioBridge — a national student biotechnology hackathon organized by MARABANU, StartupTN and KSR College of Technology.",
-      },
     ],
   }),
   component: AboutPage,

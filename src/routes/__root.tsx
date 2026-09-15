@@ -76,14 +76,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "BioBridge 2026 — Student Biotech Hackathon" },
-      {
-        name: "description",
-        content:
-          "BioBridge student biotech hackathon by MARABANU, StartupTN and KSR College of Technology.",
-      },
-      { name: "author", content: "BioBridge" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {

@@ -13,11 +13,6 @@ export const Route = createFileRoute("/details")({
   head: () => ({
     meta: [
       { title: "How It Works — Timeline, Eligibility & Rules — BioBridge 2026" },
-      {
-        name: "description",
-        content:
-          "BioBridge hackathon details: timeline, four mandatory mentoring weekends, eligibility criteria and submission rules.",
-      },
     ],
   }),
   component: DetailsPage,

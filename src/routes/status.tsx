@@ -8,11 +8,6 @@ export const Route = createFileRoute("/status")({
   head: () => ({
     meta: [
       { title: "Check Application Status — BioBridge 2026" },
-      {
-        name: "description",
-        content:
-          "Enter your BioBridge application ID to view your submitted team details, problem statement and next steps.",
-      },
     ],
   }),
   component: StatusPage,
