@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { ArrowRight, CheckCircle2, FlaskConical, Leaf, Sparkles, Users } from "lucide-react";
+import { ArrowRight, FlaskConical, Leaf, Sparkles, Users } from "lucide-react";
 import { categories, problemsByCategory } from "@/data/problems";
 import DecryptedText from "@/components/decrypted-text";
 
@@ -25,22 +25,34 @@ const SCHEDULE = [
 
 const TRACK_ICONS = [FlaskConical, Users, Leaf];
 
+const REGISTER_URL =
+  "https://unstop.com/p/biobridge-bio-innovation-hackathon-2026-ks-rangasamy-college-of-technology-ksrct-namakkal-1755864?lb=gRm2vex&utm_medium=Share&utm_source=WhatsApp";
+
 function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
+
     if (!video) return;
 
-    const startVideo = () => {
-      void video.play().catch(() => {
-        // Mobile browsers may delay autoplay until the media is ready.
-      });
+    const startVideo = async () => {
+      try {
+        if (video.paused) {
+          await video.play();
+        }
+      } catch {
+        // Autoplay can be blocked by some browsers.
+        // The poster image will remain visible in that case.
+      }
     };
 
+    // Try immediately.
+    void startVideo();
+
+    // Try again when the video is ready.
     video.addEventListener("loadeddata", startVideo);
     video.addEventListener("canplay", startVideo);
-    startVideo();
 
     return () => {
       video.removeEventListener("loadeddata", startVideo);
@@ -51,6 +63,7 @@ function Home() {
   return (
     <div className="bio-home overflow-x-hidden">
       <section className="bio-hero" id="home">
+        {/* Background video */}
         <video
           ref={videoRef}
           className="bio-hero-video"
@@ -64,7 +77,11 @@ function Home() {
         >
           <source src="/V.mp4" type="video/mp4" />
         </video>
+
+        {/* Video overlay */}
         <div className="bio-hero-video-overlay" aria-hidden="true" />
+
+        {/* All foreground content */}
         <div className="bio-container bio-hero-grid">
           <div className="bio-hero-copy">
             <p className="bio-eyebrow">
@@ -79,28 +96,37 @@ function Home() {
                 animateOn="view"
               />
             </p>
+
+            {/* BioBridge PNG Wordmark */}
             <h1 className="bio-wordmark-title">
               <img
                 src="/biobridge-wordmark.png"
                 alt="BioBridge — Ideas for a healthier tomorrow"
                 className="bio-wordmark"
+                draggable={false}
               />
             </h1>
+
             <p className="bio-hero-description">
               A student-led innovation programme bringing together biology, technology, and
               interdisciplinary problem-solving to shape practical solutions for a healthier future.
             </p>
+
             <div className="bio-actions">
               <a
-                href="https://unstop.com/p/biobridge-bio-innovation-hackathon-2026-ks-rangasamy-college-of-technology-ksrct-namakkal-1755864?lb=gRm2vex&utm_medium=Share&utm_source=WhatsApp"
+                href={REGISTER_URL}
                 className="bio-button bio-button-primary"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Register now <ArrowRight size={17} />
               </a>
+
               <a href="#tracks" className="bio-button bio-button-ghost">
                 Explore tracks
               </a>
             </div>
+
             <div className="bio-highlights">
               <div>
                 <Users />
@@ -109,6 +135,7 @@ function Home() {
                   <small>Innovators</small>
                 </span>
               </div>
+
               <div>
                 <Sparkles />
                 <span>
@@ -116,6 +143,7 @@ function Home() {
                   <small>Solutions</small>
                 </span>
               </div>
+
               <div>
                 <Leaf />
                 <span>
@@ -126,20 +154,22 @@ function Home() {
             </div>
           </div>
         </div>
+
         <a href="#about" className="bio-scroll">
           Scroll to explore <span />
         </a>
       </section>
 
+      {/* ABOUT */}
       <section className="bio-section bio-about" id="about">
         <div className="bio-container bio-narrow">
           <p className="bio-section-tag">ABOUT BIO BRIDGE</p>
-          <h2>
-            Where biology meets <span>innovation.</span>
-          </h2>
+
+          <h2>Shaping the Future of Health and Innovation</h2>
           <p>
-            BIO BRIDGE connects students, researchers, creators, and problem-solvers to develop
-            responsible, evidence-led solutions inspired by biology.
+            BioBridge is a student-led innovation programme that brings together biology,
+            technology, and interdisciplinary problem-solving to create practical solutions for a
+            healthier future.
           </p>
         </div>
       </section>
@@ -157,7 +187,7 @@ function Home() {
           </div>
           <div className="bio-track-grid">
             {categories.slice(0, 3).map((category, index) => {
-              const Icon = TRACK_ICONS[index];
+              const Icon = TRACK_ICONS[index] ?? FlaskConical;
               return (
                 <Link
                   key={category.id}
@@ -243,10 +273,7 @@ function Home() {
               <span>shape tomorrow.</span>
             </h2>
           </div>
-          <a
-            href="https://unstop.com/p/biobridge-bio-innovation-hackathon-2026-ks-rangasamy-college-of-technology-ksrct-namakkal-1755864?lb=gRm2vex&utm_medium=Share&utm_source=WhatsApp"
-            className="bio-button bio-button-primary"
-          >
+          <a href={REGISTER_URL} className="bio-button bio-button-primary">
             Register for BIO BRIDGE <ArrowRight size={17} />
           </a>
         </div>
