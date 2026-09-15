@@ -729,7 +729,8 @@
   position: relative !important;
   z-index: 20 !important;
   width: min(664px, calc(100% - 56px));
-  margin-inline: auto;
+  margin-left: clamp(28px, 12vw, 180px);
+  margin-right: 0;
   display: grid;
   grid-template-columns: minmax(0, 664px);
   align-items: center;
