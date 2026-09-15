@@ -1045,6 +1045,13 @@
 .bio-revealed {
   text-shadow: 0 0 12px rgba(19, 138, 75, 0.22);
 }
+.bio-encrypted {
+  color: #18a957;
+  text-shadow:
+    0 0 5px rgba(24, 169, 87, 0.7),
+    0 0 14px rgba(56, 191, 196, 0.45);
+  filter: blur(0.2px);
+}
 .bio-section {
   padding: 105px 0;
 }

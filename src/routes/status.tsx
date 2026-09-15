@@ -8,7 +8,9 @@ export const Route = createFileRoute("/status")({
   head: () => ({
     meta: [
       { title: "Check Application Status — BioBridge 2026" },
+      { name: "robots", content: "noindex, nofollow" },
     ],
+    links: [{ rel: "canonical", href: "https://biobridge.pages.dev/status" }],
   }),
   component: StatusPage,
 });

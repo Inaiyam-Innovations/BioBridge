@@ -91,6 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0b6b3a" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "BioBridge 2026" },
+      { property: "og:url", content: "https://biobridge.pages.dev/" },
       { property: "og:title", content: "BioBridge 2026 — Student Biotech Hackathon" },
       {
         property: "og:description",
@@ -99,6 +100,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:image", content: "/biobridge-wordmark.png" },
       { property: "og:image:alt", content: "BioBridge 2026 hackathon wordmark" },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:width", content: "1920" },
+      { property: "og:image:height", content: "768" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "BioBridge 2026 — Student Biotech Hackathon" },
       {

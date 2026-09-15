@@ -6,7 +6,13 @@ export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
       { title: "FAQs — BioBridge 2026" },
+      {
+        name: "description",
+        content:
+          "Find answers about BioBridge 2026 eligibility, team registration, problem statements, deadlines, mentoring, and participation.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://biobridge.pages.dev/faq" }],
   }),
   component: FAQPage,
 });

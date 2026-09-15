@@ -14,6 +14,7 @@ export const Route = createFileRoute("/")({
           "BioBridge 2026 brings students together to create biology-led solutions across biotechnology, healthcare, and sustainability.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://biobridge.pages.dev/" }],
   }),
   component: Home,
 });

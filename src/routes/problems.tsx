@@ -10,7 +10,13 @@ export const Route = createFileRoute("/problems")({
   head: () => ({
     meta: [
       { title: "36 Problem Statements — BioBridge 2026" },
+      {
+        name: "description",
+        content:
+          "Explore 36 BioBridge 2026 biotech problem statements across seven tracks, including healthcare, bio-AI, agriculture, food, and sustainability.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://biobridge.pages.dev/problems" }],
   }),
   component: ProblemsPage,
 });

@@ -6,7 +6,11 @@ const REGISTRATION_URL =
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
-    meta: [{ title: "Register — BioBridge 2026" }],
+    meta: [
+      { title: "Register — BioBridge 2026" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+    links: [{ rel: "canonical", href: "https://biobridge.pages.dev/apply" }],
   }),
   component: RegistrationRedirect,
 });
