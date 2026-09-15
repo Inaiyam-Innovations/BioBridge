@@ -36,6 +36,9 @@ function Home() {
           playsInline
           preload="auto"
           poster="/biobridge-wordmark.png"
+          onCanPlay={(event) => {
+            void event.currentTarget.play();
+          }}
           aria-hidden="true"
         >
           <source src="/V.mp4" type="video/mp4" />
