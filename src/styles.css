@@ -1022,11 +1022,6 @@
 .bio-revealed {
   text-shadow: 0 0 12px rgba(19, 138, 75, 0.22);
 }
-@media (prefers-reduced-motion: reduce) {
-  .bio-hero-video {
-    display: none;
-  }
-}
 .bio-section {
   padding: 105px 0;
 }

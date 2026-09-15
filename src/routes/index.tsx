@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { ArrowRight, CheckCircle2, FlaskConical, Leaf, Sparkles, Users } from "lucide-react";
 import { categories, problemsByCategory } from "@/data/problems";
 import DecryptedText from "@/components/decrypted-text";
@@ -25,17 +26,39 @@ const SCHEDULE = [
 const TRACK_ICONS = [FlaskConical, Users, Leaf];
 
 function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const startVideo = () => {
+      void video.play().catch(() => {
+        // Mobile browsers may delay autoplay until the media is ready.
+      });
+    };
+
+    video.addEventListener("loadeddata", startVideo);
+    video.addEventListener("canplay", startVideo);
+    startVideo();
+
+    return () => {
+      video.removeEventListener("loadeddata", startVideo);
+      video.removeEventListener("canplay", startVideo);
+    };
+  }, []);
+
   return (
     <div className="bio-home overflow-x-hidden">
       <section className="bio-hero" id="home">
         <video
+          ref={videoRef}
           className="bio-hero-video"
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster="/biobridge-logo.png"
           aria-hidden="true"
         >
           <source src="/V.mp4" type="video/mp4" />
