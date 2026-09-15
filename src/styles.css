@@ -1207,16 +1207,24 @@
 }
 
 @media (max-width: 800px) {
+  .bio-hero {
+    min-height: calc(100svh - 60px);
+  }
   .bio-hero-grid {
     grid-template-columns: 1fr;
     gap: 30px;
+    min-height: calc(100svh - 60px);
     padding-top: 70px;
   }
-  .bio-hero {
-    min-height: 0;
-  }
-  .bio-hero-grid {
-    min-height: 0;
+  .bio-hero-video-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(247, 251, 248, 0.3) 0%,
+        rgba(247, 251, 248, 0.16) 48%,
+        rgba(247, 251, 248, 0.04) 100%
+      ),
+      linear-gradient(0deg, rgba(247, 251, 248, 0.06), rgba(247, 251, 248, 0.06));
   }
   .bio-highlights {
     margin-top: 42px;
