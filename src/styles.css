@@ -729,7 +729,8 @@
   position: relative !important;
   z-index: 20 !important;
   width: min(920px, calc(100% - 56px));
-  margin-inline: auto;
+  margin-left: max(28px, calc((100% - 920px) / 2));
+  margin-right: 0;
   display: grid;
   grid-template-columns: minmax(0, 680px);
   align-items: center;
@@ -1234,6 +1235,7 @@
   }
   .bio-hero-grid {
     width: min(100% - 56px, 1280px);
+    margin-inline: auto;
     grid-template-columns: 1fr;
     gap: 30px;
     min-height: calc(100svh - 60px);
@@ -1280,6 +1282,7 @@
   }
   .bio-hero-grid {
     width: min(100% - 28px, 1280px);
+    margin-inline: auto;
   }
   .bio-hero h1 {
     font-size: 3.5rem;
