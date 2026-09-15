@@ -703,11 +703,11 @@
   background:
     linear-gradient(
       90deg,
-      rgba(247, 251, 248, 0.88) 0%,
-      rgba(247, 251, 248, 0.68) 42%,
-      rgba(247, 251, 248, 0.24) 100%
+      rgba(247, 251, 248, 0.54) 0%,
+      rgba(247, 251, 248, 0.34) 42%,
+      rgba(247, 251, 248, 0.1) 100%
     ),
-    linear-gradient(0deg, rgba(247, 251, 248, 0.18), rgba(247, 251, 248, 0.18));
+    linear-gradient(0deg, rgba(247, 251, 248, 0.1), rgba(247, 251, 248, 0.1));
   pointer-events: none;
 }
 .bio-hero::before {
@@ -715,7 +715,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 0.32;
+  opacity: 0.18;
   background-image:
     linear-gradient(rgba(19, 138, 75, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(19, 138, 75, 0.08) 1px, transparent 1px);
