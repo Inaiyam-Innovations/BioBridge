@@ -751,11 +751,17 @@
   letter-spacing: -0.07em;
 }
 .bio-wordmark-title {
+  display: inline-block;
   max-width: min(900px, 100%);
+  padding: 12px 16px 10px;
+  border: 1px solid rgba(207, 228, 214, 0.92);
+  border-radius: 18px;
+  background: rgba(247, 251, 248, 0.96);
+  box-shadow: 0 12px 34px rgba(3, 21, 43, 0.12);
 }
 .bio-wordmark {
   display: block;
-  width: min(900px, 100%);
+  width: min(900px, calc(100vw - 88px));
   height: auto;
   object-fit: contain;
   object-position: left center;
@@ -1249,6 +1255,14 @@
   }
   .bio-hero h1 {
     font-size: 3.5rem;
+  }
+  .bio-wordmark-title {
+    max-width: calc(100vw - 28px);
+    padding: 9px 10px 8px;
+    border-radius: 14px;
+  }
+  .bio-wordmark {
+    width: min(100%, calc(100vw - 48px));
   }
   .bio-highlights {
     flex-wrap: wrap;
