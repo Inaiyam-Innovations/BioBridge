@@ -76,8 +76,48 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "BioBridge 2026 — Student Biotech Hackathon" },
+      {
+        name: "description",
+        content:
+          "BioBridge 2026 is a national student biotech hackathon connecting biology, technology, and innovation to build practical solutions for a healthier future.",
+      },
+      {
+        name: "keywords",
+        content:
+          "BioBridge 2026, biotech hackathon, student hackathon, biotechnology, healthcare innovation, sustainability, StartupTN, MARABANU",
+      },
+      { name: "author", content: "BioBridge 2026" },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#0b6b3a" },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "BioBridge 2026" },
+      { property: "og:title", content: "BioBridge 2026 — Student Biotech Hackathon" },
+      {
+        property: "og:description",
+        content:
+          "Connect biology, technology, and innovation at the BioBridge 2026 student hackathon.",
+      },
+      { property: "og:image", content: "/biobridge-wordmark.png" },
+      { property: "og:image:alt", content: "BioBridge 2026 hackathon wordmark" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "BioBridge 2026 — Student Biotech Hackathon" },
+      {
+        name: "twitter:description",
+        content:
+          "A national student biotech hackathon bridging biology, technology, and innovation.",
+      },
+      { name: "twitter:image", content: "/biobridge-wordmark.png" },
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/png",
+        href: "/biobridge-logo.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/biobridge-logo.png",
+      },
       {
         rel: "stylesheet",
         href: appCss,
