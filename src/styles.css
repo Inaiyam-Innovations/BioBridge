@@ -751,12 +751,15 @@
   letter-spacing: -0.07em;
 }
 .bio-wordmark-title {
+  position: relative;
+  z-index: 3;
   display: inline-block;
   max-width: min(900px, 100%);
   padding: 12px 16px 10px;
   border: 1px solid rgba(207, 228, 214, 0.92);
   border-radius: 18px;
-  background: rgba(247, 251, 248, 0.96);
+  background: #f7fbf8;
+  isolation: isolate;
   box-shadow: 0 12px 34px rgba(3, 21, 43, 0.12);
 }
 .bio-wordmark {
