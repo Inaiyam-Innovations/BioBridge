@@ -728,11 +728,13 @@
 .bio-hero-grid {
   position: relative !important;
   z-index: 20 !important;
+  width: min(920px, calc(100% - 56px));
+  margin-inline: auto;
   display: grid;
-  grid-template-columns: minmax(0, 900px);
+  grid-template-columns: minmax(0, 680px);
   align-items: center;
   min-height: calc(100svh - 60px);
-  padding-block: 100px 82px;
+  padding-block: 112px 82px;
 }
 .bio-hero-copy {
   position: relative !important;
@@ -757,7 +759,7 @@
   position: relative !important;
   z-index: 100 !important;
   display: inline-block;
-  max-width: min(900px, 100%);
+  max-width: 660px;
   padding: 12px 16px 10px;
   border: 1px solid rgba(207, 228, 214, 0.92);
   border-radius: 18px;
@@ -771,7 +773,7 @@
   position: relative !important;
   z-index: 101 !important;
   display: block;
-  width: min(900px, calc(100vw - 88px));
+  width: min(640px, calc(100vw - 88px));
   height: auto;
   object-fit: contain;
   object-position: left center;
@@ -785,7 +787,7 @@
   color: var(--bio-lime);
 }
 .bio-hero-description {
-  max-width: 680px;
+  max-width: 620px;
   color: #557568;
   font-size: 18px;
   line-height: 1.75;
@@ -1231,6 +1233,7 @@
     min-height: calc(100svh - 60px);
   }
   .bio-hero-grid {
+    width: min(100% - 56px, 1280px);
     grid-template-columns: 1fr;
     gap: 30px;
     min-height: calc(100svh - 60px);
@@ -1265,6 +1268,9 @@
 
 @media (max-width: 480px) {
   .bio-container {
+    width: min(100% - 28px, 1280px);
+  }
+  .bio-hero-grid {
     width: min(100% - 28px, 1280px);
   }
   .bio-hero h1 {
