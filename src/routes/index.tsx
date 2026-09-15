@@ -28,7 +28,16 @@ function Home() {
   return (
     <div className="bio-home overflow-x-hidden">
       <section className="bio-hero" id="home">
-        <video className="bio-hero-video" autoPlay loop muted playsInline aria-hidden="true">
+        <video
+          className="bio-hero-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/biobridge-wordmark.png"
+          aria-hidden="true"
+        >
           <source src="/V.mp4" type="video/mp4" />
         </video>
         <div className="bio-hero-video-overlay" aria-hidden="true" />
