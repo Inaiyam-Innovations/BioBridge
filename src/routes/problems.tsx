@@ -11,6 +11,9 @@ import {
   SlidersHorizontal,
   Sparkles,
   X,
+  Download,
+  FileText,
+  FileDown,
   type LucideIcon,
 } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -106,8 +109,85 @@ function ProblemsPage() {
             </div>
           </div>
 
+          {/* ── Official Downloadable Documents (One-Pager Template & Problem Statements) ── */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {/* Card 1: One Pager Template */}
+            <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#BEE3EA] bg-gradient-to-br from-white via-[#F8FCFD] to-[#EDF7F9] p-5 shadow-sm transition-all duration-300 hover:border-[#1599B5] hover:shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#BEE3EA] bg-[#D9F2F6] text-[#0E7E96] transition-transform duration-300 group-hover:scale-105">
+                  <FileText className="h-6 w-6" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-md bg-emerald-100 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-800 border border-emerald-200">
+                      Required for Apply
+                    </span>
+                    <span className="font-mono text-[11px] text-[#366273]">PDF Format</span>
+                  </div>
+                  <h2 className="mt-1.5 font-display text-[17px] font-bold text-[#0B2A4A]">
+                    One-Pager Template
+                  </h2>
+                  <p className="mt-1 text-[13px] text-[#366273] leading-relaxed">
+                    Official one-page idea proposal format required for all applicant teams.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 pt-3.5 border-t border-[#BEE3EA]/60 flex items-center justify-between gap-3">
+                <span className="font-mono text-[11px] text-[#366273]">
+                  Format &amp; Sample Guide
+                </span>
+                <a
+                  href="/BioBridge-One-Pager-Template.pdf"
+                  download="BioBridge-One-Pager-Template.pdf"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#1599B5] px-4 py-2 text-xs font-bold text-white shadow-sm transition-all hover:bg-[#0E7E96] hover:shadow"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Download Template
+                </a>
+              </div>
+            </div>
+
+            {/* Card 2: Problem Statements PDF */}
+            <div className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#BEE3EA] bg-gradient-to-br from-white via-[#F8FCFD] to-[#EDF7F9] p-5 shadow-sm transition-all duration-300 hover:border-[#1599B5] hover:shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#BEE3EA] bg-[#D9F2F6] text-[#0E7E96] transition-transform duration-300 group-hover:scale-105">
+                  <FileDown className="h-6 w-6" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-md bg-[#D9F2F6] px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-[#0E7E96] border border-[#BEE3EA]">
+                      Official Booklet
+                    </span>
+                    <span className="font-mono text-[11px] text-[#366273]">4 Pages PDF</span>
+                  </div>
+                  <h2 className="mt-1.5 font-display text-[17px] font-bold text-[#0B2A4A]">
+                    Problem Statements (PDF)
+                  </h2>
+                  <p className="mt-1 text-[13px] text-[#366273] leading-relaxed">
+                    Complete directory with all 36 challenges across all 7 biotechnology tracks.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 pt-3.5 border-t border-[#BEE3EA]/60 flex items-center justify-between gap-3">
+                <span className="font-mono text-[11px] text-[#366273]">
+                  All Tracks BB-PB to BB-OB
+                </span>
+                <a
+                  href="/BioBridge-Problem-Statements.pdf"
+                  download="BioBridge-Problem-Statements.pdf"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#0B2A4A] px-4 py-2 text-xs font-bold text-white shadow-sm transition-all hover:bg-[#1599B5] hover:shadow"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Download Statements
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* ── Search + filter controls ── */}
-          <div className="mt-7 space-y-4">
+          <div className="mt-8 space-y-4">
             {/* Search bar */}
             <div className="flex items-center gap-2.5 rounded-xl border border-[#BEE3EA] bg-white px-4 py-3 shadow-[0_1px_4px_rgba(21,153,181,0.06)] focus-within:border-[#1599B5] focus-within:shadow-[0_0_0_3px_rgba(21,153,181,0.15)] transition-all">
               <Search className="h-4 w-4 shrink-0 text-[#366273]" />
