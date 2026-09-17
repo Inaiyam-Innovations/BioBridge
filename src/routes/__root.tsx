@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { SiteHeader } from "../components/site-header";
 import { SiteFooter } from "../components/site-footer";
 import { FaqChatbot } from "../components/faq-chatbot";
+import { CursorGlow } from "../components/cursor-glow";
 
 function NotFoundComponent() {
   return (
@@ -160,7 +161,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col">
+      <div className="relative flex min-h-screen flex-col">
+        <CursorGlow />
         <SiteHeader />
         <main className="flex-1">
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
