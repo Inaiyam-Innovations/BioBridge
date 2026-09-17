@@ -224,17 +224,16 @@ const WEEKEND_SESSIONS = [
 
 const PARTNERS = [
   {
-    name: "K.S.Rangasamy College of Technology",
-    tag: "Host Institution",
+    name: "K.S. Rangasamy College of Technology",
+    subName: "Department of Biotechnology",
     accent: "#0B2A4A",
     logo: "/ksrct-logo.png",
-    logoAlt: "K.S. Rangasamy College of Technology",
+    logoAlt: "Department of Biotechnology, K.S. Rangasamy College of Technology",
     logoClass: "h-14 sm:h-16 max-w-[240px]",
     role: "Campus Venue, Biotech Labs & Innovation Cell",
   },
   {
     name: "MARABANU",
-    tag: "Organiser & Operator",
     accent: "#1599B5",
     logo: "/marabanu-logo.png",
     logoAlt: "MARABANU",
@@ -244,7 +243,6 @@ const PARTNERS = [
   {
     name: "StartupTN Government of Tamil Nadu",
     subName: "StartupTN (TANSIM)",
-    tag: "Ecosystem Partner",
     accent: "#20AFC5",
     logo: "/startuptn-logo.png",
     logoAlt: "StartupTN Government of Tamil Nadu",
@@ -394,7 +392,7 @@ function Home() {
 
             <p className="bio-hero-description">
               A four-week biotech venture-building sprint for student teams across India, ending in
-              an in-person finals day at K.S.Rangasamy College of Technology.
+              an in-person finals day at Department of Biotechnology, K.S.Rangasamy College of Technology.
             </p>
 
             <div className="bio-actions">
@@ -1311,12 +1309,6 @@ function Home() {
                 className="group rounded-2xl border border-[#BEE3EA] bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-[#1599B5] hover:shadow-xl flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-[#EAF4F7]">
-                    <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#D9F2F6]/60 px-2.5 py-1 rounded-md border border-[#BEE3EA]">
-                      {p.tag}
-                    </span>
-                  </div>
-
                   {/* Dedicated Large Logo Stage */}
                   <div className="mb-5 flex h-28 sm:h-32 items-center justify-center rounded-xl bg-gradient-to-b from-[#F8FCFD] to-white border border-[#E1F1F4] p-5 transition-colors group-hover:bg-[#F2FAFC]">
                     <img

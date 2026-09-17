@@ -20,6 +20,7 @@ const NAV_SECTIONS = [
     links: [
       { to: REGISTER_URL, label: "Register on Unstop", external: true },
       { to: "/status", label: "Check Application Status" },
+      { to: "/terms", label: "Terms & Conditions" },
       { to: "/#faq", label: "Frequently Asked Questions" },
       { to: "/problems", label: "Download Challenge Directory" },
     ],
@@ -29,17 +30,17 @@ const NAV_SECTIONS = [
 const ORGANIZERS = [
   {
     name: "K.S.Rangasamy College of Technology",
-    role: "Host Institution",
+    sub: "Department of Biotechnology",
     logo: "/ksrct-logo.png",
   },
   {
     name: "MARABANU",
-    role: "Organiser & Operator",
+    sub: "Venture Incubation & Mentorship",
     logo: "/marabanu-logo.png",
   },
   {
     name: "StartupTN Government of Tamil Nadu",
-    role: "Ecosystem Partner",
+    sub: "StartupTN (TANSIM)",
     logo: "/startuptn-logo.png",
   },
 ] as const;
@@ -110,7 +111,7 @@ export function SiteFooter() {
             <div className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#D9F2F6]/60 px-3 py-1.5 border border-[#BEE3EA]">
               <span className="h-2 w-2 rounded-full bg-[#059669] animate-pulse" />
               <span className="font-mono text-[11px] font-bold text-[#0E7E96] uppercase tracking-wide">
-                Finals Day: K.S.Rangasamy College of Technology
+                Finals Day: Department of Biotechnology, K.S.Rangasamy College of Technology
               </span>
             </div>
           </div>
@@ -168,7 +169,7 @@ export function SiteFooter() {
                   />
                   <div className="min-w-0">
                     <p className="text-[12px] font-bold text-[#0B2A4A] truncate">{org.name}</p>
-                    <p className="font-mono text-[10px] text-[#366273] truncate">{org.role}</p>
+                    <p className="font-mono text-[10px] text-[#366273] truncate">{org.sub}</p>
                   </div>
                 </div>
               ))}
@@ -211,6 +212,12 @@ export function SiteFooter() {
 
           {/* Quick Legal Links */}
           <div className="flex flex-wrap items-center gap-4">
+            <Link
+              to="/terms"
+              className="font-mono text-[11px] text-[#366273] transition-colors hover:text-[#1599B5]"
+            >
+              Terms &amp; Conditions
+            </Link>
             <Link
               to="/about"
               className="font-mono text-[11px] text-[#366273] transition-colors hover:text-[#1599B5]"
