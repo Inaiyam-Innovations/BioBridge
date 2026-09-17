@@ -41,7 +41,7 @@ export const indianStates: string[] = [
 
 /** Common institutions used for the autocomplete. Free text is always allowed. */
 export const indianColleges: string[] = [
-  "KSR College of Technology, Tiruchengode",
+  "K.S.Rangasamy College of Technology, Tiruchengode",
   "KSR Institute for Engineering and Technology, Tiruchengode",
   "KSR College of Arts and Science, Tiruchengode",
   "Anna University, Chennai",

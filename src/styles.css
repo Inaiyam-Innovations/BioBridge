@@ -62,57 +62,57 @@
   --radius: 0.75rem;
 
   /* Backgrounds */
-  --background: #f8fcf8;
-  --foreground: #0e2f25;
-  --surface: #eaf7ef;
-  --surface-foreground: #0e2f25;
+  --background: #f4fafb;
+  --foreground: #0B2A4A;
+  --surface: #D9F2F6;
+  --surface-foreground: #0B2A4A;
 
   /* Cards */
   --card: #ffffff;
-  --card-foreground: #0e2f25;
+  --card-foreground: #0B2A4A;
   --popover: #ffffff;
-  --popover-foreground: #0e2f25;
+  --popover-foreground: #0B2A4A;
 
-  /* Brand greens */
-  --primary: #18a957;
+  /* Brand scientific blues */
+  --primary: #1599B5;
   --primary-foreground: #ffffff;
-  --glow: #22c46a;
+  --glow: #20AFC5;
 
   /* Secondaries */
-  --secondary: #eaf7ef;
-  --secondary-foreground: #087a43;
-  --muted: #f0f8f3;
-  --muted-foreground: #4a7a60;
+  --secondary: #D9F2F6;
+  --secondary-foreground: #0B2A4A;
+  --muted: #edf7f9;
+  --muted-foreground: #366273;
 
   /* Accent — cyan */
-  --accent: #dceff0;
-  --accent-foreground: #163d50;
+  --accent: #D9F2F6;
+  --accent-foreground: #0B2A4A;
 
   /* Destructive */
   --destructive: #d84040;
   --destructive-foreground: #ffffff;
 
   /* Borders & inputs */
-  --border: #cdedd8;
-  --input: #cdedd8;
-  --ring: #18a957;
+  --border: #bee3ea;
+  --input: #bee3ea;
+  --ring: #1599B5;
 
   /* Charts */
-  --chart-1: #18a957;
-  --chart-2: #38bfc4;
-  --chart-3: #087a43;
-  --chart-4: #163d50;
-  --chart-5: #cdedd8;
+  --chart-1: #1599B5;
+  --chart-2: #20AFC5;
+  --chart-3: #0B2A4A;
+  --chart-4: #48cae4;
+  --chart-5: #D9F2F6;
 
   /* Sidebar */
-  --sidebar: #f0f8f3;
-  --sidebar-foreground: #0e2f25;
-  --sidebar-primary: #18a957;
+  --sidebar: #edf7f9;
+  --sidebar-foreground: #0B2A4A;
+  --sidebar-primary: #1599B5;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eaf7ef;
-  --sidebar-accent-foreground: #087a43;
-  --sidebar-border: #cdedd8;
-  --sidebar-ring: #18a957;
+  --sidebar-accent: #D9F2F6;
+  --sidebar-accent-foreground: #0B2A4A;
+  --sidebar-border: #bee3ea;
+  --sidebar-ring: #1599B5;
 }
 
 /* ── Base layer ── */
@@ -209,7 +209,7 @@
 
 /* ── Gradient text ── */
 @utility bio-gradient-text {
-  background-image: linear-gradient(125deg, var(--primary) 0%, var(--glow) 50%, #38bfc4 100%);
+  background-image: linear-gradient(125deg, #1599B5 0%, #20AFC5 50%, #0B2A4A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -225,7 +225,7 @@
     ),
     radial-gradient(
       ellipse 55% 45% at 98% 5%,
-      color-mix(in srgb, #38bfc4 10%, transparent),
+      color-mix(in srgb, #20AFC5 12%, transparent),
       transparent 65%
     ),
     radial-gradient(
@@ -310,7 +310,7 @@
   border-radius: 2rem;
   background:
     radial-gradient(circle at 50% 36%, color-mix(in srgb, white 97%, transparent), transparent 38%),
-    linear-gradient(145deg, #f0faf4, #ddf2e7);
+    linear-gradient(145deg, #f4fafb, #D9F2F6);
   box-shadow:
     0 32px 72px -32px color-mix(in srgb, var(--primary) 35%, transparent),
     inset 0 1px 0 color-mix(in srgb, white 95%, transparent);
@@ -445,7 +445,7 @@
   width: 28%;
   height: 13%;
   border-radius: 100% 0 100% 0;
-  background: linear-gradient(135deg, #38bfc4, var(--primary));
+  background: linear-gradient(135deg, #20AFC5, var(--primary));
   box-shadow: 0 8px 14px color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
@@ -521,8 +521,8 @@
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 50%;
-  background: #38bfc4;
-  box-shadow: 0 0 7px #38bfc4;
+  background: #20AFC5;
+  box-shadow: 0 0 7px #20AFC5;
   flex-shrink: 0;
 }
 
@@ -638,38 +638,23 @@
 ════════════════════════════════════ */
 
 .bio-home {
-  --bio-ink: #12382b;
-  --bio-muted: #557568;
-  --bio-green: #138a4b;
-  --bio-lime: #8dcc4f;
-  --bio-line: #cfe4d6;
+  --bio-ink: #0B2A4A;
+  --bio-muted: #366273;
+  --bio-green: #1599B5;
+  --bio-lime: #20AFC5;
+  --bio-line: #bee3ea;
   color: var(--bio-ink);
-  background: #f7fbf8;
+  background: #f4fafb;
 }
 
 .bio-site-header {
-  border-color: #cfe4d6 !important;
+  border-color: #bee3ea !important;
   background: rgba(255, 255, 255, 0.96) !important;
-  color: #12382b;
+  color: #0B2A4A;
   backdrop-filter: blur(14px);
 }
-.bio-site-header .text-\[\#0E2F25\] {
-  color: #12382b !important;
-}
-.bio-site-header .text-\[\#4A7A60\] {
-  color: #557568 !important;
-}
-.bio-site-header .border-\[\#CDEDD8\] {
-  border-color: #cfe4d6 !important;
-}
-.bio-site-header .bg-\[\#EAF7EF\] {
-  background: rgba(184, 230, 108, 0.15) !important;
-}
-.bio-site-header .hover\:bg-\[\#F0F8F3\]:hover {
-  background: rgba(184, 230, 108, 0.12) !important;
-}
 .bio-site-header .bio-gradient-text {
-  color: #138a4b;
+  color: #1599B5;
   background-image: none;
 }
 
@@ -681,9 +666,10 @@
   position: relative !important;
   isolation: isolate !important;
   min-height: calc(100svh - 60px);
+  scroll-margin-top: 60px;
   overflow: hidden !important;
-  background: #03152b url("/V-poster.jpg") center / cover no-repeat;
-  color: #12382b;
+  background: #f4fafb url("/V-poster.jpg") center / cover no-repeat;
+  color: #0B2A4A;
 }
 .bio-hero-video {
   position: absolute !important;
@@ -705,11 +691,11 @@
   background:
     linear-gradient(
       90deg,
-      rgba(247, 251, 248, 0.86) 0%,
-      rgba(247, 251, 248, 0.74) 42%,
-      rgba(247, 251, 248, 0.46) 100%
+      rgba(244, 250, 251, 0.93) 0%,
+      rgba(244, 250, 251, 0.82) 42%,
+      rgba(244, 250, 251, 0.55) 100%
     ),
-    linear-gradient(0deg, rgba(247, 251, 248, 0.2), rgba(247, 251, 248, 0.2));
+    linear-gradient(0deg, rgba(217, 242, 246, 0.25), rgba(217, 242, 246, 0.25));
   pointer-events: none !important;
 }
 .bio-hero::before {
@@ -719,8 +705,8 @@
   z-index: 2 !important;
   opacity: 0.18;
   background-image:
-    linear-gradient(rgba(19, 138, 75, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(19, 138, 75, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(21, 153, 181, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 153, 181, 0.12) 1px, transparent 1px);
   background-size: 54px 54px;
   mask-image: linear-gradient(to bottom, black, transparent 90%);
   pointer-events: none !important;
@@ -728,39 +714,48 @@
 .bio-hero-grid {
   position: relative !important;
   z-index: 20 !important;
-  width: min(664px, calc(100% - 56px));
-  margin-left: clamp(28px, 12vw, 180px);
-  margin-right: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 664px);
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   min-height: calc(100svh - 60px);
-  padding-block: 112px 82px;
+  padding-block: 22px 30px;
 }
 .bio-hero-copy {
   position: relative !important;
   z-index: 30 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
 .bio-eyebrow,
 .bio-section-tag {
   margin: 0;
   color: var(--bio-lime);
-  font: 600 11px/1.2 var(--font-mono);
+  font: 700 13px/1.3 var(--font-mono);
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 .bio-hero h1 {
-  margin: 24px 0 28px;
-  color: #12382b;
-  font-size: clamp(4.5rem, 8vw, 8rem);
+  margin: 14px 0 20px;
+  color: #0B2A4A;
+  font-size: clamp(4rem, 7vw, 7rem);
   line-height: 0.94;
   letter-spacing: -0.07em;
 }
 .bio-wordmark-title {
   position: relative !important;
   z-index: 100 !important;
-  display: inline-block;
-  max-width: 660px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px auto 8px;
+  max-width: 900px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -774,10 +769,11 @@
   position: relative !important;
   z-index: 101 !important;
   display: block;
-  width: min(640px, calc(100vw - 88px));
+  margin-inline: auto;
+  width: min(720px, calc(100vw - 48px));
   height: auto;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
   transform: translateZ(0);
   backface-visibility: hidden;
   pointer-events: none;
@@ -788,73 +784,152 @@
   color: var(--bio-lime);
 }
 .bio-hero-description {
-  max-width: 620px;
-  color: #557568;
-  font-size: 18px;
-  line-height: 1.75;
+  margin: 0 auto;
+  max-width: 760px;
+  text-align: center;
+  color: #082038;
+  font-size: 18.5px;
+  line-height: 1.58;
+  font-weight: 500;
 }
 .bio-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
 }
 .bio-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 47px;
-  padding: 0 21px;
-  border-radius: 4px;
-  font-size: 13px;
+  gap: 11px;
+  min-height: 50px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-size: 15.5px;
   font-weight: 700;
   letter-spacing: 0.01em;
 }
 .bio-button-primary {
-  color: #0d2721;
-  background: var(--bio-lime);
-  box-shadow: 0 10px 28px rgba(184, 230, 108, 0.18);
+  color: #ffffff;
+  background: var(--bio-green);
+  box-shadow: 0 10px 28px rgba(21, 153, 181, 0.25);
 }
 .bio-button-primary:hover {
-  background: #d0f592;
+  background: #0E7E96;
   transform: translateY(-2px);
 }
 .bio-button-ghost {
-  color: #12382b;
-  border: 1px solid #b8d3c1;
+  color: #0B2A4A;
+  border: 1.5px solid #bee3ea;
+  background: rgba(255, 255, 255, 0.6);
 }
 .bio-button-ghost:hover {
-  border-color: var(--bio-lime);
-  color: var(--bio-lime);
+  border-color: var(--bio-green);
+  color: var(--bio-green);
 }
 .bio-highlights {
   display: flex;
-  gap: 32px;
-  margin-top: 62px;
+  justify-content: center;
+  gap: 36px;
+  margin-top: 22px;
 }
 .bio-highlights > div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .bio-highlights svg {
-  width: 18px;
-  color: var(--bio-lime);
+  width: 22px;
+  height: 22px;
+  color: var(--bio-green);
 }
 .bio-highlights strong,
 .bio-highlights small {
   display: block;
 }
 .bio-highlights strong {
-  font-size: 13px;
+  font-size: 16.5px;
 }
 .bio-highlights small {
   margin-top: 2px;
-  color: #557568;
-  font-size: 10px;
+  color: #366273;
+  font-size: 11.5px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+}
+
+/* ── Hero Organizers & Supported By Strip ── */
+.bio-hero-organizers {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 25;
+}
+.bio-organizers-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1599B5;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+.bio-organizers-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 10px 30px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(190, 227, 234, 0.95);
+  border-radius: 999px;
+  box-shadow: 0 6px 24px rgba(11, 42, 74, 0.08);
+  transition: all 0.25s ease;
+}
+.bio-organizers-pill:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: #1599B5;
+  box-shadow: 0 8px 30px rgba(21, 153, 181, 0.2);
+  transform: translateY(-2px);
+}
+.bio-organizer-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.95;
+}
+.bio-organizer-logo-wrap:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+.bio-organizer-logo {
+  display: block;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+.bio-logo-ksrct {
+  height: 35px;
+  width: auto;
+}
+.bio-logo-marabanu {
+  height: 23px;
+  width: auto;
+}
+.bio-logo-startuptn {
+  height: 33px;
+  width: auto;
+}
+.bio-organizer-divider {
+  width: 1.5px;
+  height: 24px;
+  background: #BEE3EA;
 }
 .bio-hero-art {
   position: relative;
@@ -870,10 +945,10 @@
   width: min(100%, 500px);
   min-height: 420px;
   padding: 54px;
-  border: 1px solid #cfe4d6;
+  border: 1px solid #bee3ea;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 28px 70px rgba(19, 138, 75, 0.1);
+  box-shadow: 0 28px 70px rgba(11, 42, 74, 0.1);
 }
 .bio-hero-panel img {
   width: 150px;
@@ -882,7 +957,7 @@
   margin-bottom: 26px;
 }
 .bio-hero-panel .bio-panel-label {
-  color: #557568;
+  color: #366273;
   font: 9px var(--font-mono);
   letter-spacing: 0.14em;
 }
@@ -898,7 +973,7 @@
 .bio-hero-panel p {
   max-width: 270px;
   margin: 12px 0 0;
-  color: #557568;
+  color: #366273;
   font-size: 14px;
   line-height: 1.6;
 }
@@ -906,7 +981,7 @@
   position: absolute;
   left: 50%;
   top: 48%;
-  border: 1px solid rgba(184, 230, 108, 0.42);
+  border: 1px solid rgba(32, 175, 197, 0.42);
   border-radius: 50%;
   transform: translate(-50%, -50%) rotate(-22deg);
 }
@@ -935,7 +1010,7 @@
   border-top-color: transparent;
   border-bottom-color: transparent;
   border-radius: 50%;
-  filter: drop-shadow(0 0 10px rgba(184, 230, 108, 0.45));
+  filter: drop-shadow(0 0 10px rgba(32, 175, 197, 0.45));
 }
 .bio-dna-strand-a {
   transform: rotateY(55deg);
@@ -949,7 +1024,7 @@
   width: 68%;
   height: 2px;
   background: var(--bio-lime);
-  box-shadow: 0 0 8px rgba(184, 230, 108, 0.5);
+  box-shadow: 0 0 8px rgba(32, 175, 197, 0.5);
 }
 .bio-logo-card {
   position: absolute;
@@ -962,10 +1037,10 @@
   height: 155px;
   padding: 20px;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(19, 138, 75, 0.28);
+  border: 1px solid rgba(21, 153, 181, 0.28);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 20px 60px rgba(19, 138, 75, 0.14);
+  box-shadow: 0 20px 60px rgba(11, 42, 74, 0.14);
   backdrop-filter: blur(10px);
 }
 .bio-logo-card img {
@@ -974,7 +1049,7 @@
   object-fit: contain;
 }
 .bio-logo-card span {
-  color: #557568;
+  color: #366273;
   font: 8px var(--font-mono);
   letter-spacing: 0.1em;
   white-space: nowrap;
@@ -986,7 +1061,7 @@
   position: absolute;
   z-index: 3;
   padding: 8px 10px;
-  border: 1px solid rgba(19, 138, 75, 0.3);
+  border: 1px solid rgba(21, 153, 181, 0.3);
   border-radius: 3px;
   color: var(--bio-green);
   background: rgba(255, 255, 255, 0.8);
@@ -1008,21 +1083,21 @@
   width: 68%;
   height: 48px;
   transform: translateX(-50%) perspective(200px) rotateX(60deg);
-  border: 1px solid rgba(184, 230, 108, 0.45);
+  border: 1px solid rgba(32, 175, 197, 0.45);
   border-radius: 50%;
-  background: rgba(24, 169, 87, 0.2);
-  box-shadow: 0 0 35px rgba(24, 169, 87, 0.35);
+  background: rgba(21, 153, 181, 0.2);
+  box-shadow: 0 0 35px rgba(21, 153, 181, 0.35);
 }
 .bio-scroll {
   position: absolute !important;
   z-index: 40 !important;
-  bottom: 25px;
+  bottom: 10px;
   left: 50%;
   display: flex;
   align-items: center;
   gap: 11px;
   transform: translateX(-50%);
-  color: #557568;
+  color: #366273;
   font: 10px var(--font-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1034,29 +1109,29 @@
   background: var(--bio-green);
 }
 .bio-code {
-  color: #138a4b;
+  color: #1599B5;
   font-family: var(--font-mono);
-  text-shadow: 0 0 8px rgba(19, 138, 75, 0.35);
+  text-shadow: 0 0 8px rgba(21, 153, 181, 0.35);
 }
 .bio-title,
 .bio-revealed {
-  color: #12382b;
+  color: #0B2A4A;
 }
 .bio-revealed {
-  text-shadow: 0 0 12px rgba(19, 138, 75, 0.22);
+  text-shadow: 0 0 12px rgba(21, 153, 181, 0.22);
 }
 .bio-encrypted {
-  color: #18a957;
+  color: #20AFC5;
   text-shadow:
-    0 0 5px rgba(24, 169, 87, 0.7),
-    0 0 14px rgba(56, 191, 196, 0.45);
+    0 0 5px rgba(32, 175, 197, 0.7),
+    0 0 14px rgba(21, 153, 181, 0.45);
   filter: blur(0.2px);
 }
 .bio-section {
-  padding: 105px 0;
+  padding: 48px 0;
 }
 .bio-about {
-  background: #f7fbf8;
+  background: #f4fafb;
   text-align: center;
 }
 .bio-narrow {
@@ -1067,6 +1142,7 @@
   font-size: clamp(2.3rem, 4vw, 4rem);
   line-height: 1;
   letter-spacing: -0.055em;
+  color: #0B2A4A;
 }
 .bio-section p:not(.bio-section-tag) {
   color: var(--bio-muted);
@@ -1074,7 +1150,7 @@
   line-height: 1.75;
 }
 .bio-tracks {
-  background: #eaf5ee;
+  background: #D9F2F6;
 }
 .bio-section-heading {
   display: flex;
@@ -1103,7 +1179,7 @@
   min-height: 270px;
   padding: 26px;
   border: 1px solid var(--bio-line);
-  background: #f7fbf8;
+  background: #ffffff;
   transition:
     transform 0.2s,
     border-color 0.2s,
@@ -1111,7 +1187,7 @@
 }
 .bio-track-card:hover {
   border-color: var(--bio-green);
-  box-shadow: 0 16px 35px rgba(16, 44, 37, 0.08);
+  box-shadow: 0 16px 35px rgba(11, 42, 74, 0.1);
   transform: translateY(-5px);
 }
 .bio-track-card svg {
@@ -1123,12 +1199,13 @@
   position: absolute;
   top: 22px;
   right: 24px;
-  color: #8fac9f;
+  color: #5c8899;
   font: 11px var(--font-mono);
 }
 .bio-track-card h3 {
   margin: 0 0 9px;
   font-size: 21px;
+  color: #0B2A4A;
 }
 .bio-track-card p {
   flex: 1;
@@ -1160,7 +1237,7 @@
   letter-spacing: 0.08em;
 }
 .bio-schedule {
-  background: #f7fbf8;
+  background: #f4fafb;
 }
 .bio-schedule-grid {
   display: grid;
@@ -1181,13 +1258,14 @@
 .bio-schedule-item h3 {
   margin: 0 0 7px;
   font-size: 16px;
+  color: #0B2A4A;
 }
 .bio-schedule-item p {
   margin: 0 !important;
   font-size: 13px !important;
 }
 .bio-faq {
-  background: #eaf5ee;
+  background: #D9F2F6;
 }
 .bio-faq details {
   border-top: 1px solid var(--bio-line);
@@ -1200,6 +1278,7 @@
   cursor: pointer;
   list-style: none;
   font-weight: 700;
+  color: #0B2A4A;
 }
 .bio-faq summary::-webkit-details-marker {
   display: none;
@@ -1218,9 +1297,281 @@
   margin: 12px 0 0 !important;
   font-size: 14px !important;
 }
+
+/* ── Attractive Prizes Announcement ── */
+.bio-prizes {
+  background: radial-gradient(circle at 50% 15%, rgba(32, 175, 197, 0.08) 0%, rgba(244, 250, 251, 1) 70%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Running DNA Animations ── */
+@keyframes dnaHelixRunDown {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes dnaHelixRunUp {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 120;
+  }
+}
+
+@keyframes dnaPulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(21, 153, 181, 0.45);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 10px rgba(21, 153, 181, 0);
+  }
+}
+
+@keyframes dnaWaveFlow {
+  0% {
+    opacity: 0.35;
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 0.35;
+    transform: translateY(-10px);
+  }
+}
+
+.animate-dna-run-down {
+  stroke-dasharray: 12 8;
+  animation: dnaHelixRunDown 2.2s linear infinite;
+}
+
+.animate-dna-run-up {
+  stroke-dasharray: 12 8;
+  animation: dnaHelixRunUp 2.2s linear infinite;
+}
+
+.animate-dna-node-pulse {
+  animation: dnaPulseGlow 2.2s ease-in-out infinite;
+}
+
+.bio-podium-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 40px;
+}
+
+.bio-podium-card {
+  position: relative;
+  border-radius: 28px;
+  background: #ffffff;
+  border: 1.5px solid #BEE3EA;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px -6px rgba(11, 42, 74, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bio-podium-card:hover {
+  transform: translateY(-8px);
+}
+
+/* 1st Prize Gold Card - Luxurious Grand Champion */
+.bio-podium-card-gold {
+  border: 2px solid #F59E0B !important;
+  background: radial-gradient(circle at 50% 0%, #FFFBEB 0%, #FFFFFF 75%) !important;
+  box-shadow: 0 20px 60px -12px rgba(245, 158, 11, 0.32), 0 0 0 1px rgba(251, 191, 36, 0.2) inset !important;
+}
+
+.bio-podium-card-gold:hover {
+  box-shadow: 0 28px 70px -12px rgba(245, 158, 11, 0.42), 0 0 0 1.5px rgba(245, 158, 11, 0.5) inset !important;
+}
+
+.bio-podium-card-silver {
+  border: 1.5px solid #CBD5E1 !important;
+  background: radial-gradient(circle at 50% 0%, #F8FAFC 0%, #FFFFFF 80%) !important;
+  box-shadow: 0 14px 40px -10px rgba(100, 116, 139, 0.16) !important;
+}
+
+.bio-podium-card-silver:hover {
+  border-color: #94A3B8 !important;
+  box-shadow: 0 20px 50px -10px rgba(100, 116, 139, 0.26) !important;
+}
+
+.bio-podium-card-bronze {
+  border: 1.5px solid #FDBA74 !important;
+  background: radial-gradient(circle at 50% 0%, #FFF7ED 0%, #FFFFFF 80%) !important;
+  box-shadow: 0 14px 40px -10px rgba(217, 119, 6, 0.16) !important;
+}
+
+.bio-podium-card-bronze:hover {
+  border-color: #EA580C !important;
+  box-shadow: 0 20px 50px -10px rgba(217, 119, 6, 0.26) !important;
+}
+
+.bio-prize-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.bio-badge-gold {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.bio-badge-silver {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+
+.bio-badge-bronze {
+  background: #FFEDD5;
+  color: #9A3412;
+  border: 1px solid #FED7AA;
+}
+
+.bio-prize-amount {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 12px 0 8px;
+}
+
+.bio-prize-amount-gold {
+  color: #B45309;
+  background: linear-gradient(135deg, #D97706 0%, #B45309 50%, #78350F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bio-prize-amount-silver {
+  color: #334155;
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bio-prize-amount-bronze {
+  color: #7C2D12;
+  background: linear-gradient(135deg, #C2410C 0%, #7C2D12 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bio-venture-grand-card {
+  margin-top: 36px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #061A30 0%, #0B2A4A 50%, #0B3A5A 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.45) !important;
+  padding: clamp(24px, 4vw, 44px) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 24px 64px -12px rgba(11, 42, 74, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.bio-venture-grand-card::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -15%;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(32, 175, 197, 0.08) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Force high contrast for all text inside the grand card */
+.bio-venture-grand-card h3 {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+.bio-venture-grand-card p,
+.bio-section .bio-venture-grand-card p:not(.bio-section-tag) {
+  color: #F0F9FF !important;
+  font-size: 15.5px !important;
+  line-height: 1.7 !important;
+}
+
+.bio-venture-grand-card strong {
+  color: #FFFFFF !important;
+}
+
+.bio-venture-grand-card p strong {
+  color: #38BDF8 !important;
+  font-weight: 700 !important;
+}
+
+.bio-venture-grand-card small {
+  color: #BAE6FD !important;
+  font-size: 12.5px !important;
+  opacity: 0.95 !important;
+}
+
+/* 4 Feature Cards inside the grand card */
+.bio-venture-feature-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(186, 230, 253, 0.32) !important;
+  background: rgba(255, 255, 255, 0.09) !important;
+  padding: 18px !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 0.25s ease !important;
+}
+
+.bio-venture-feature-card:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(56, 189, 248, 0.6) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25) !important;
+}
+
+.bio-venture-feature-card strong {
+  display: block !important;
+  color: #FFFFFF !important;
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.bio-venture-feature-card p,
+.bio-section .bio-venture-feature-card p:not(.bio-section-tag) {
+  margin-top: 6px !important;
+  color: #D6F1FA !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
 .bio-register {
   padding: 60px 0;
-  background: #0d2721;
+  background: #0B2A4A;
   color: #f5fbf6;
 }
 .bio-register-card {
@@ -1231,7 +1582,7 @@
 }
 .bio-register h2 {
   margin: 13px 0 0;
-  color: #f5fbf6;
+  color: #ffffff;
   font-size: clamp(2.4rem, 4vw, 4rem);
   line-height: 0.95;
 }
@@ -1248,30 +1599,82 @@
     min-height: calc(100svh - 60px);
     padding-block: 58px 64px;
   }
+  .bio-hero-video {
+    object-position: 64% center !important;
+  }
   .bio-hero-video-overlay {
     display: block;
     background:
       linear-gradient(
-        90deg,
-        rgba(247, 251, 248, 0.72) 0%,
-        rgba(247, 251, 248, 0.58) 52%,
-        rgba(247, 251, 248, 0.3) 100%
+        180deg,
+        rgba(244, 250, 251, 0.95) 0%,
+        rgba(244, 250, 251, 0.86) 35%,
+        rgba(244, 250, 251, 0.82) 70%,
+        rgba(244, 250, 251, 0.95) 100%
       ),
-      linear-gradient(0deg, rgba(247, 251, 248, 0.16), rgba(247, 251, 248, 0.16));
+      linear-gradient(0deg, rgba(217, 242, 246, 0.35), rgba(217, 242, 246, 0.35));
   }
-  .bio-hero::before {
-    display: none;
+  .bio-hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .bio-eyebrow {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #0B2A4A;
+  }
+  .bio-hero-description {
+    color: #082038 !important;
+    font-weight: 500 !important;
+    line-height: 1.6;
+  }
+  .bio-actions .bio-button-ghost {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(190, 227, 234, 0.9) !important;
+    color: #0B2A4A !important;
   }
   .bio-highlights {
-    margin-top: 42px;
-    gap: 18px;
+    margin-top: 28px;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(190, 227, 234, 0.8);
+    border-radius: 16px;
+    padding: 10px 16px;
+    box-shadow: 0 4px 16px rgba(11, 42, 74, 0.05);
+  }
+  .bio-hero-organizers {
+    margin-top: 18px;
+    gap: 8px;
+    width: 100%;
+  }
+  .bio-organizers-pill {
+    gap: 16px;
+    padding: 8px 18px;
+  }
+  .bio-logo-ksrct {
+    height: 30px;
+  }
+  .bio-logo-marabanu {
+    height: 20px;
+  }
+  .bio-logo-startuptn {
+    height: 28px;
+  }
+  .bio-organizer-divider {
+    height: 22px;
   }
   .bio-track-grid,
-  .bio-schedule-grid {
+  .bio-schedule-grid,
+  .bio-podium-grid {
     grid-template-columns: 1fr;
   }
   .bio-section {
-    padding: 76px 0;
+    padding: 48px 0;
   }
   .bio-section-heading {
     align-items: start;
@@ -1285,30 +1688,75 @@
 
 @media (max-width: 480px) {
   .bio-container {
-    width: min(100% - 28px, 1280px);
+    width: min(100% - 24px, 1280px);
   }
   .bio-hero-grid {
-    width: min(100% - 28px, 1280px);
+    width: min(100% - 20px, 1280px);
     margin-inline: auto;
+    padding-top: 48px !important;
+    padding-bottom: 40px !important;
+    gap: 18px;
+    justify-content: center;
+  }
+  .bio-hero-video {
+    object-position: 68% center !important;
   }
   .bio-hero h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
   .bio-wordmark-title {
-    max-width: calc(100vw - 28px);
+    max-width: calc(100vw - 24px);
   }
   .bio-wordmark {
-    width: min(100%, calc(100vw - 48px));
+    max-width: 350px;
+    width: min(100%, calc(100vw - 36px));
+  }
+  .bio-hero-description {
+    font-size: 1.02rem;
+    line-height: 1.55;
+    max-width: 350px;
   }
   .bio-highlights {
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
   }
   .bio-highlights > div {
     min-width: 28%;
   }
+  .bio-highlights strong {
+    font-size: 14.5px;
+  }
+  .bio-highlights small {
+    font-size: 10.5px;
+  }
+  .bio-hero-organizers {
+    margin-top: 16px;
+    gap: 8px;
+    width: 100%;
+  }
+  .bio-organizers-label {
+    font-size: 0.68rem;
+  }
+  .bio-organizers-pill {
+    gap: 14px;
+    padding: 9px 18px;
+    max-width: calc(100vw - 24px);
+  }
+  .bio-logo-ksrct {
+    height: 26px;
+  }
+  .bio-logo-marabanu {
+    height: 16px;
+  }
+  .bio-logo-startuptn {
+    height: 24px;
+  }
+  .bio-organizer-divider {
+    height: 20px;
+  }
 }
 
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

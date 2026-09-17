@@ -133,4 +133,4 @@ export function findApplication(id: string): SubmittedApplication | undefined {
   return listApplications().find((a) => a.applicationId.toUpperCase() === needle);
 }
 
-export const SUBMISSION_DEADLINE = "2026-10-31T18:30:00+05:30";
+export const SUBMISSION_DEADLINE = "2026-09-30T23:59:59+05:30";

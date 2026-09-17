@@ -1,6 +1,6 @@
 # BioBridge 2026
 
-Official website and registration portal for **BioBridge**, a national student biotech hackathon hosted by MARABANU, StartupTN, and KSR College of Technology.
+Official website and registration portal for **BioBridge**, a national student biotech hackathon hosted by MARABANU, StartupTN, and K.S.Rangasamy College of Technology.
 
 - 36 problem statements across 7 tracks
 - Teams of 2–4 students

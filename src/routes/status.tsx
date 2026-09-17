@@ -39,19 +39,19 @@ function StatusPage() {
   }
 
   return (
-    <div className="bg-[#F8FCF8] min-h-screen">
+    <div className="bg-[#F4FAFB] min-h-screen">
       {/* ── Page header ── */}
-      <div className="bg-white border-b border-[#CDEDD8]">
+      <div className="bg-white border-b border-[#BEE3EA]">
         <div className="mx-auto max-w-3xl px-5 py-12 md:px-8 md:py-14">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#18A957]">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#1599B5]">
             Application Status
           </p>
-          <h1 className="mt-2 font-display text-[38px] font-bold text-[#0E2F25] sm:text-[42px]">
+          <h1 className="mt-2 font-display text-[38px] font-bold text-[#0B2A4A] sm:text-[42px]">
             Check Your Application
           </h1>
-          <p className="mt-2 text-[15px] text-[#4A7A60]">
+          <p className="mt-2 text-[15px] text-[#366273]">
             Enter the application ID from your submission slip, for example{" "}
-            <code className="rounded bg-[#EAF7EF] px-1.5 py-0.5 font-mono text-sm text-[#18A957]">
+            <code className="rounded bg-[#D9F2F6] px-1.5 py-0.5 font-mono text-sm text-[#1599B5]">
               BB-2026-4F7QA
             </code>
           </p>
@@ -67,20 +67,20 @@ function StatusPage() {
             lookup(id);
           }}
         >
-          <div className="flex min-w-[240px] flex-1 items-center gap-2.5 rounded-xl border border-[#CDEDD8] bg-white px-4 shadow-[0_2px_8px_-4px_rgba(24,169,87,0.06)] focus-within:border-[#18A957] focus-within:shadow-[0_0_0_3px_rgba(24,169,87,0.12)] transition-all">
-            <Search className="h-4 w-4 shrink-0 text-[#4A7A60]" />
+          <div className="flex min-w-[240px] flex-1 items-center gap-2.5 rounded-xl border border-[#BEE3EA] bg-white px-4 shadow-[0_2px_8px_-4px_rgba(11,42,74,0.08)] focus-within:border-[#1599B5] focus-within:shadow-[0_0_0_3px_rgba(21,153,181,0.15)] transition-all">
+            <Search className="h-4 w-4 shrink-0 text-[#366273]" />
             <input
               value={id}
               onChange={(e) => setId(e.target.value.toUpperCase())}
               placeholder="BB-2026-XXXXX"
-              className="w-full bg-transparent py-3.5 font-mono text-sm uppercase text-[#0E2F25] outline-none placeholder:text-[#4A7A60]/50"
+              className="w-full bg-transparent py-3.5 font-mono text-sm uppercase text-[#0B2A4A] outline-none placeholder:text-[#366273]/50"
               aria-label="Application ID"
               maxLength={14}
             />
           </div>
           <button
             type="submit"
-            className="rounded-xl bg-[#18A957] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(24,169,87,0.45)] transition-all hover:bg-[#087A43]"
+            className="rounded-xl bg-[#1599B5] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(21,153,181,0.45)] transition-all hover:bg-[#0E7E96]"
           >
             Check Status
           </button>
@@ -96,10 +96,10 @@ function StatusPage() {
 
         {/* ── Recent applications ── */}
         {!result && (
-          <div className="mt-6 rounded-2xl border border-[#CDEDD8] bg-white p-6">
+          <div className="mt-6 rounded-2xl border border-[#BEE3EA] bg-white p-6">
             <div className="flex items-center gap-2.5 mb-4">
-              <ClipboardList className="h-4 w-4 text-[#18A957]" />
-              <p className="text-sm font-semibold text-[#0E2F25]">
+              <ClipboardList className="h-4 w-4 text-[#1599B5]" />
+              <p className="text-sm font-semibold text-[#0B2A4A]">
                 Applications on this device
               </p>
             </div>
@@ -107,14 +107,14 @@ function StatusPage() {
               <button
                 type="button"
                 onClick={showRecent}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#18A957] hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#1599B5] hover:underline"
               >
                 Show submitted applications <ChevronRight className="h-4 w-4" />
               </button>
             ) : (
               <ul className="space-y-2.5">
                 {recent.length === 0 ? (
-                  <li className="rounded-xl border border-[#CDEDD8] bg-[#F8FCF8] p-4 text-center text-sm text-[#4A7A60]">
+                  <li className="rounded-xl border border-[#BEE3EA] bg-[#F4FAFB] p-4 text-center text-sm text-[#366273]">
                     No applications submitted from this device yet.
                   </li>
                 ) : (
@@ -126,17 +126,17 @@ function StatusPage() {
                           setId(a.applicationId);
                           lookup(a.applicationId);
                         }}
-                        className="flex w-full flex-wrap items-center gap-x-4 gap-y-1.5 rounded-xl border border-[#CDEDD8] bg-[#F8FCF8] px-4 py-3.5 text-left text-sm transition-all hover:border-[#18A957] hover:bg-[#EAF7EF]"
+                        className="flex w-full flex-wrap items-center gap-x-4 gap-y-1.5 rounded-xl border border-[#BEE3EA] bg-[#F4FAFB] px-4 py-3.5 text-left text-sm transition-all hover:border-[#1599B5] hover:bg-[#D9F2F6]"
                       >
-                        <span className="font-mono text-xs font-bold text-[#18A957]">
+                        <span className="font-mono text-xs font-bold text-[#1599B5]">
                           {a.applicationId}
                         </span>
-                        <span className="font-semibold text-[#0E2F25]">{a.teamName}</span>
-                        <span className="font-mono text-[11px] text-[#4A7A60]">
+                        <span className="font-semibold text-[#0B2A4A]">{a.teamName}</span>
+                        <span className="font-mono text-[11px] text-[#366273]">
                           {a.statementCode}
                         </span>
-                        <span className="text-[13px] text-[#4A7A60]">{a.college}</span>
-                        <span className="ml-auto font-mono text-[10px] text-[#4A7A60]">
+                        <span className="text-[13px] text-[#366273]">{a.college}</span>
+                        <span className="ml-auto font-mono text-[10px] text-[#366273]">
                           {new Date(a.submittedAt).toLocaleDateString("en-IN")}
                         </span>
                       </button>
@@ -154,7 +154,7 @@ function StatusPage() {
             <button
               type="button"
               onClick={() => { setResult(null); setError(""); setId(""); }}
-              className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-[#4A7A60] hover:text-[#18A957]"
+              className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-[#366273] hover:text-[#1599B5]"
             >
               ← Search again
             </button>

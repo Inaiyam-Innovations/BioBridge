@@ -12,6 +12,7 @@ import type { ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { SiteHeader } from "../components/site-header";
 import { SiteFooter } from "../components/site-footer";
+import { FaqChatbot } from "../components/faq-chatbot";
 
 function NotFoundComponent() {
   return (
@@ -88,7 +89,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "BioBridge 2026" },
       { name: "robots", content: "index, follow" },
-      { name: "theme-color", content: "#0b6b3a" },
+      { name: "theme-color", content: "#0B2A4A" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "BioBridge 2026" },
       { property: "og:url", content: "https://biobridge.pages.dev/" },
@@ -166,6 +167,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <SiteFooter />
+        <FaqChatbot />
       </div>
     </QueryClientProvider>
   );

@@ -57,7 +57,7 @@ type Errors = Record<string, string>;
    Shared field primitives
 ──────────────────────────────────────────────── */
 const fieldBase =
-  "w-full rounded-xl border border-[#CDEDD8] bg-white px-4 py-3 text-sm text-[#0E2F25] outline-none placeholder:text-[#4A7A60]/60 transition-all focus:border-[#18A957] focus:shadow-[0_0_0_3px_rgba(24,169,87,0.15)]";
+  "w-full rounded-xl border border-[#BEE3EA] bg-white px-4 py-3 text-sm text-[#0B2A4A] outline-none placeholder:text-[#366273]/60 transition-all focus:border-[#1599B5] focus:shadow-[0_0_0_3px_rgba(21,153,181,0.15)]";
 
 function FieldLabel({
   children,
@@ -71,10 +71,10 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="mb-1.5 block text-[13px] font-semibold text-[#0E2F25]"
+      className="mb-1.5 block text-[13px] font-semibold text-[#0B2A4A]"
     >
       {children}
-      {required && <span className="ml-1 text-[#18A957]">*</span>}
+      {required && <span className="ml-1 text-[#1599B5]">*</span>}
     </label>
   );
 }
@@ -98,8 +98,8 @@ function SectionTitle({
 }) {
   return (
     <div className="mb-6">
-      <h3 className="font-display text-[22px] font-bold text-[#0E2F25]">{title}</h3>
-      <p className="mt-1 text-sm text-[#4A7A60]">{subtitle}</p>
+      <h3 className="font-display text-[22px] font-bold text-[#0B2A4A]">{title}</h3>
+      <p className="mt-1 text-sm text-[#366273]">{subtitle}</p>
     </div>
   );
 }
@@ -112,9 +112,9 @@ function Stepper({ step }: { step: number }) {
   return (
     <div className="mb-8">
       {/* Progress bar */}
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#EAF7EF]">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#D9F2F6]">
         <div
-          className="h-full rounded-full bg-[#18A957] transition-all duration-500"
+          className="h-full rounded-full bg-[#1599B5] transition-all duration-500"
           style={{ width: `${pct}%` }}
           role="progressbar"
           aria-valuenow={pct}
@@ -134,20 +134,20 @@ function Stepper({ step }: { step: number }) {
               className={cn(
                 "flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-xs transition-colors sm:shrink",
                 isActive
-                  ? "bg-[#EAF7EF] text-[#18A957]"
+                  ? "bg-[#D9F2F6] text-[#1599B5]"
                   : isDone
-                    ? "text-[#18A957]"
-                    : "text-[#4A7A60]",
+                    ? "text-[#1599B5]"
+                    : "text-[#366273]",
               )}
             >
               <span
                 className={cn(
                   "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold",
                   isDone
-                    ? "bg-[#18A957] text-white"
+                    ? "bg-[#1599B5] text-white"
                     : isActive
-                      ? "bg-[#18A957]/20 text-[#18A957]"
-                      : "bg-[#EAF7EF] text-[#4A7A60]",
+                      ? "bg-[#1599B5]/20 text-[#1599B5]"
+                      : "bg-[#D9F2F6] text-[#366273]",
                 )}
               >
                 {isDone ? <Check className="h-3 w-3" /> : i + 1}
@@ -197,12 +197,12 @@ function CollegeAutocomplete({
         aria-label="College name"
         aria-autocomplete="list"
       />
-      <p className="mt-1.5 text-[12px] text-[#4A7A60]">
+      <p className="mt-1.5 text-[12px] text-[#366273]">
         Not listed? Just type your institution's full name.
       </p>
       <FieldError msg={error} />
       {open && matches.length > 0 && (
-        <ul className="absolute left-0 right-0 top-full z-20 mt-1 max-h-52 overflow-auto rounded-xl border border-[#CDEDD8] bg-white p-1 shadow-[0_8px_32px_-8px_rgba(24,169,87,0.22)]">
+        <ul className="absolute left-0 right-0 top-full z-20 mt-1 max-h-52 overflow-auto rounded-xl border border-[#BEE3EA] bg-white p-1 shadow-[0_8px_32px_-8px_rgba(21,153,181,0.22)]">
           {matches.map((c) => (
             <li key={c}>
               <button
@@ -212,7 +212,7 @@ function CollegeAutocomplete({
                   onChange(c);
                   setOpen(false);
                 }}
-                className="w-full rounded-lg px-3.5 py-2.5 text-left text-sm text-[#0E2F25] hover:bg-[#EAF7EF]"
+                className="w-full rounded-lg px-3.5 py-2.5 text-left text-sm text-[#0B2A4A] hover:bg-[#D9F2F6]"
               >
                 {c}
               </button>
@@ -283,20 +283,20 @@ function UploadZone({
         className={cn(
           "rounded-2xl border-2 border-dashed p-8 text-center transition-all cursor-pointer",
           dragging
-            ? "border-[#18A957] bg-[#EAF7EF]"
+            ? "border-[#1599B5] bg-[#D9F2F6]"
             : fileName
-              ? "border-[#18A957]/40 bg-[#F0F8F3] cursor-default"
-              : "border-[#CDEDD8] bg-white hover:border-[#18A957]/50",
+              ? "border-[#1599B5]/40 bg-[#F4FAFB] cursor-default"
+              : "border-[#BEE3EA] bg-white hover:border-[#1599B5]/50",
         )}
       >
         {fileName ? (
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EAF7EF]">
-              <FileText className="h-6 w-6 text-[#18A957]" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#D9F2F6]">
+              <FileText className="h-6 w-6 text-[#1599B5]" />
             </div>
             <div className="text-left">
-              <p className="text-sm font-semibold text-[#0E2F25]">{fileName}</p>
-              <p className="text-xs text-[#4A7A60]">
+              <p className="text-sm font-semibold text-[#0B2A4A]">{fileName}</p>
+              <p className="text-xs text-[#366273]">
                 {(fileSize / 1024 / 1024).toFixed(2)} MB · PDF
               </p>
             </div>
@@ -306,27 +306,27 @@ function UploadZone({
                 e.stopPropagation();
                 onClear();
               }}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[#CDEDD8] bg-white px-3 py-1.5 text-xs font-medium text-[#0E2F25] hover:border-red-300 hover:text-red-600"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#BEE3EA] bg-white px-3 py-1.5 text-xs font-medium text-[#0B2A4A] hover:border-red-300 hover:text-red-600"
             >
               <X className="h-3 w-3" /> Remove
             </button>
           </div>
         ) : (
           <>
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-[#CDEDD8] bg-[#EAF7EF]">
-              <Upload className="h-5 w-5 text-[#18A957]" />
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-[#BEE3EA] bg-[#D9F2F6]">
+              <Upload className="h-5 w-5 text-[#1599B5]" />
             </div>
-            <p className="mt-3 text-sm font-semibold text-[#0E2F25]">
+            <p className="mt-3 text-sm font-semibold text-[#0B2A4A]">
               Drag &amp; drop your PDF here
             </p>
-            <p className="mt-1 text-xs text-[#4A7A60]">PDF only · Maximum 5 MB</p>
+            <p className="mt-1 text-xs text-[#366273]">PDF only · Maximum 5 MB</p>
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 inputRef.current?.click();
               }}
-              className="mt-4 inline-flex items-center gap-1.5 rounded-xl border border-[#CDEDD8] bg-white px-5 py-2.5 text-sm font-medium text-[#0E2F25] hover:border-[#18A957] hover:text-[#18A957]"
+              className="mt-4 inline-flex items-center gap-1.5 rounded-xl border border-[#BEE3EA] bg-white px-5 py-2.5 text-sm font-medium text-[#0B2A4A] hover:border-[#1599B5] hover:text-[#1599B5]"
             >
               Browse files
             </button>
@@ -343,15 +343,15 @@ function UploadZone({
 
       <FieldError msg={error} />
 
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#CDEDD8] bg-[#F8FCF8] px-4 py-3">
-        <p className="text-xs text-[#4A7A60]">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#BEE3EA] bg-[#F4FAFB] px-4 py-3">
+        <p className="text-xs text-[#366273]">
           Suggested name:{" "}
-          <code className="font-mono text-[#0E2F25]">{suggestedName}</code>
+          <code className="font-mono text-[#0B2A4A]">{suggestedName}</code>
         </p>
         <a
           href="/BioBridge-One-Pager-Template.pdf"
           download
-          className="inline-flex items-center gap-1.5 rounded-lg border border-[#CDEDD8] bg-white px-3 py-1.5 text-xs font-semibold text-[#18A957] hover:border-[#18A957]"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-[#BEE3EA] bg-white px-3 py-1.5 text-xs font-semibold text-[#1599B5] hover:border-[#1599B5]"
         >
           <Download className="h-3.5 w-3.5" /> Download template
         </a>
@@ -370,10 +370,10 @@ export function ReviewCard({ data }: { data: ApplicationDraft }) {
   function Row({ label, value }: { label: string; value: string }) {
     return (
       <div>
-        <dt className="text-[11px] font-medium uppercase tracking-wider text-[#4A7A60]">
+        <dt className="text-[11px] font-medium uppercase tracking-wider text-[#366273]">
           {label}
         </dt>
-        <dd className="mt-0.5 break-words text-sm font-semibold text-[#0E2F25]">
+        <dd className="mt-0.5 break-words text-sm font-semibold text-[#0B2A4A]">
           {value || "—"}
         </dd>
       </div>
@@ -381,8 +381,8 @@ export function ReviewCard({ data }: { data: ApplicationDraft }) {
   }
 
   return (
-    <div className="rounded-2xl border border-[#CDEDD8] bg-[#F8FCF8] p-6">
-      <p className="mb-5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#18A957]">
+    <div className="rounded-2xl border border-[#BEE3EA] bg-[#F4FAFB] p-6">
+      <p className="mb-5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#1599B5]">
         Application Review
       </p>
 
@@ -406,28 +406,28 @@ export function ReviewCard({ data }: { data: ApplicationDraft }) {
         <Row label="One-Pager" value={data.fileName} />
       </dl>
 
-      <div className="mt-6 border-t border-[#CDEDD8] pt-5">
-        <p className="mb-3 font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#18A957]">
+      <div className="mt-6 border-t border-[#BEE3EA] pt-5">
+        <p className="mb-3 font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#1599B5]">
           Team Members
         </p>
         <ul className="space-y-2.5">
           {data.members.slice(0, data.teamSize).map((m, i) => (
             <li
               key={i}
-              className="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border border-[#CDEDD8] bg-white px-4 py-3 text-sm"
+              className="flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl border border-[#BEE3EA] bg-white px-4 py-3 text-sm"
             >
-              <UserRound className="h-4 w-4 shrink-0 text-[#18A957]" />
-              <span className="font-semibold text-[#0E2F25]">{m.fullName || "—"}</span>
+              <UserRound className="h-4 w-4 shrink-0 text-[#1599B5]" />
+              <span className="font-semibold text-[#0B2A4A]">{m.fullName || "—"}</span>
               {i === 0 && (
-                <span className="rounded-full bg-[#EAF7EF] px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-[#18A957]">
+                <span className="rounded-full bg-[#D9F2F6] px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-[#1599B5]">
                   Team Lead
                 </span>
               )}
-              <span className="text-[#4A7A60]">{m.email}</span>
+              <span className="text-[#366273]">{m.email}</span>
               {m.phone && (
-                <span className="text-[#4A7A60]">+91 {m.phone}</span>
+                <span className="text-[#366273]">+91 {m.phone}</span>
               )}
-              <span className="text-[#4A7A60]">
+              <span className="text-[#366273]">
                 {[m.degree, m.branch, m.year].filter(Boolean).join(" · ")}
               </span>
             </li>
@@ -451,27 +451,27 @@ export function Confirmation({
   return (
     <div className="mx-auto max-w-3xl">
       {/* Success card */}
-      <div className="rounded-2xl border border-[#CDEDD8] bg-white p-8 text-center shadow-[0_4px_24px_-8px_rgba(24,169,87,0.15)] print:border-0 print:shadow-none">
+      <div className="rounded-2xl border border-[#BEE3EA] bg-white p-8 text-center shadow-[0_4px_24px_-8px_rgba(21,153,181,0.15)] print:border-0 print:shadow-none">
         {/* Check icon */}
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF7EF]">
-          <Check className="h-8 w-8 text-[#18A957]" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#D9F2F6]">
+          <Check className="h-8 w-8 text-[#1599B5]" />
         </div>
 
-        <h2 className="mt-5 font-display text-[26px] font-bold text-[#0E2F25]">
+        <h2 className="mt-5 font-display text-[26px] font-bold text-[#0B2A4A]">
           Application Submitted
         </h2>
-        <p className="mt-2 text-[15px] text-[#4A7A60]">
+        <p className="mt-2 text-[15px] text-[#366273]">
           Your BioBridge application has been successfully submitted. Keep your Application ID
           safe — you'll need it to check your status.
         </p>
 
         {/* Application ID */}
-        <div className="mx-auto mt-6 inline-flex items-center gap-3 rounded-2xl border border-[#18A957]/30 bg-[#EAF7EF] px-6 py-4">
+        <div className="mx-auto mt-6 inline-flex items-center gap-3 rounded-2xl border border-[#1599B5]/30 bg-[#D9F2F6] px-6 py-4">
           <div className="text-left">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[#4A7A60]">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[#366273]">
               Application ID
             </p>
-            <p className="mt-1 font-mono text-2xl font-bold tracking-widest text-[#18A957]">
+            <p className="mt-1 font-mono text-2xl font-bold tracking-widest text-[#1599B5]">
               {application.applicationId}
             </p>
           </div>
@@ -486,7 +486,7 @@ export function Confirmation({
                 /* unavailable */
               }
             }}
-            className="flex items-center gap-1.5 rounded-xl bg-[#18A957] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:bg-[#087A43] print:hidden"
+            className="flex items-center gap-1.5 rounded-xl bg-[#1599B5] px-4 py-2.5 text-xs font-semibold text-white transition-all hover:bg-[#0E7E96] print:hidden"
           >
             <Copy className="h-3.5 w-3.5" />
             {copied ? "Copied!" : "Copy ID"}
@@ -498,7 +498,7 @@ export function Confirmation({
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#CDEDD8] bg-white px-5 py-2.5 text-sm font-semibold text-[#0E2F25] hover:border-[#18A957] hover:text-[#18A957]"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#BEE3EA] bg-white px-5 py-2.5 text-sm font-semibold text-[#0B2A4A] hover:border-[#1599B5] hover:text-[#1599B5]"
           >
             <Printer className="h-4 w-4" /> Print / Download Slip
           </button>
@@ -506,13 +506,13 @@ export function Confirmation({
       </div>
 
       {/* Submission slip */}
-      <div className="mt-5 rounded-2xl border border-[#CDEDD8] bg-white p-7">
+      <div className="mt-5 rounded-2xl border border-[#BEE3EA] bg-white p-7">
         <div className="flex items-center justify-between gap-4 mb-5">
           <div>
-            <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#18A957]">
+            <p className="font-mono text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#1599B5]">
               Submission Slip
             </p>
-            <p className="mt-0.5 text-xs text-[#4A7A60]">
+            <p className="mt-0.5 text-xs text-[#366273]">
               Submitted on{" "}
               {new Date(application.submittedAt).toLocaleString("en-IN", {
                 dateStyle: "long",
@@ -520,18 +520,18 @@ export function Confirmation({
               })}
             </p>
           </div>
-          <div className="font-mono text-xs text-[#4A7A60] text-right hidden sm:block">
+          <div className="font-mono text-xs text-[#366273] text-right hidden sm:block">
             <p>Keep this ID for reference</p>
-            <p className="font-bold text-[#18A957]">{application.applicationId}</p>
+            <p className="font-bold text-[#1599B5]">{application.applicationId}</p>
           </div>
         </div>
         <ReviewCard data={application} />
       </div>
 
       {/* Next steps */}
-      <div className="mt-5 rounded-2xl border border-[#CDEDD8] bg-white p-7">
-        <h3 className="font-display text-[18px] font-bold text-[#0E2F25]">Next Steps</h3>
-        <p className="mt-1 text-sm text-[#4A7A60]">
+      <div className="mt-5 rounded-2xl border border-[#BEE3EA] bg-white p-7">
+        <h3 className="font-display text-[18px] font-bold text-[#0B2A4A]">Next Steps</h3>
+        <p className="mt-1 text-sm text-[#366273]">
           If shortlisted, attendance at all four weekends is mandatory for your entire team.
         </p>
         <ol className="mt-5 space-y-3">
@@ -543,12 +543,12 @@ export function Confirmation({
           ].map((text, i) => (
             <li
               key={i}
-              className="flex gap-3.5 rounded-xl border border-[#CDEDD8] bg-[#F8FCF8] p-4"
+              className="flex gap-3.5 rounded-xl border border-[#BEE3EA] bg-[#F4FAFB] p-4"
             >
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EAF7EF] font-display text-[12px] font-bold text-[#18A957]">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#D9F2F6] font-display text-[12px] font-bold text-[#1599B5]">
                 {i + 1}
               </span>
-              <span className="text-sm text-[#0E2F25]">{text}</span>
+              <span className="text-sm text-[#0B2A4A]">{text}</span>
             </li>
           ))}
         </ol>
@@ -699,7 +699,7 @@ export function ApplyForm({
       <Stepper step={step} />
 
       {/* Card */}
-      <div className="rounded-2xl border border-[#CDEDD8] bg-white p-6 shadow-[0_2px_16px_-4px_rgba(24,169,87,0.10)] sm:p-8">
+      <div className="rounded-2xl border border-[#BEE3EA] bg-white p-6 shadow-[0_2px_16px_-4px_rgba(21,153,181,0.10)] sm:p-8">
 
         {/* ── Step 0: Contact ── */}
         {step === 0 && (
@@ -727,19 +727,19 @@ export function ApplyForm({
                 onChange={(e) => set("email", e.target.value)}
                 placeholder="you@college.edu"
               />
-              <p className="mt-1.5 text-xs text-[#4A7A60]">
+              <p className="mt-1.5 text-xs text-[#366273]">
                 Shortlist notifications and session invites will be sent to this address.
               </p>
               <FieldError msg={errors["email"]} />
             </div>
             <div>
               <FieldLabel required>Phone Number</FieldLabel>
-              <div className="flex overflow-hidden rounded-xl border border-[#CDEDD8] bg-white focus-within:border-[#18A957] focus-within:shadow-[0_0_0_3px_rgba(24,169,87,0.15)] transition-all">
-                <span className="flex items-center border-r border-[#CDEDD8] bg-[#F8FCF8] px-3.5 font-mono text-sm text-[#4A7A60]">
+              <div className="flex overflow-hidden rounded-xl border border-[#BEE3EA] bg-white focus-within:border-[#1599B5] focus-within:shadow-[0_0_0_3px_rgba(21,153,181,0.15)] transition-all">
+                <span className="flex items-center border-r border-[#BEE3EA] bg-[#F4FAFB] px-3.5 font-mono text-sm text-[#366273]">
                   +91
                 </span>
                 <input
-                  className="w-full bg-transparent px-4 py-3 text-sm text-[#0E2F25] outline-none"
+                  className="w-full bg-transparent px-4 py-3 text-sm text-[#0B2A4A] outline-none"
                   inputMode="numeric"
                   maxLength={10}
                   value={data.phone}
@@ -823,8 +823,8 @@ export function ApplyForm({
                     className={cn(
                       "rounded-xl border py-3.5 text-sm font-semibold transition-all",
                       data.teamSize === n
-                        ? "border-[#18A957] bg-[#EAF7EF] text-[#18A957] shadow-[0_0_0_2px_rgba(24,169,87,0.15)]"
-                        : "border-[#CDEDD8] bg-white text-[#4A7A60] hover:border-[#18A957] hover:text-[#18A957]",
+                        ? "border-[#1599B5] bg-[#D9F2F6] text-[#1599B5] shadow-[0_0_0_2px_rgba(21,153,181,0.15)]"
+                        : "border-[#BEE3EA] bg-white text-[#366273] hover:border-[#1599B5] hover:text-[#1599B5]",
                     )}
                   >
                     {n} Members
@@ -838,29 +838,29 @@ export function ApplyForm({
               return (
                 <div
                   key={i}
-                  className="rounded-2xl border border-[#CDEDD8] bg-[#F8FCF8] p-5"
+                  className="rounded-2xl border border-[#BEE3EA] bg-[#F4FAFB] p-5"
                 >
                   <div className="mb-5 flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#EAF7EF] font-display text-sm font-bold text-[#18A957]">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#D9F2F6] font-display text-sm font-bold text-[#1599B5]">
                       {i + 1}
                     </span>
-                    <h4 className="text-[15px] font-bold text-[#0E2F25]">
+                    <h4 className="text-[15px] font-bold text-[#0B2A4A]">
                       {i === 0 ? "Member 1 — Team Lead" : `Member ${i + 1}`}
                     </h4>
                   </div>
 
                   {i === 0 ? (
-                    <dl className="mb-5 grid gap-4 rounded-xl border border-[#CDEDD8] bg-white p-4 sm:grid-cols-3">
+                    <dl className="mb-5 grid gap-4 rounded-xl border border-[#BEE3EA] bg-white p-4 sm:grid-cols-3">
                       {[
                         { label: "Name", value: data.fullName },
                         { label: "Email", value: data.email },
                         { label: "Phone", value: data.phone ? `+91 ${data.phone}` : "" },
                       ].map(({ label, value }) => (
                         <div key={label}>
-                          <dt className="text-[11px] font-medium uppercase tracking-wider text-[#4A7A60]">
+                          <dt className="text-[11px] font-medium uppercase tracking-wider text-[#366273]">
                             {label}
                           </dt>
-                          <dd className="mt-0.5 break-all text-sm font-semibold text-[#0E2F25]">
+                          <dd className="mt-0.5 break-all text-sm font-semibold text-[#0B2A4A]">
                             {value || "—"}
                           </dd>
                         </div>
@@ -1015,18 +1015,18 @@ export function ApplyForm({
 
             {/* Statement preview card */}
             {selectedStatement && (
-              <div className="rounded-xl border border-[#18A957]/25 bg-[#EAF7EF] p-5">
-                <span className="font-mono text-[11px] font-bold text-[#18A957]">
+              <div className="rounded-xl border border-[#1599B5]/25 bg-[#D9F2F6] p-5">
+                <span className="font-mono text-[11px] font-bold text-[#1599B5]">
                   {selectedStatement.code}
                 </span>
-                <h4 className="mt-1.5 text-[15px] font-bold text-[#0E2F25]">
+                <h4 className="mt-1.5 text-[15px] font-bold text-[#0B2A4A]">
                   {selectedStatement.title}
                 </h4>
-                <p className="mt-2 text-sm text-[#4A7A60]">
+                <p className="mt-2 text-sm text-[#366273]">
                   {selectedStatement.description}
                 </p>
                 {selectedStatement.wildcard && (
-                  <span className="mt-3 inline-flex items-center gap-1 rounded-full border border-[#CDEDD8] bg-white px-2.5 py-1 font-mono text-[9.5px] font-semibold uppercase tracking-wider text-[#18A957]">
+                  <span className="mt-3 inline-flex items-center gap-1 rounded-full border border-[#BEE3EA] bg-white px-2.5 py-1 font-mono text-[9.5px] font-semibold uppercase tracking-wider text-[#1599B5]">
                     ✨ Wildcard · Propose your own problem
                   </span>
                 )}
@@ -1079,12 +1079,12 @@ export function ApplyForm({
         )}
 
         {/* ── Navigation buttons ── */}
-        <div className="mt-8 flex items-center justify-between gap-3 border-t border-[#CDEDD8] pt-6">
+        <div className="mt-8 flex items-center justify-between gap-3 border-t border-[#BEE3EA] pt-6">
           <button
             type="button"
             onClick={back}
             disabled={step === 0}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-[#CDEDD8] px-5 py-3 text-sm font-semibold text-[#0E2F25] transition-all hover:border-[#18A957] hover:text-[#18A957] disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-[#BEE3EA] px-5 py-3 text-sm font-semibold text-[#0B2A4A] transition-all hover:border-[#1599B5] hover:text-[#1599B5] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronLeft className="h-4 w-4" />
             Back
@@ -1094,7 +1094,7 @@ export function ApplyForm({
             <button
               type="button"
               onClick={next}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-[#18A957] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(24,169,87,0.45)] transition-all hover:bg-[#087A43] hover:shadow-[0_6px_20px_-4px_rgba(24,169,87,0.5)]"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#1599B5] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(21,153,181,0.45)] transition-all hover:bg-[#0E7E96] hover:shadow-[0_6px_20px_-4px_rgba(21,153,181,0.5)]"
             >
               Continue
               <ChevronRight className="h-4 w-4" />
@@ -1103,7 +1103,7 @@ export function ApplyForm({
             <button
               type="button"
               onClick={finalSubmit}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#18A957] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(24,169,87,0.45)] transition-all hover:bg-[#087A43]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#1599B5] px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(21,153,181,0.45)] transition-all hover:bg-[#0E7E96]"
             >
               <Check className="h-4 w-4" />
               Submit Application
