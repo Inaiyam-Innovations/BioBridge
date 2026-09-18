@@ -149,7 +149,7 @@ export function BiotechCountdown({ className, variant = "hero" }: BiotechCountdo
         <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-[#1599B5]" />
           <span className="text-[13px] sm:text-[14.5px] font-semibold text-[#0B2A4A]">
-            Finals at K.S.Rangasamy College of Technology
+            1-Day Event on Oct 30 at K.S.Rangasamy College of Technology
           </span>
           <span className="hidden sm:inline-block text-[12.5px] text-[#366273]">
             • Top 25 Teams Shortlisted

@@ -139,7 +139,7 @@ export const ALL_FAQS: FaqEntry[] = [
     keywords: ["final", "finals", "ksrct", "venue", "location", "in person", "offline", "namakkal"],
     question: "Where does the grand finals take place?",
     answer:
-      "The finals are held **in person on campus at K.S.Rangasamy College of Technology (KSRCT)** in Tiruchengode / Namakkal, Tamil Nadu. The 25 finalist teams present live before a distinguished jury of investors, MARABANU partners, and StartupTN officials, with access to KSRCT biotechnology labs.",
+      "The grand finals are a **one-day in-person event on October 30** held on campus at **Department of Biotechnology, K.S.Rangasamy College of Technology (KSRCT)** in Tiruchengode / Namakkal, Tamil Nadu. The 25 finalist teams present live before a distinguished jury of investors, MARABANU partners, and StartupTN officials, with access to KSRCT biotechnology labs.",
     followUps: ["What do the winning teams get?", "Who are the organizers?", "What are the 4 weekend sessions?"],
   },
   {
@@ -323,7 +323,7 @@ export function FaqChatbot() {
         botMsg = {
           id: `bot-${Date.now()}`,
           sender: "bot",
-          text: `I don't have a direct answer for "${query}", but here are the key facts:\n\n• **Format:** 4-week build sprint ending in in-person finals at KSRCT.\n• **Entry Fee:** 100% Free at all stages.\n• **Teams:** 2 to 4 students from any college in India.\n• **Prizes:** ₹18,000 cash pool + 6-month MARABANU venture building.\n\nFeel free to explore our full FAQ catalog via the **'Browse All FAQs'** tab above!`,
+          text: `I don't have a direct answer for "${query}", but here are the key facts:\n\n• **Format:** 4-week build sprint ending in a 1-day in-person Grand Finale on Oct 30 at KSRCT.\n• **Entry Fee:** 100% Free at all stages.\n• **Teams:** 2 to 4 students from any college in India.\n• **Prizes:** ₹18,000 cash pool + 6-month MARABANU venture building.\n\nFeel free to explore our full FAQ catalog via the **'Browse All FAQs'** tab above!`,
           time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
           suggestions: [
             "Is there an entry fee?",

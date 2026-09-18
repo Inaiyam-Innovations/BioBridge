@@ -36,7 +36,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Four-week biotech venture-building sprint for student teams across India, ending in an in-person finals day at KSRCT. Organized by MARABANU, StartupTN, and K.S.Rangasamy College of Technology.",
+          "Four-week biotech venture-building sprint for student teams across India, culminating in a 1-day in-person Grand Finale on Oct 30 at KSRCT. Organized by MARABANU, StartupTN, and K.S.Rangasamy College of Technology.",
       },
     ],
     links: [{ rel: "canonical", href: "https://biobridge.pages.dev/" }],
@@ -54,7 +54,7 @@ const QUICK_SPECS = [
     codon: "ATG // INITIATE",
     label: "FORMAT",
     val: "Four-week build, then finals",
-    sub: "Venture sprint + in-person pitch",
+    sub: "Venture sprint + 1-day Oct 30 pitch",
     bioConcept: "Bio-Incubation Sprint",
     bioMeta: "28-Day Protocol",
     icon: Dna,
@@ -127,11 +127,11 @@ const QUICK_SPECS = [
     step: "06",
     tag: "SUMMIT 06",
     codon: "APEX // KSRCT",
-    label: "FINALS",
-    val: "Top 25 present in person",
-    sub: "At KSRCT campus",
-    bioConcept: "Phenotype Demo Day",
-    bioMeta: "In-Person Pitch",
+    label: "EVENT DATE",
+    val: "Oct 30 · 1-Day Event",
+    sub: "Top 25 in person at KSRCT",
+    bioConcept: "Grand Finale Pitch",
+    bioMeta: "Oct 30 · 1-Day Demo",
     icon: Trophy,
     color: "#D97706",
     pillBg: "bg-amber-100/80 text-amber-800",
@@ -183,11 +183,11 @@ const STAGES = [
   },
   {
     num: "06",
-    phase: "Finals day",
-    timing: "In person at KSRCT",
+    phase: "Finals Day (Oct 30)",
+    timing: "Oct 30 · 1-day in-person event",
     summary:
-      "The 25 finalist teams present in person. Three prizes are awarded, and the winning teams enter a six-month venture-building engagement with the MARABANU team.",
-    badge: "Campus Finals & Venture Sprint",
+      "The 25 finalist teams present in person during the one-day grand finale on October 30. Three prizes are awarded, and the winning teams enter a six-month venture-building engagement with the MARABANU team.",
+    badge: "Oct 30 · 1-Day Finals & Venture Sprint",
   },
 ];
 
@@ -391,8 +391,8 @@ function Home() {
             </h1>
 
             <p className="bio-hero-description">
-              A four-week biotech venture-building sprint for student teams across India, ending in
-              an in-person finals day at Department of Biotechnology, K.S.Rangasamy College of Technology.
+              A four-week biotech venture-building sprint for student teams across India, culminating in
+              a 1-day in-person Grand Finale on Oct 30 at Department of Biotechnology, K.S.Rangasamy College of Technology.
             </p>
 
             <div className="bio-actions">
@@ -435,8 +435,8 @@ function Home() {
               <div>
                 <Leaf />
                 <span>
-                  <strong>Top 25</strong>
-                  <small>Finals at KSRCT</small>
+                  <strong>Oct 30</strong>
+                  <small>1-Day Event at KSRCT</small>
                 </span>
               </div>
             </div>
@@ -953,7 +953,7 @@ function Home() {
               </span>
             </h2>
             <p className="mt-3 text-[16.5px] sm:text-[18px] text-[#366273] leading-relaxed">
-              Three non-dilutive cash prizes awarded on finals day at KSRCT, coupled with six months of
+              Three non-dilutive cash prizes awarded on the Oct 30 one-day Grand Finale at KSRCT, coupled with six months of
               venture-building partnership alongside MARABANU and StartupTN.
             </p>
           </div>

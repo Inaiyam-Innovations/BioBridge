@@ -111,7 +111,7 @@ export function SiteFooter() {
             <div className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#D9F2F6]/60 px-3 py-1.5 border border-[#BEE3EA]">
               <span className="h-2 w-2 rounded-full bg-[#059669] animate-pulse" />
               <span className="font-mono text-[11px] font-bold text-[#0E7E96] uppercase tracking-wide">
-                Finals Day: Department of Biotechnology, K.S.Rangasamy College of Technology
+                Finals (1-Day Event): Oct 30 · Department of Biotechnology, K.S.Rangasamy College of Technology
               </span>
             </div>
           </div>
