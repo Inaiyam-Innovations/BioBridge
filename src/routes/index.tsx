@@ -1019,31 +1019,29 @@ function Home() {
             </div>
           </div>
 
-          {/* 3D Polygon Carousel Showcase (One Front, Remaining in Sides & Back) */}
+          {/* Spotlight Multi-Frame Showcase Matching Reference Image */}
           {(() => {
             const currentMembers = panelView === "mentors" ? MENTORS : JURY_MEMBERS;
-            const isMentor = panelView === "mentors";
             const totalCount = currentMembers.length;
-            const stepAngle = 360 / totalCount;
-            const radius = isMentor ? 380 : 470;
+
+            // Slot calculations relative to active member
+            const leftIdx = (activeMemberIdx - 1 + totalCount) % totalCount;
+            const rightIdx = (activeMemberIdx + 1) % totalCount;
+            const farLeftIdx = (activeMemberIdx - 2 + totalCount) % totalCount;
+            const farRightIdx = (activeMemberIdx + 2) % totalCount;
+
+            const centerPerson = currentMembers[activeMemberIdx];
+            const leftPerson = currentMembers[leftIdx];
+            const rightPerson = currentMembers[rightIdx];
+            const farLeftPerson = currentMembers[farLeftIdx];
+            const farRightPerson = currentMembers[farRightIdx];
 
             const handlePrev = () => {
               setActiveMemberIdx((prev) => (prev - 1 + totalCount) % totalCount);
-              setRotationAngle((prev) => prev + stepAngle);
             };
 
             const handleNext = () => {
               setActiveMemberIdx((prev) => (prev + 1) % totalCount);
-              setRotationAngle((prev) => prev - stepAngle);
-            };
-
-            const handleSelectCard = (targetIdx: number) => {
-              if (targetIdx === activeMemberIdx) return;
-              let diff = targetIdx - activeMemberIdx;
-              if (diff > totalCount / 2) diff -= totalCount;
-              if (diff < -totalCount / 2) diff += totalCount;
-              setRotationAngle((prev) => prev - diff * stepAngle);
-              setActiveMemberIdx(targetIdx);
             };
 
             return (
@@ -1052,159 +1050,276 @@ function Home() {
                 onMouseEnter={() => setIsCarouselPaused(true)}
                 onMouseLeave={() => setIsCarouselPaused(false)}
               >
-                {/* 3D Perspective Stage - Increased Height & Spacing */}
-                <div
-                  className="relative w-full h-[510px] sm:h-[560px] flex items-center justify-center overflow-hidden"
-                  style={{
-                    perspective: "1300px",
-                    perspectiveOrigin: "50% 48%",
-                  }}
-                >
-                  {/* Radial Ambient Ground Shadow */}
+                {/* Multi-Frame Stage Matching Reference Image with Gold Borders & Stepped Plaques */}
+                <div className="relative w-full flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-7 py-8 px-2 overflow-hidden sm:overflow-visible">
+                  
+                  {/* 1. FAR LEFT FRAME (4th member in 4-member view, or 5th member in Jury) */}
                   <div
-                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[480px] sm:w-[680px] h-[44px] rounded-full bg-[#0B2A4A]/10 blur-2xl pointer-events-none"
-                    aria-hidden="true"
-                  />
-
-                  {/* 3D Rotator Ring - Spacious Layout */}
-                  <div
-                    className="relative w-[280px] sm:w-[320px] h-[410px] sm:h-[440px]"
-                    style={{
-                      transformStyle: "preserve-3d",
-                      transform: `translateZ(-${radius}px) rotateY(${rotationAngle}deg)`,
-                      transition: "transform 0.75s cubic-bezier(0.2, 0.8, 0.25, 1)",
-                    }}
+                    onClick={() => setActiveMemberIdx(farLeftIdx)}
+                    className="hidden md:flex group relative cursor-pointer flex-col items-center transition-all duration-300 hover:scale-102 opacity-75 hover:opacity-100"
+                    title={`Switch to ${farLeftPerson.name}`}
                   >
-                    {currentMembers.map((person, idx) => {
-                      const cardAngle = (idx * 360) / totalCount;
-                      const effectiveAngle = ((cardAngle + (rotationAngle % 360) + 360) % 360);
-                      const distFromFront = Math.min(effectiveAngle, 360 - effectiveAngle);
-                      const isFacingFront = distFromFront < 32;
-                      const isSide = distFromFront >= 32 && distFromFront <= 110;
-
-                      return (
-                        <div
-                          key={person.num}
-                          onClick={() => handleSelectCard(idx)}
-                          className={cn(
-                            "absolute inset-0 rounded-3xl p-5 sm:p-6 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border bg-white select-none",
-                            isFacingFront
-                              ? "border-[#1599B5] shadow-[0_20px_45px_rgba(21,153,181,0.25)] ring-4 ring-[#20AFC5]/20 opacity-100 z-30"
-                              : isSide
-                              ? "border-[#BEE3EA] shadow-lg opacity-90 hover:opacity-100 hover:border-[#1599B5] z-20"
-                              : "border-[#E2F2F5] shadow-sm opacity-50 hover:opacity-90 z-10"
-                          )}
-                          style={{
-                            transform: `rotateY(${cardAngle}deg) translateZ(${radius}px)`,
-                            backfaceVisibility: "hidden",
-                            WebkitBackfaceVisibility: "hidden",
-                          }}
-                        >
-                          {/* Top Bar: Number Badge + Status */}
-                          <div className="w-full flex items-center justify-between">
-                            <span className="font-mono text-[11px] sm:text-[11.5px] font-extrabold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-3 py-0.5 rounded-full border border-[#BEE3EA]">
-                              #{person.num}
-                            </span>
-                            <span className="font-mono text-[10px] sm:text-[10.5px] font-semibold text-[#1599B5] bg-white/90 px-2.5 py-0.5 rounded-full border border-[#BEE3EA]">
+                    <div className="relative w-[130px] lg:w-[170px] h-[220px] lg:h-[270px] rounded-xl p-2 bg-white border-2 border-[#D4AF37]/80 shadow-[0_8px_24px_rgba(212,175,55,0.15)] flex flex-col items-center justify-between">
+                      {/* Inner Photo Area */}
+                      <div className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-2 border border-[#EBD68E]/60">
+                        {farLeftPerson.image ? (
+                          <img
+                            src={farLeftPerson.image}
+                            alt={farLeftPerson.name}
+                            className="h-full w-full object-cover rounded-md"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center select-none text-center">
+                            <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-full bg-white border border-[#D4AF37]/70 flex items-center justify-center shadow-2xs">
+                              <Dna className="h-5 w-5 lg:h-6 lg:w-6 text-[#9A6B1F]" />
+                            </div>
+                            <span className="mt-2 font-mono text-[10px] lg:text-[11px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
                               Coming Soon
                             </span>
-                          </div>
-
-                          {/* Large Portrait Photo Frame */}
-                          <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden border border-[#BEE3EA] bg-gradient-to-b from-[#F0FAFC] via-white to-[#E3F4F7] my-3 flex flex-col items-center justify-center shadow-inner">
-                            {person.image ? (
-                              <img
-                                src={person.image}
-                                alt={person.name}
-                                className="h-full w-full object-cover"
-                              />
-                            ) : (
-                              <div className="flex flex-col items-center justify-center select-none p-4">
-                                <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-white border border-[#BEE3EA] flex items-center justify-center shadow-xs">
-                                  <Dna
-                                    className={cn(
-                                      "h-8 w-8 sm:h-10 sm:w-10",
-                                      isFacingFront ? "text-[#1599B5] animate-pulse" : "text-[#64748B]"
-                                    )}
-                                  />
-                                </div>
-                                <span className="mt-3 font-mono text-[13px] sm:text-[14px] font-extrabold uppercase tracking-wider text-[#0E7E96]">
-                                  Coming Soon
-                                </span>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Bottom: Member Name and Coming Soon */}
-                          <div className="w-full text-center">
-                            <h4 className="font-display text-[20px] sm:text-[22px] font-extrabold text-[#0B2A4A] tracking-tight truncate">
-                              {person.name}
-                            </h4>
-                            <span className="mt-2 inline-block font-mono text-[10.5px] text-[#0E7E96] font-semibold bg-[#EAF7FA] px-3 py-0.5 rounded-full border border-[#BEE3EA]">
-                              Coming Soon
+                            <span className="font-mono text-[9px] font-bold text-[#8A5A0A]">
+                              #{farLeftPerson.num}
                             </span>
                           </div>
+                        )}
+                      </div>
+
+                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center shadow-sm select-none z-20 group-hover:scale-105 transition-transform">
+                        <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
+                        <div className="px-2 lg:px-3 py-0.5 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[10px] lg:text-[11.5px] tracking-wide border-y border-[#684605] whitespace-nowrap">
+                          {farLeftPerson.name}
                         </div>
-                      );
-                    })}
+                        <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
+                      </div>
+                    </div>
                   </div>
+
+                  {/* 2. IMMEDIATE LEFT FRAME */}
+                  <div
+                    onClick={() => setActiveMemberIdx(leftIdx)}
+                    className="group relative cursor-pointer flex flex-col items-center transition-all duration-300 hover:scale-102 opacity-85 hover:opacity-100"
+                    title={`Switch to ${leftPerson.name}`}
+                  >
+                    <div className="relative w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] h-[260px] sm:h-[320px] md:h-[350px] lg:h-[370px] rounded-2xl p-2.5 sm:p-3 bg-white border-2 sm:border-3 border-[#D4AF37] shadow-[0_12px_32px_rgba(212,175,55,0.22)] flex flex-col items-center justify-between">
+                      {/* Inner Photo Area */}
+                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-3 border border-[#EBD68E]/70">
+                        {leftPerson.image ? (
+                          <img
+                            src={leftPerson.image}
+                            alt={leftPerson.name}
+                            className="h-full w-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center select-none text-center">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-white border border-[#D4AF37] flex items-center justify-center shadow-2xs">
+                              <Dna className="h-6 w-6 sm:h-7 sm:w-7 text-[#9A6B1F]" />
+                            </div>
+                            <span className="mt-2.5 font-mono text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
+                              Coming Soon
+                            </span>
+                            <span className="font-mono text-[9.5px] font-bold text-[#8A5A0A]">
+                              #{leftPerson.num}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                      <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 flex items-center shadow-md select-none z-20 group-hover:scale-105 transition-transform">
+                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
+                        <div className="px-3 sm:px-4.5 py-0.5 sm:py-1 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[11px] sm:text-[13px] tracking-wide border-y border-[#684605] whitespace-nowrap">
+                          {leftPerson.name}
+                        </div>
+                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 3. CENTER SPOTLIGHT FRAME (LARGER, IN FRONT) */}
+                  <div className="relative z-10 flex flex-col items-center transition-all duration-300">
+                    <div className="relative w-[220px] sm:w-[270px] md:w-[310px] lg:w-[340px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[490px] rounded-2xl sm:rounded-3xl p-3 sm:p-4 bg-white border-3 sm:border-4 lg:border-[5px] border-[#D4AF37] shadow-[0_20px_50px_rgba(212,175,55,0.35)] ring-4 ring-[#E6CA65]/35 flex flex-col items-center justify-between">
+                      {/* Top Corner Badge */}
+                      <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-10">
+                        <span className="font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#8A5A0A] bg-white/95 px-2.5 py-0.5 rounded-full border border-[#D4AF37] shadow-2xs">
+                          #{centerPerson.num}
+                        </span>
+                      </div>
+
+                      {/* Inner Photo Area */}
+                      <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-b from-[#F2FBF9] via-white to-[#FFFDF0] flex flex-col items-center justify-center p-4 border border-[#D4AF37]/60 shadow-inner">
+                        {centerPerson.image ? (
+                          <img
+                            src={centerPerson.image}
+                            alt={centerPerson.name}
+                            className="h-full w-full object-cover rounded-xl"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center select-none text-center">
+                            <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-white border-2 border-[#D4AF37] flex items-center justify-center shadow-xs">
+                              <Dna className="h-8 w-8 sm:h-10 sm:w-10 text-[#9A6B1F] animate-pulse" />
+                            </div>
+                            <span className="mt-3.5 font-mono text-[13px] sm:text-[15px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
+                              Coming Soon
+                            </span>
+                            <span className="font-mono text-[11px] font-bold text-[#8A5A0A] mt-0.5">
+                              Member #{centerPerson.num}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                      <div className="absolute -bottom-4 sm:-bottom-5 left-1/2 -translate-x-1/2 flex items-center shadow-xl select-none z-20">
+                        <div className="w-1.5 sm:w-2.5 h-4 sm:h-5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
+                        <div className="px-5 sm:px-7 md:px-8 py-1 sm:py-1.5 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[13.5px] sm:text-[16px] md:text-[17px] tracking-wide border-y border-[#684605] whitespace-nowrap">
+                          {centerPerson.name}
+                        </div>
+                        <div className="w-1.5 sm:w-2.5 h-4 sm:h-5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 4. IMMEDIATE RIGHT FRAME */}
+                  <div
+                    onClick={() => setActiveMemberIdx(rightIdx)}
+                    className="group relative cursor-pointer flex flex-col items-center transition-all duration-300 hover:scale-102 opacity-85 hover:opacity-100"
+                    title={`Switch to ${rightPerson.name}`}
+                  >
+                    <div className="relative w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] h-[260px] sm:h-[320px] md:h-[350px] lg:h-[370px] rounded-2xl p-2.5 sm:p-3 bg-white border-2 sm:border-3 border-[#D4AF37] shadow-[0_12px_32px_rgba(212,175,55,0.22)] flex flex-col items-center justify-between">
+                      {/* Inner Photo Area */}
+                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-3 border border-[#EBD68E]/70">
+                        {rightPerson.image ? (
+                          <img
+                            src={rightPerson.image}
+                            alt={rightPerson.name}
+                            className="h-full w-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <div className="flex flex-col items-center justify-center select-none text-center">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-white border border-[#D4AF37] flex items-center justify-center shadow-2xs">
+                              <Dna className="h-6 w-6 sm:h-7 sm:w-7 text-[#9A6B1F]" />
+                            </div>
+                            <span className="mt-2.5 font-mono text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
+                              Coming Soon
+                            </span>
+                            <span className="font-mono text-[9.5px] font-bold text-[#8A5A0A]">
+                              #{rightPerson.num}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                      <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 flex items-center shadow-md select-none z-20 group-hover:scale-105 transition-transform">
+                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
+                        <div className="px-3 sm:px-4.5 py-0.5 sm:py-1 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[11px] sm:text-[13px] tracking-wide border-y border-[#684605] whitespace-nowrap">
+                          {rightPerson.name}
+                        </div>
+                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 5. FAR RIGHT FRAME (For Jury 6-member view) */}
+                  {totalCount > 4 && (
+                    <div
+                      onClick={() => setActiveMemberIdx(farRightIdx)}
+                      className="hidden md:flex group relative cursor-pointer flex-col items-center transition-all duration-300 hover:scale-102 opacity-75 hover:opacity-100"
+                      title={`Switch to ${farRightPerson.name}`}
+                    >
+                      <div className="relative w-[130px] lg:w-[170px] h-[220px] lg:h-[270px] rounded-xl p-2 bg-white border-2 border-[#D4AF37]/80 shadow-[0_8px_24px_rgba(212,175,55,0.15)] flex flex-col items-center justify-between">
+                        {/* Inner Photo Area */}
+                        <div className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-2 border border-[#EBD68E]/60">
+                          {farRightPerson.image ? (
+                            <img
+                              src={farRightPerson.image}
+                              alt={farRightPerson.name}
+                              className="h-full w-full object-cover rounded-md"
+                            />
+                          ) : (
+                            <div className="flex flex-col items-center justify-center select-none text-center">
+                              <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-full bg-white border border-[#D4AF37]/70 flex items-center justify-center shadow-2xs">
+                                <Dna className="h-5 w-5 lg:h-6 lg:w-6 text-[#9A6B1F]" />
+                              </div>
+                              <span className="mt-2 font-mono text-[10px] lg:text-[11px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
+                                Coming Soon
+                              </span>
+                              <span className="font-mono text-[9px] font-bold text-[#8A5A0A]">
+                                #{farRightPerson.num}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center shadow-sm select-none z-20 group-hover:scale-105 transition-transform">
+                          <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
+                          <div className="px-2 lg:px-3 py-0.5 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[10px] lg:text-[11.5px] tracking-wide border-y border-[#684605] whitespace-nowrap">
+                            {farRightPerson.name}
+                          </div>
+                          <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                 </div>
 
-                {/* 3D Carousel Controls (< O > like sample) */}
-                <div className="mt-4 flex flex-col items-center gap-2.5">
-                  <div className="flex items-center gap-4 bg-white/95 px-4 py-2 rounded-full border border-[#BEE3EA] shadow-sm">
-                    {/* Prev button */}
+                {/* Navigation Controls: < Dots > */}
+                <div className="mt-8 flex flex-col items-center gap-2.5">
+                  <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-full border border-[#D4AF37]/40 shadow-sm">
+                    {/* Prev Button */}
                     <button
                       type="button"
                       onClick={handlePrev}
-                      aria-label="Previous frame"
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#0B2A4A] hover:bg-[#EAF7FA] hover:text-[#1599B5] transition-colors cursor-pointer active:scale-95"
+                      aria-label="Previous member"
+                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
                     >
                       <ChevronLeft className="h-5 w-5" />
                     </button>
 
-                    {/* Indicator dots for each member */}
+                    {/* Dots */}
                     <div className="flex items-center gap-1.5">
                       {currentMembers.map((_, idx) => (
                         <button
                           key={idx}
                           type="button"
-                          onClick={() => handleSelectCard(idx)}
+                          onClick={() => setActiveMemberIdx(idx)}
                           aria-label={`Go to slide ${idx + 1}`}
                           className={cn(
                             "transition-all duration-300 rounded-full cursor-pointer",
                             idx === activeMemberIdx
-                              ? "h-2.5 w-6 bg-[#1599B5]"
-                              : "h-2.5 w-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8]"
+                              ? "h-2.5 w-6 bg-[#D4AF37]"
+                              : "h-2.5 w-2.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
                           )}
                         />
                       ))}
                     </div>
 
-                    {/* Next button */}
+                    {/* Next Button */}
                     <button
                       type="button"
                       onClick={handleNext}
-                      aria-label="Next frame"
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#0B2A4A] hover:bg-[#EAF7FA] hover:text-[#1599B5] transition-colors cursor-pointer active:scale-95"
+                      aria-label="Next member"
+                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
                     >
                       <ChevronRight className="h-5 w-5" />
                     </button>
                   </div>
 
-                  {/* Auto-scroll Status & Interaction Hint */}
+                  {/* Auto-scroll Status */}
                   <div className="flex items-center gap-2 text-[11px] sm:text-[11.5px] font-mono text-[#64748B]">
                     <span
                       className={cn(
                         "h-2 w-2 rounded-full",
-                        isCarouselPaused ? "bg-amber-400" : "bg-[#20AFC5] animate-pulse"
+                        isCarouselPaused ? "bg-amber-400" : "bg-[#D4AF37] animate-pulse"
                       )}
                     />
                     <span>
-                      {isCarouselPaused ? "Auto-scroll Paused" : "3D Auto-Rotating Carousel"}
+                      {isCarouselPaused ? "Auto-scroll Paused (Hovering)" : "Auto-cycling Showcase"}
                     </span>
                     <span>•</span>
-                    <span>Click any side frame to bring to front</span>
+                    <span>Click side frames to switch</span>
                   </div>
                 </div>
               </div>
