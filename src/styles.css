@@ -1792,6 +1792,31 @@
 }
 
 /* ════════════════════════════════════
+   SPOTLIGHT PHYSICAL SLIDER STAGE
+════════════════════════════════════ */
+.bio-spotlight-stage {
+  --card-w: 220px;
+  --card-h: 350px;
+  --card-step: 155px;
+}
+
+@media (min-width: 640px) {
+  .bio-spotlight-stage {
+    --card-w: 260px;
+    --card-h: 410px;
+    --card-step: 215px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bio-spotlight-stage {
+    --card-w: 295px;
+    --card-h: 460px;
+    --card-step: 265px;
+  }
+}
+
+/* ════════════════════════════════════
    PRINT STYLES (submission slip)
 ════════════════════════════════════ */
 

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   FlaskConical,
@@ -293,23 +293,301 @@ const SUPPORTED_BY = [
 
 const TRACK_ICONS = [FlaskConical, Users, Leaf];
 
+function SpotlightCarousel({
+  members,
+  isPaused,
+}: {
+  members: { num: string; name: string; image: string | null }[];
+  isPaused: boolean;
+}) {
+  const totalCount = members.length;
+  // Triple the items so we have seamless left and right buffer sets [cloneBefore, activeSet, cloneAfter]
+  const items = useMemo(() => [...members, ...members, ...members], [members]);
+
+  const [currentIndex, setCurrentIndex] = useState(totalCount);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // Active member index (0 to totalCount - 1)
+  const activeMemberIdx = ((currentIndex % totalCount) + totalCount) % totalCount;
+
+  // Auto-advance
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => prev + 1);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Seamless loop reset when sliding animation completes
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // Only react to the card container's own transform transition
+    if (e.target !== e.currentTarget) return;
+    if (currentIndex >= 2 * totalCount) {
+      setIsTransitioning(false);
+      setCurrentIndex((prev) => prev - totalCount);
+    } else if (currentIndex < totalCount) {
+      setIsTransitioning(false);
+      setCurrentIndex((prev) => prev + totalCount);
+    }
+  };
+
+  // Re-enable smooth transitions right after an instant loop jump
+  useEffect(() => {
+    if (!isTransitioning) {
+      const raf = requestAnimationFrame(() => {
+        setIsTransitioning(true);
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [isTransitioning]);
+
+  const handlePrev = () => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  const handleNext = () => {
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const handleDotClick = (dotIdx: number) => {
+    let diff = dotIdx - activeMemberIdx;
+    if (diff > totalCount / 2) diff -= totalCount;
+    if (diff < -totalCount / 2) diff += totalCount;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + diff);
+  };
+
+  const handleCardClick = (dist: number) => {
+    if (dist !== 0) {
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => prev + dist);
+    }
+  };
+
+  return (
+    <div className="w-full flex flex-col items-center select-none">
+      {/* 3D Physical Sliding Stage */}
+      <div
+        className="bio-spotlight-stage relative w-full max-w-6xl h-[420px] sm:h-[480px] lg:h-[520px] flex items-center justify-center overflow-hidden sm:overflow-visible"
+        style={{ perspective: "1200px" }}
+      >
+        {items.map((person, i) => {
+          const dist = i - currentIndex;
+          // Only render cards within the active sliding window
+          if (Math.abs(dist) > 3) return null;
+
+          const isCenter = dist === 0;
+          const absDist = Math.abs(dist);
+
+          const scale = isCenter ? 1.05 : absDist === 1 ? 0.86 : absDist === 2 ? 0.72 : 0.58;
+          const opacity = isCenter ? 1 : absDist === 1 ? 0.88 : absDist === 2 ? 0.70 : 0;
+          const zIndex = isCenter ? 30 : absDist === 1 ? 20 : absDist === 2 ? 10 : 0;
+          const pointerEvents = absDist > 2 ? "none" : "auto";
+
+          return (
+            <div
+              key={`${person.num}-${i}`}
+              onClick={() => handleCardClick(dist)}
+              onTransitionEnd={handleTransitionEnd}
+              className={cn(
+                "absolute left-1/2 top-1/2 flex flex-col items-center",
+                !isCenter && "cursor-pointer hover:opacity-100"
+              )}
+              style={{
+                width: "var(--card-w, 295px)",
+                height: "var(--card-h, 460px)",
+                transform: `translate3d(calc(-50% + ${dist} * var(--card-step, 265px)), -50%, 0) scale(${scale})`,
+                opacity,
+                zIndex,
+                pointerEvents,
+                transition: isTransitioning
+                  ? "transform 650ms cubic-bezier(0.22, 1, 0.36, 1), opacity 650ms ease, box-shadow 650ms ease"
+                  : "none",
+              }}
+              title={!isCenter ? `Switch to ${person.name}` : undefined}
+            >
+              <div
+                className={cn(
+                  "relative w-full h-full rounded-2xl sm:rounded-3xl p-3 sm:p-4 bg-white flex flex-col items-center justify-between transition-all duration-300",
+                  isCenter
+                    ? "border-4 sm:border-[5px] border-[#D4AF37] ring-4 ring-[#E6CA65]/35 shadow-[0_22px_55px_rgba(212,175,55,0.36)]"
+                    : absDist === 1
+                    ? "border-3 sm:border-4 border-[#D4AF37]/90 shadow-[0_12px_32px_rgba(212,175,55,0.22)]"
+                    : "border-2 sm:border-3 border-[#D4AF37]/75 shadow-[0_8px_24px_rgba(212,175,55,0.15)]"
+                )}
+              >
+                {/* Top Corner Badge */}
+                <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-10">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#8A5A0A] bg-white/95 px-2.5 py-0.5 rounded-full border border-[#D4AF37] shadow-2xs">
+                    #{person.num}
+                  </span>
+                </div>
+
+                {/* Inner Photo Area */}
+                <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-3 sm:p-4 border border-[#EBD68E]/70 shadow-inner">
+                  {person.image ? (
+                    <img
+                      src={person.image}
+                      alt={person.name}
+                      className="h-full w-full object-cover rounded-xl"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center select-none text-center">
+                      <div
+                        className={cn(
+                          "rounded-full bg-white border flex items-center justify-center shadow-xs",
+                          isCenter
+                            ? "h-16 w-16 sm:h-20 sm:w-20 border-2 border-[#D4AF37]"
+                            : "h-12 w-12 sm:h-14 sm:w-14 border border-[#D4AF37]"
+                        )}
+                      >
+                        <Dna
+                          className={cn(
+                            "text-[#9A6B1F]",
+                            isCenter
+                              ? "h-8 w-8 sm:h-10 sm:w-10 animate-pulse"
+                              : "h-6 w-6 sm:h-7 sm:w-7"
+                          )}
+                        />
+                      </div>
+                      <span
+                        className={cn(
+                          "font-mono font-extrabold uppercase tracking-wider text-[#0B2A4A]",
+                          isCenter
+                            ? "mt-3.5 text-[13px] sm:text-[15px]"
+                            : "mt-2.5 text-[11px] sm:text-[12px]"
+                        )}
+                      >
+                        Coming Soon
+                      </span>
+                      <span
+                        className={cn(
+                          "font-mono font-bold text-[#8A5A0A]",
+                          isCenter ? "text-[11px] mt-0.5" : "text-[9.5px]"
+                        )}
+                      >
+                        Member #{person.num}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                <div
+                  className={cn(
+                    "absolute left-1/2 -translate-x-1/2 flex items-center select-none z-20 transition-transform",
+                    isCenter
+                      ? "-bottom-4 sm:-bottom-5 shadow-xl"
+                      : absDist === 1
+                      ? "-bottom-3.5 shadow-md"
+                      : "-bottom-3 shadow-sm"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs",
+                      isCenter
+                        ? "w-1.5 sm:w-2.5 h-4 sm:h-5"
+                        : absDist === 1
+                        ? "w-1.5 sm:w-2 h-3.5 sm:h-4.5"
+                        : "w-1 h-3"
+                    )}
+                  />
+                  <div
+                    className={cn(
+                      "bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black tracking-wide border-y border-[#684605] whitespace-nowrap",
+                      isCenter
+                        ? "px-5 sm:px-7 md:px-8 py-1 sm:py-1.5 text-[13.5px] sm:text-[16px] md:text-[17px]"
+                        : absDist === 1
+                        ? "px-3 sm:px-4.5 py-0.5 sm:py-1 text-[11px] sm:text-[13px]"
+                        : "px-2.5 sm:px-3 py-0.5 text-[10px] sm:text-[11px]"
+                    )}
+                  >
+                    {person.name}
+                  </div>
+                  <div
+                    className={cn(
+                      "bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs",
+                      isCenter
+                        ? "w-1.5 sm:w-2.5 h-4 sm:h-5"
+                        : absDist === 1
+                        ? "w-1.5 sm:w-2 h-3.5 sm:h-4.5"
+                        : "w-1 h-3"
+                    )}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Navigation Controls: < Dots > */}
+      <div className="mt-8 flex flex-col items-center gap-2.5">
+        <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-full border border-[#D4AF37]/40 shadow-sm">
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Previous member"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {members.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => handleDotClick(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={cn(
+                  "transition-all duration-300 rounded-full cursor-pointer",
+                  idx === activeMemberIdx
+                    ? "h-2.5 w-6 bg-[#D4AF37]"
+                    : "h-2.5 w-2.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
+                )}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Next member"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Auto-scroll Status */}
+        <div className="flex items-center gap-2 text-[11px] sm:text-[11.5px] font-mono text-[#64748B]">
+          <span
+            className={cn(
+              "h-2 w-2 rounded-full",
+              isPaused ? "bg-amber-400" : "bg-[#D4AF37] animate-pulse"
+            )}
+          />
+          <span>
+            {isPaused ? "Auto-scroll Paused (Hovering)" : "Auto-cycling Showcase"}
+          </span>
+          <span>•</span>
+          <span>Click side frames to switch</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [panelView, setPanelView] = useState<"mentors" | "jury">("mentors");
-  const [activeMemberIdx, setActiveMemberIdx] = useState(0);
-  const [rotationAngle, setRotationAngle] = useState(0);
   const [isCarouselPaused, setIsCarouselPaused] = useState(false);
-
-  useEffect(() => {
-    if (isCarouselPaused) return;
-    const currentCount = panelView === "mentors" ? MENTORS.length : JURY_MEMBERS.length;
-    const stepAngle = 360 / currentCount;
-    const timer = setInterval(() => {
-      setActiveMemberIdx((prev) => (prev + 1) % currentCount);
-      setRotationAngle((prev) => prev - stepAngle);
-    }, 3200);
-    return () => clearInterval(timer);
-  }, [panelView, isCarouselPaused]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -929,11 +1207,7 @@ function Home() {
             <div className="mt-6 inline-flex items-center rounded-full border border-[#BEE3EA] bg-[#F8FCFD] p-1 shadow-xs">
               <button
                 type="button"
-                onClick={() => {
-                  setPanelView("mentors");
-                  setActiveMemberIdx(0);
-                  setRotationAngle(0);
-                }}
+                onClick={() => setPanelView("mentors")}
                 className={cn(
                   "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
                   panelView === "mentors"
@@ -946,11 +1220,7 @@ function Home() {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setPanelView("jury");
-                  setActiveMemberIdx(0);
-                  setRotationAngle(0);
-                }}
+                onClick={() => setPanelView("jury")}
                 className={cn(
                   "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
                   panelView === "jury"
@@ -964,312 +1234,18 @@ function Home() {
             </div>
           </div>
 
-          {/* Spotlight Multi-Frame Showcase Matching Reference Image */}
-          {(() => {
-            const currentMembers = panelView === "mentors" ? MENTORS : JURY_MEMBERS;
-            const totalCount = currentMembers.length;
-
-            // Slot calculations relative to active member
-            const leftIdx = (activeMemberIdx - 1 + totalCount) % totalCount;
-            const rightIdx = (activeMemberIdx + 1) % totalCount;
-            const farLeftIdx = (activeMemberIdx - 2 + totalCount) % totalCount;
-            const farRightIdx = (activeMemberIdx + 2) % totalCount;
-
-            const centerPerson = currentMembers[activeMemberIdx];
-            const leftPerson = currentMembers[leftIdx];
-            const rightPerson = currentMembers[rightIdx];
-            const farLeftPerson = currentMembers[farLeftIdx];
-            const farRightPerson = currentMembers[farRightIdx];
-
-            const handlePrev = () => {
-              setActiveMemberIdx((prev) => (prev - 1 + totalCount) % totalCount);
-            };
-
-            const handleNext = () => {
-              setActiveMemberIdx((prev) => (prev + 1) % totalCount);
-            };
-
-            return (
-              <div
-                className="mt-10 relative w-full max-w-6xl mx-auto flex flex-col items-center select-none"
-                onMouseEnter={() => setIsCarouselPaused(true)}
-                onMouseLeave={() => setIsCarouselPaused(false)}
-              >
-                {/* Multi-Frame Stage Matching Reference Image with Gold Borders & Stepped Plaques */}
-                <div className="relative w-full flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-7 py-8 px-2 overflow-hidden sm:overflow-visible">
-                  
-                  {/* 1. FAR LEFT FRAME (4th member in 4-member view, or 5th member in Jury) */}
-                  <div
-                    onClick={() => setActiveMemberIdx(farLeftIdx)}
-                    className="hidden md:flex group relative cursor-pointer flex-col items-center transition-all duration-300 hover:scale-102 opacity-75 hover:opacity-100"
-                    title={`Switch to ${farLeftPerson.name}`}
-                  >
-                    <div className="relative w-[130px] lg:w-[170px] h-[220px] lg:h-[270px] rounded-xl p-2 bg-white border-2 border-[#D4AF37]/80 shadow-[0_8px_24px_rgba(212,175,55,0.15)] flex flex-col items-center justify-between">
-                      {/* Inner Photo Area */}
-                      <div className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-2 border border-[#EBD68E]/60">
-                        {farLeftPerson.image ? (
-                          <img
-                            src={farLeftPerson.image}
-                            alt={farLeftPerson.name}
-                            className="h-full w-full object-cover rounded-md"
-                          />
-                        ) : (
-                          <div className="flex flex-col items-center justify-center select-none text-center">
-                            <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-full bg-white border border-[#D4AF37]/70 flex items-center justify-center shadow-2xs">
-                              <Dna className="h-5 w-5 lg:h-6 lg:w-6 text-[#9A6B1F]" />
-                            </div>
-                            <span className="mt-2 font-mono text-[10px] lg:text-[11px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
-                              Coming Soon
-                            </span>
-                            <span className="font-mono text-[9px] font-bold text-[#8A5A0A]">
-                              #{farLeftPerson.num}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
-                      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center shadow-sm select-none z-20 group-hover:scale-105 transition-transform">
-                        <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
-                        <div className="px-2 lg:px-3 py-0.5 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[10px] lg:text-[11.5px] tracking-wide border-y border-[#684605] whitespace-nowrap">
-                          {farLeftPerson.name}
-                        </div>
-                        <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 2. IMMEDIATE LEFT FRAME */}
-                  <div
-                    onClick={() => setActiveMemberIdx(leftIdx)}
-                    className="group relative cursor-pointer flex flex-col items-center transition-all duration-300 hover:scale-102 opacity-85 hover:opacity-100"
-                    title={`Switch to ${leftPerson.name}`}
-                  >
-                    <div className="relative w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] h-[260px] sm:h-[320px] md:h-[350px] lg:h-[370px] rounded-2xl p-2.5 sm:p-3 bg-white border-2 sm:border-3 border-[#D4AF37] shadow-[0_12px_32px_rgba(212,175,55,0.22)] flex flex-col items-center justify-between">
-                      {/* Inner Photo Area */}
-                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-3 border border-[#EBD68E]/70">
-                        {leftPerson.image ? (
-                          <img
-                            src={leftPerson.image}
-                            alt={leftPerson.name}
-                            className="h-full w-full object-cover rounded-lg"
-                          />
-                        ) : (
-                          <div className="flex flex-col items-center justify-center select-none text-center">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-white border border-[#D4AF37] flex items-center justify-center shadow-2xs">
-                              <Dna className="h-6 w-6 sm:h-7 sm:w-7 text-[#9A6B1F]" />
-                            </div>
-                            <span className="mt-2.5 font-mono text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
-                              Coming Soon
-                            </span>
-                            <span className="font-mono text-[9.5px] font-bold text-[#8A5A0A]">
-                              #{leftPerson.num}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
-                      <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 flex items-center shadow-md select-none z-20 group-hover:scale-105 transition-transform">
-                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
-                        <div className="px-3 sm:px-4.5 py-0.5 sm:py-1 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[11px] sm:text-[13px] tracking-wide border-y border-[#684605] whitespace-nowrap">
-                          {leftPerson.name}
-                        </div>
-                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 3. CENTER SPOTLIGHT FRAME (LARGER, IN FRONT) */}
-                  <div className="relative z-10 flex flex-col items-center transition-all duration-300">
-                    <div className="relative w-[220px] sm:w-[270px] md:w-[310px] lg:w-[340px] h-[350px] sm:h-[420px] md:h-[460px] lg:h-[490px] rounded-2xl sm:rounded-3xl p-3 sm:p-4 bg-white border-3 sm:border-4 lg:border-[5px] border-[#D4AF37] shadow-[0_20px_50px_rgba(212,175,55,0.35)] ring-4 ring-[#E6CA65]/35 flex flex-col items-center justify-between">
-                      {/* Top Corner Badge */}
-                      <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-10">
-                        <span className="font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#8A5A0A] bg-white/95 px-2.5 py-0.5 rounded-full border border-[#D4AF37] shadow-2xs">
-                          #{centerPerson.num}
-                        </span>
-                      </div>
-
-                      {/* Inner Photo Area */}
-                      <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-b from-[#F2FBF9] via-white to-[#FFFDF0] flex flex-col items-center justify-center p-4 border border-[#D4AF37]/60 shadow-inner">
-                        {centerPerson.image ? (
-                          <img
-                            src={centerPerson.image}
-                            alt={centerPerson.name}
-                            className="h-full w-full object-cover rounded-xl"
-                          />
-                        ) : (
-                          <div className="flex flex-col items-center justify-center select-none text-center">
-                            <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-white border-2 border-[#D4AF37] flex items-center justify-center shadow-xs">
-                              <Dna className="h-8 w-8 sm:h-10 sm:w-10 text-[#9A6B1F] animate-pulse" />
-                            </div>
-                            <span className="mt-3.5 font-mono text-[13px] sm:text-[15px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
-                              Coming Soon
-                            </span>
-                            <span className="font-mono text-[11px] font-bold text-[#8A5A0A] mt-0.5">
-                              Member #{centerPerson.num}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
-                      <div className="absolute -bottom-4 sm:-bottom-5 left-1/2 -translate-x-1/2 flex items-center shadow-xl select-none z-20">
-                        <div className="w-1.5 sm:w-2.5 h-4 sm:h-5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
-                        <div className="px-5 sm:px-7 md:px-8 py-1 sm:py-1.5 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[13.5px] sm:text-[16px] md:text-[17px] tracking-wide border-y border-[#684605] whitespace-nowrap">
-                          {centerPerson.name}
-                        </div>
-                        <div className="w-1.5 sm:w-2.5 h-4 sm:h-5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 4. IMMEDIATE RIGHT FRAME */}
-                  <div
-                    onClick={() => setActiveMemberIdx(rightIdx)}
-                    className="group relative cursor-pointer flex flex-col items-center transition-all duration-300 hover:scale-102 opacity-85 hover:opacity-100"
-                    title={`Switch to ${rightPerson.name}`}
-                  >
-                    <div className="relative w-[160px] sm:w-[200px] md:w-[220px] lg:w-[240px] h-[260px] sm:h-[320px] md:h-[350px] lg:h-[370px] rounded-2xl p-2.5 sm:p-3 bg-white border-2 sm:border-3 border-[#D4AF37] shadow-[0_12px_32px_rgba(212,175,55,0.22)] flex flex-col items-center justify-between">
-                      {/* Inner Photo Area */}
-                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-3 border border-[#EBD68E]/70">
-                        {rightPerson.image ? (
-                          <img
-                            src={rightPerson.image}
-                            alt={rightPerson.name}
-                            className="h-full w-full object-cover rounded-lg"
-                          />
-                        ) : (
-                          <div className="flex flex-col items-center justify-center select-none text-center">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-white border border-[#D4AF37] flex items-center justify-center shadow-2xs">
-                              <Dna className="h-6 w-6 sm:h-7 sm:w-7 text-[#9A6B1F]" />
-                            </div>
-                            <span className="mt-2.5 font-mono text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
-                              Coming Soon
-                            </span>
-                            <span className="font-mono text-[9.5px] font-bold text-[#8A5A0A]">
-                              #{rightPerson.num}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Docked Gold Plaque with Stepped Bracket Ears */}
-                      <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 flex items-center shadow-md select-none z-20 group-hover:scale-105 transition-transform">
-                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
-                        <div className="px-3 sm:px-4.5 py-0.5 sm:py-1 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[11px] sm:text-[13px] tracking-wide border-y border-[#684605] whitespace-nowrap">
-                          {rightPerson.name}
-                        </div>
-                        <div className="w-1.5 sm:w-2 h-3.5 sm:h-4.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 5. FAR RIGHT FRAME (For Jury 6-member view) */}
-                  {totalCount > 4 && (
-                    <div
-                      onClick={() => setActiveMemberIdx(farRightIdx)}
-                      className="hidden md:flex group relative cursor-pointer flex-col items-center transition-all duration-300 hover:scale-102 opacity-75 hover:opacity-100"
-                      title={`Switch to ${farRightPerson.name}`}
-                    >
-                      <div className="relative w-[130px] lg:w-[170px] h-[220px] lg:h-[270px] rounded-xl p-2 bg-white border-2 border-[#D4AF37]/80 shadow-[0_8px_24px_rgba(212,175,55,0.15)] flex flex-col items-center justify-between">
-                        {/* Inner Photo Area */}
-                        <div className="relative w-full h-full rounded-lg overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-2 border border-[#EBD68E]/60">
-                          {farRightPerson.image ? (
-                            <img
-                              src={farRightPerson.image}
-                              alt={farRightPerson.name}
-                              className="h-full w-full object-cover rounded-md"
-                            />
-                          ) : (
-                            <div className="flex flex-col items-center justify-center select-none text-center">
-                              <div className="h-10 w-10 lg:h-12 lg:w-12 rounded-full bg-white border border-[#D4AF37]/70 flex items-center justify-center shadow-2xs">
-                                <Dna className="h-5 w-5 lg:h-6 lg:w-6 text-[#9A6B1F]" />
-                              </div>
-                              <span className="mt-2 font-mono text-[10px] lg:text-[11px] font-extrabold uppercase tracking-wider text-[#0B2A4A]">
-                                Coming Soon
-                              </span>
-                              <span className="font-mono text-[9px] font-bold text-[#8A5A0A]">
-                                #{farRightPerson.num}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Docked Gold Plaque with Stepped Bracket Ears */}
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center shadow-sm select-none z-20 group-hover:scale-105 transition-transform">
-                          <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs" />
-                          <div className="px-2 lg:px-3 py-0.5 bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black text-[10px] lg:text-[11.5px] tracking-wide border-y border-[#684605] whitespace-nowrap">
-                            {farRightPerson.name}
-                          </div>
-                          <div className="w-1 lg:w-1.5 h-3 lg:h-3.5 bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs" />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                </div>
-
-                {/* Navigation Controls: < Dots > */}
-                <div className="mt-8 flex flex-col items-center gap-2.5">
-                  <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-full border border-[#D4AF37]/40 shadow-sm">
-                    {/* Prev Button */}
-                    <button
-                      type="button"
-                      onClick={handlePrev}
-                      aria-label="Previous member"
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
-                    >
-                      <ChevronLeft className="h-5 w-5" />
-                    </button>
-
-                    {/* Dots */}
-                    <div className="flex items-center gap-1.5">
-                      {currentMembers.map((_, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => setActiveMemberIdx(idx)}
-                          aria-label={`Go to slide ${idx + 1}`}
-                          className={cn(
-                            "transition-all duration-300 rounded-full cursor-pointer",
-                            idx === activeMemberIdx
-                              ? "h-2.5 w-6 bg-[#D4AF37]"
-                              : "h-2.5 w-2.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
-                          )}
-                        />
-                      ))}
-                    </div>
-
-                    {/* Next Button */}
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      aria-label="Next member"
-                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
-                    >
-                      <ChevronRight className="h-5 w-5" />
-                    </button>
-                  </div>
-
-                  {/* Auto-scroll Status */}
-                  <div className="flex items-center gap-2 text-[11px] sm:text-[11.5px] font-mono text-[#64748B]">
-                    <span
-                      className={cn(
-                        "h-2 w-2 rounded-full",
-                        isCarouselPaused ? "bg-amber-400" : "bg-[#D4AF37] animate-pulse"
-                      )}
-                    />
-                    <span>
-                      {isCarouselPaused ? "Auto-scroll Paused (Hovering)" : "Auto-cycling Showcase"}
-                    </span>
-                    <span>•</span>
-                    <span>Click side frames to switch</span>
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
+          {/* Spotlight Multi-Frame Sliding Carousel */}
+          <div
+            className="mt-8 relative w-full max-w-6xl mx-auto flex flex-col items-center select-none"
+            onMouseEnter={() => setIsCarouselPaused(true)}
+            onMouseLeave={() => setIsCarouselPaused(false)}
+          >
+            <SpotlightCarousel
+              key={panelView}
+              members={panelView === "mentors" ? MENTORS : JURY_MEMBERS}
+              isPaused={isCarouselPaused}
+            />
+          </div>
         </div>
       </section>
 
