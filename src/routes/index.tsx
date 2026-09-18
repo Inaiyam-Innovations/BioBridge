@@ -295,230 +295,273 @@ const TRACK_ICONS = [FlaskConical, Users, Leaf];
 
 function SpotlightCarousel({
   members,
+  roleLabel,
   isPaused,
 }: {
   members: { num: string; name: string; image: string | null }[];
+  roleLabel: string;
   isPaused: boolean;
 }) {
   const totalCount = members.length;
-  // Triple the items so we have seamless left and right buffer sets [cloneBefore, activeSet, cloneAfter]
-  const items = useMemo(() => [...members, ...members, ...members], [members]);
+  const isN6 = totalCount === 6;
 
-  const [currentIndex, setCurrentIndex] = useState(totalCount);
-  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [stepOffset, setStepOffset] = useState(0);
 
-  // Active member index (0 to totalCount - 1)
-  const activeMemberIdx = ((currentIndex % totalCount) + totalCount) % totalCount;
-
-  // Auto-advance
+  // Auto-advance every 3.5 seconds
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      setIsTransitioning(true);
-      setCurrentIndex((prev) => prev + 1);
+      setStepOffset((prev) => prev + 1);
     }, 3500);
     return () => clearInterval(timer);
   }, [isPaused]);
 
-  // Seamless loop reset when sliding animation completes
-  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    // Only react to the card container's own transform transition
-    if (e.target !== e.currentTarget) return;
-    if (currentIndex >= 2 * totalCount) {
-      setIsTransitioning(false);
-      setCurrentIndex((prev) => prev - totalCount);
-    } else if (currentIndex < totalCount) {
-      setIsTransitioning(false);
-      setCurrentIndex((prev) => prev + totalCount);
-    }
-  };
-
-  // Re-enable smooth transitions right after an instant loop jump
-  useEffect(() => {
-    if (!isTransitioning) {
-      const raf = requestAnimationFrame(() => {
-        setIsTransitioning(true);
-      });
-      return () => cancelAnimationFrame(raf);
-    }
-  }, [isTransitioning]);
+  const activeIdx = ((stepOffset % totalCount) + totalCount) % totalCount;
 
   const handlePrev = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev - 1);
+    setStepOffset((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + 1);
+    setStepOffset((prev) => prev + 1);
   };
 
   const handleDotClick = (dotIdx: number) => {
-    let diff = dotIdx - activeMemberIdx;
+    let diff = dotIdx - activeIdx;
     if (diff > totalCount / 2) diff -= totalCount;
     if (diff < -totalCount / 2) diff += totalCount;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => prev + diff);
+    setStepOffset((prev) => prev + diff);
   };
 
-  const handleCardClick = (dist: number) => {
-    if (dist !== 0) {
-      setIsTransitioning(true);
-      setCurrentIndex((prev) => prev + dist);
+  const handleCardClick = (cardIdx: number) => {
+    let diff = cardIdx - activeIdx;
+    if (diff > totalCount / 2) diff -= totalCount;
+    if (diff < -totalCount / 2) diff += totalCount;
+    setStepOffset((prev) => prev + diff);
+  };
+
+  // Get slot configuration based on N=4 or N=6
+  const getSlotStyle = (slot: number) => {
+    if (isN6) {
+      // 6-member layout matching Image 2:
+      // Slot 0: Center Front
+      // Slot 1: Right Front (angled inward)
+      // Slot 2: Right Back (outer edge behind Right Front)
+      // Slot 3: Center Back (behind center)
+      // Slot 4: Left Back (outer edge behind Left Front)
+      // Slot 5: Left Front (angled inward)
+      switch (slot) {
+        case 0:
+          return {
+            transform: "translate3d(-50%, -50%, 0) scale(1) rotateY(0deg)",
+            zIndex: 35,
+            opacity: 1,
+            isCenter: true,
+          };
+        case 1:
+          return {
+            transform: "translate3d(calc(-50% + var(--front-x)), -50%, 0) scale(0.86) rotateY(-28deg)",
+            zIndex: 25,
+            opacity: 0.92,
+            isCenter: false,
+          };
+        case 2:
+          return {
+            transform: "translate3d(calc(-50% + var(--back-x)), calc(-50% + var(--back-y)), 0) scale(0.72) rotateY(-40deg)",
+            zIndex: 15,
+            opacity: 0.68,
+            isCenter: false,
+          };
+        case 3:
+          return {
+            transform: "translate3d(-50%, calc(-50% + var(--back-y) * 1.5), 0) scale(0.60) rotateY(0deg)",
+            zIndex: 10,
+            opacity: 0.40,
+            isCenter: false,
+          };
+        case 4:
+          return {
+            transform: "translate3d(calc(-50% - var(--back-x)), calc(-50% + var(--back-y)), 0) scale(0.72) rotateY(40deg)",
+            zIndex: 15,
+            opacity: 0.68,
+            isCenter: false,
+          };
+        case 5:
+          return {
+            transform: "translate3d(calc(-50% - var(--front-x)), -50%, 0) scale(0.86) rotateY(28deg)",
+            zIndex: 25,
+            opacity: 0.92,
+            isCenter: false,
+          };
+        default:
+          return {
+            transform: "translate3d(-50%, -50%, 0) scale(0.6)",
+            zIndex: 0,
+            opacity: 0,
+            isCenter: false,
+          };
+      }
+    } else {
+      // 4-member layout matching Image 1:
+      // Slot 0: Center Front
+      // Slot 1: Right
+      // Slot 2: Center Back (visible peeking behind center)
+      // Slot 3: Left
+      switch (slot) {
+        case 0:
+          return {
+            transform: "translate3d(-50%, -50%, 0) scale(1) rotateY(0deg)",
+            zIndex: 30,
+            opacity: 1,
+            isCenter: true,
+          };
+        case 1:
+          return {
+            transform: "translate3d(calc(-50% + var(--side-x)), -50%, 0) scale(0.85) rotateY(-20deg)",
+            zIndex: 20,
+            opacity: 0.88,
+            isCenter: false,
+          };
+        case 2:
+          return {
+            transform: "translate3d(-50%, calc(-50% + var(--back-y)), 0) scale(0.70) rotateY(0deg)",
+            zIndex: 10,
+            opacity: 0.52,
+            isCenter: false,
+          };
+        case 3:
+          return {
+            transform: "translate3d(calc(-50% - var(--side-x)), -50%, 0) scale(0.85) rotateY(20deg)",
+            zIndex: 20,
+            opacity: 0.88,
+            isCenter: false,
+          };
+        default:
+          return {
+            transform: "translate3d(-50%, -50%, 0) scale(0.6)",
+            zIndex: 0,
+            opacity: 0,
+            isCenter: false,
+          };
+      }
     }
   };
 
   return (
     <div className="w-full flex flex-col items-center select-none">
-      {/* 3D Physical Sliding Stage */}
+      {/* 3D Carousel Stage */}
       <div
-        className="bio-spotlight-stage relative w-full max-w-6xl h-[420px] sm:h-[480px] lg:h-[520px] flex items-center justify-center overflow-hidden sm:overflow-visible"
-        style={{ perspective: "1200px" }}
+        className={cn(
+          "bio-carousel-stage relative w-full max-w-5xl h-[360px] sm:h-[420px] lg:h-[460px] flex items-center justify-center overflow-hidden sm:overflow-visible",
+          isN6 ? "bio-stage-n6" : "bio-stage-n4"
+        )}
       >
-        {items.map((person, i) => {
-          const dist = i - currentIndex;
-          // Only render cards within the active sliding window
-          if (Math.abs(dist) > 3) return null;
-
-          const isCenter = dist === 0;
-          const absDist = Math.abs(dist);
-
-          const scale = isCenter ? 1.05 : absDist === 1 ? 0.86 : absDist === 2 ? 0.72 : 0.58;
-          const opacity = isCenter ? 1 : absDist === 1 ? 0.88 : absDist === 2 ? 0.70 : 0;
-          const zIndex = isCenter ? 30 : absDist === 1 ? 20 : absDist === 2 ? 10 : 0;
-          const pointerEvents = absDist > 2 ? "none" : "auto";
+        {members.map((person, idx) => {
+          const slot = ((idx - (stepOffset % totalCount)) % totalCount + totalCount) % totalCount;
+          const slotStyle = getSlotStyle(slot);
+          const isCenter = slotStyle.isCenter;
 
           return (
             <div
-              key={`${person.num}-${i}`}
-              onClick={() => handleCardClick(dist)}
-              onTransitionEnd={handleTransitionEnd}
+              key={person.num}
+              onClick={() => handleCardClick(idx)}
               className={cn(
-                "absolute left-1/2 top-1/2 flex flex-col items-center",
-                !isCenter && "cursor-pointer hover:opacity-100"
+                "absolute left-1/2 top-1/2 flex flex-col items-center transition-all cursor-pointer",
+                !isCenter && "hover:opacity-100"
               )}
               style={{
-                width: "var(--card-w, 295px)",
-                height: "var(--card-h, 460px)",
-                transform: `translate3d(calc(-50% + ${dist} * var(--card-step, 265px)), -50%, 0) scale(${scale})`,
-                opacity,
-                zIndex,
-                pointerEvents,
-                transition: isTransitioning
-                  ? "transform 650ms cubic-bezier(0.22, 1, 0.36, 1), opacity 650ms ease, box-shadow 650ms ease"
-                  : "none",
+                width: "var(--card-w)",
+                height: "var(--card-h)",
+                transform: slotStyle.transform,
+                zIndex: slotStyle.zIndex,
+                opacity: slotStyle.opacity,
+                transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1), opacity 700ms ease, box-shadow 700ms ease",
               }}
-              title={!isCenter ? `Switch to ${person.name}` : undefined}
+              title={!isCenter ? `Switch to ${roleLabel} #${person.num}` : undefined}
             >
+              {/* Minimalist Professional Frame */}
               <div
                 className={cn(
-                  "relative w-full h-full rounded-2xl sm:rounded-3xl p-3 sm:p-4 bg-white flex flex-col items-center justify-between transition-all duration-300",
+                  "relative w-full h-full rounded-2xl sm:rounded-3xl p-3.5 sm:p-4.5 flex flex-col justify-between transition-all duration-300",
                   isCenter
-                    ? "border-4 sm:border-[5px] border-[#D4AF37] ring-4 ring-[#E6CA65]/35 shadow-[0_22px_55px_rgba(212,175,55,0.36)]"
-                    : absDist === 1
-                    ? "border-3 sm:border-4 border-[#D4AF37]/90 shadow-[0_12px_32px_rgba(212,175,55,0.22)]"
-                    : "border-2 sm:border-3 border-[#D4AF37]/75 shadow-[0_8px_24px_rgba(212,175,55,0.15)]"
+                    ? "bg-white border-2 border-[#1599B5] shadow-[0_20px_45px_rgba(15,118,110,0.14)] ring-4 ring-[#1599B5]/12"
+                    : "bg-white/95 border border-slate-200/90 shadow-[0_8px_24px_rgba(15,23,42,0.06)] hover:border-slate-300"
                 )}
               >
-                {/* Top Corner Badge */}
-                <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-10">
-                  <span className="font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#8A5A0A] bg-white/95 px-2.5 py-0.5 rounded-full border border-[#D4AF37] shadow-2xs">
+                {/* Header inside frame */}
+                <div className="flex items-center justify-between w-full">
+                  <span
+                    className={cn(
+                      "font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full",
+                      isCenter
+                        ? "bg-[#EBF7F9] text-[#1599B5] border border-[#BEE3EA]"
+                        : "bg-slate-100 text-slate-500 border border-slate-200/60"
+                    )}
+                  >
                     #{person.num}
+                  </span>
+                  <span
+                    className={cn(
+                      "font-mono text-[9.5px] sm:text-[10px] uppercase tracking-wider",
+                      isCenter ? "text-[#1599B5] font-semibold" : "text-slate-400 font-medium"
+                    )}
+                  >
+                    {roleLabel}
                   </span>
                 </div>
 
-                {/* Inner Photo Area */}
-                <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden bg-gradient-to-b from-[#FAFDFB] via-white to-[#FFFDF2] flex flex-col items-center justify-center p-3 sm:p-4 border border-[#EBD68E]/70 shadow-inner">
-                  {person.image ? (
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="h-full w-full object-cover rounded-xl"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center justify-center select-none text-center">
-                      <div
-                        className={cn(
-                          "rounded-full bg-white border flex items-center justify-center shadow-xs",
-                          isCenter
-                            ? "h-16 w-16 sm:h-20 sm:w-20 border-2 border-[#D4AF37]"
-                            : "h-12 w-12 sm:h-14 sm:w-14 border border-[#D4AF37]"
-                        )}
-                      >
-                        <Dna
-                          className={cn(
-                            "text-[#9A6B1F]",
-                            isCenter
-                              ? "h-8 w-8 sm:h-10 sm:w-10 animate-pulse"
-                              : "h-6 w-6 sm:h-7 sm:w-7"
-                          )}
-                        />
-                      </div>
-                      <span
-                        className={cn(
-                          "font-mono font-extrabold uppercase tracking-wider text-[#0B2A4A]",
-                          isCenter
-                            ? "mt-3.5 text-[13px] sm:text-[15px]"
-                            : "mt-2.5 text-[11px] sm:text-[12px]"
-                        )}
-                      >
-                        Coming Soon
-                      </span>
-                      <span
-                        className={cn(
-                          "font-mono font-bold text-[#8A5A0A]",
-                          isCenter ? "text-[11px] mt-0.5" : "text-[9.5px]"
-                        )}
-                      >
-                        Member #{person.num}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Docked Gold Plaque with Stepped Bracket Ears */}
+                {/* Photo / Avatar Placeholder Area */}
                 <div
                   className={cn(
-                    "absolute left-1/2 -translate-x-1/2 flex items-center select-none z-20 transition-transform",
+                    "relative w-full flex-1 my-2.5 sm:my-3 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center p-3 sm:p-4 text-center border",
                     isCenter
-                      ? "-bottom-4 sm:-bottom-5 shadow-xl"
-                      : absDist === 1
-                      ? "-bottom-3.5 shadow-md"
-                      : "-bottom-3 shadow-sm"
+                      ? "bg-gradient-to-b from-[#FAFDFE] via-white to-[#F0F9FB] border-[#D9F2F6]"
+                      : "bg-gradient-to-b from-slate-50/90 via-white to-slate-50/60 border-slate-100"
                   )}
                 >
                   <div
                     className={cn(
-                      "bg-[#8F6317] border-y border-l border-[#684605] rounded-l-xs",
+                      "rounded-2xl flex items-center justify-center transition-all duration-300",
                       isCenter
-                        ? "w-1.5 sm:w-2.5 h-4 sm:h-5"
-                        : absDist === 1
-                        ? "w-1.5 sm:w-2 h-3.5 sm:h-4.5"
-                        : "w-1 h-3"
-                    )}
-                  />
-                  <div
-                    className={cn(
-                      "bg-gradient-to-r from-[#9A6B1F] via-[#ECD476] via-[#FFF6C0] via-[#ECD476] to-[#9A6B1F] text-[#18181B] font-display font-black tracking-wide border-y border-[#684605] whitespace-nowrap",
-                      isCenter
-                        ? "px-5 sm:px-7 md:px-8 py-1 sm:py-1.5 text-[13.5px] sm:text-[16px] md:text-[17px]"
-                        : absDist === 1
-                        ? "px-3 sm:px-4.5 py-0.5 sm:py-1 text-[11px] sm:text-[13px]"
-                        : "px-2.5 sm:px-3 py-0.5 text-[10px] sm:text-[11px]"
+                        ? "h-14 w-14 sm:h-16 sm:w-16 bg-[#EBF7F9] border border-[#BEE3EA] text-[#1599B5] shadow-xs"
+                        : "h-11 w-11 sm:h-13 sm:w-13 bg-slate-100 border border-slate-200/80 text-slate-400"
                     )}
                   >
-                    {person.name}
+                    <Dna className={cn(isCenter ? "h-7 w-7 sm:h-8 sm:w-8 animate-pulse text-[#1599B5]" : "h-5 w-5 sm:h-6 sm:w-6")} />
                   </div>
+
+                  <h4
+                    className={cn(
+                      "font-display font-bold tracking-tight text-[#0B2A4A]",
+                      isCenter ? "mt-3 text-[16px] sm:text-[18px]" : "mt-2 text-[13px] sm:text-[14px]"
+                    )}
+                  >
+                    Coming Soon
+                  </h4>
+
+                  <p
+                    className={cn(
+                      "font-mono font-medium",
+                      isCenter ? "mt-0.5 text-[11px] sm:text-[12px] text-[#1599B5]" : "mt-0.5 text-[10px] text-slate-400"
+                    )}
+                  >
+                    {roleLabel} #{person.num}
+                  </p>
+                </div>
+
+                {/* Minimalist Bottom Docked Pill */}
+                <div className="flex items-center justify-center w-full">
                   <div
                     className={cn(
-                      "bg-[#8F6317] border-y border-r border-[#684605] rounded-r-xs",
+                      "w-full py-1 sm:py-1.5 px-3 rounded-xl flex items-center justify-center gap-1.5 font-mono text-center transition-all",
                       isCenter
-                        ? "w-1.5 sm:w-2.5 h-4 sm:h-5"
-                        : absDist === 1
-                        ? "w-1.5 sm:w-2 h-3.5 sm:h-4.5"
-                        : "w-1 h-3"
+                        ? "bg-[#0B2A4A] text-white text-[11px] sm:text-[12px] font-bold shadow-xs"
+                        : "bg-slate-50 border border-slate-200/70 text-slate-600 text-[10px] sm:text-[10.5px] font-semibold"
                     )}
-                  />
+                  >
+                    {isCenter && <Sparkles className="h-3.5 w-3.5 text-[#20AFC5]" />}
+                    <span>Coming Soon</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -528,12 +571,12 @@ function SpotlightCarousel({
 
       {/* Navigation Controls: < Dots > */}
       <div className="mt-8 flex flex-col items-center gap-2.5">
-        <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-full border border-[#D4AF37]/40 shadow-sm">
+        <div className="flex items-center gap-4 bg-white px-4 py-2 rounded-full border border-slate-200/80 shadow-sm">
           <button
             type="button"
             onClick={handlePrev}
             aria-label="Previous member"
-            className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:bg-slate-100 hover:text-[#0B2A4A] transition-colors cursor-pointer active:scale-95"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -547,9 +590,9 @@ function SpotlightCarousel({
                 aria-label={`Go to slide ${idx + 1}`}
                 className={cn(
                   "transition-all duration-300 rounded-full cursor-pointer",
-                  idx === activeMemberIdx
-                    ? "h-2.5 w-6 bg-[#D4AF37]"
-                    : "h-2.5 w-2.5 bg-[#E2E8F0] hover:bg-[#CBD5E1]"
+                  idx === activeIdx
+                    ? "h-2.5 w-6 bg-[#1599B5]"
+                    : "h-2.5 w-2.5 bg-slate-200 hover:bg-slate-300"
                 )}
               />
             ))}
@@ -559,25 +602,25 @@ function SpotlightCarousel({
             type="button"
             onClick={handleNext}
             aria-label="Next member"
-            className="flex h-8 w-8 items-center justify-center rounded-full text-[#18181B] hover:bg-[#FAF5E6] hover:text-[#9A6B1F] transition-colors cursor-pointer active:scale-95"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-slate-700 hover:bg-slate-100 hover:text-[#0B2A4A] transition-colors cursor-pointer active:scale-95"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
         </div>
 
         {/* Auto-scroll Status */}
-        <div className="flex items-center gap-2 text-[11px] sm:text-[11.5px] font-mono text-[#64748B]">
+        <div className="flex items-center gap-2 text-[11px] sm:text-[11.5px] font-mono text-slate-500">
           <span
             className={cn(
               "h-2 w-2 rounded-full",
-              isPaused ? "bg-amber-400" : "bg-[#D4AF37] animate-pulse"
+              isPaused ? "bg-amber-400" : "bg-[#1599B5] animate-pulse"
             )}
           />
           <span>
-            {isPaused ? "Auto-scroll Paused (Hovering)" : "Auto-cycling Showcase"}
+            {isPaused ? "Auto-rotation Paused (Hovering)" : "Auto-rotating 3D Showcase"}
           </span>
           <span>•</span>
-          <span>Click side frames to switch</span>
+          <span>Click any card to spotlight</span>
         </div>
       </div>
     </div>
@@ -1243,6 +1286,7 @@ function Home() {
             <SpotlightCarousel
               key={panelView}
               members={panelView === "mentors" ? MENTORS : JURY_MEMBERS}
+              roleLabel={panelView === "mentors" ? "Keynote Mentor" : "Grand Jury Member"}
               isPaused={isCarouselPaused}
             />
           </div>

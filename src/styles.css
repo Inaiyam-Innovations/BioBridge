@@ -1792,27 +1792,63 @@
 }
 
 /* ════════════════════════════════════
-   SPOTLIGHT PHYSICAL SLIDER STAGE
+   MINIMALIST 3D CAROUSEL STAGES (N=4 & N=6)
 ════════════════════════════════════ */
-.bio-spotlight-stage {
-  --card-w: 220px;
-  --card-h: 350px;
-  --card-step: 155px;
+.bio-carousel-stage {
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
 }
 
+/* Mobile defaults (< 640px) */
+.bio-stage-n4 {
+  --card-w: 185px;
+  --card-h: 275px;
+  --side-x: 140px;
+  --back-y: -16px;
+}
+
+.bio-stage-n6 {
+  --card-w: 165px;
+  --card-h: 260px;
+  --front-x: 110px;
+  --back-x: 185px;
+  --back-y: -14px;
+}
+
+/* Tablet (640px - 1024px) */
 @media (min-width: 640px) {
-  .bio-spotlight-stage {
-    --card-w: 260px;
-    --card-h: 410px;
-    --card-step: 215px;
+  .bio-stage-n4 {
+    --card-w: 220px;
+    --card-h: 320px;
+    --side-x: 215px;
+    --back-y: -22px;
+  }
+
+  .bio-stage-n6 {
+    --card-w: 200px;
+    --card-h: 300px;
+    --front-x: 165px;
+    --back-x: 270px;
+    --back-y: -18px;
   }
 }
 
+/* Desktop (>= 1024px) */
 @media (min-width: 1024px) {
-  .bio-spotlight-stage {
-    --card-w: 295px;
-    --card-h: 460px;
-    --card-step: 265px;
+  .bio-stage-n4 {
+    --card-w: 255px;
+    --card-h: 365px;
+    --side-x: 280px;
+    --back-y: -26px;
+  }
+
+  .bio-stage-n6 {
+    --card-w: 235px;
+    --card-h: 345px;
+    --front-x: 215px;
+    --back-x: 355px;
+    --back-y: -22px;
   }
 }
 
