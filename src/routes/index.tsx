@@ -1087,16 +1087,17 @@ function Home() {
                           key={person.num}
                           onClick={() => handleSelectCard(idx)}
                           className={cn(
-                            "absolute inset-0 rounded-3xl p-5 sm:p-6 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border backdrop-blur-md",
+                            "absolute inset-0 rounded-3xl p-5 sm:p-6 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border bg-white select-none",
                             isFacingFront
-                              ? "bg-white border-[#1599B5] shadow-[0_24px_50px_rgba(21,153,181,0.28)] ring-4 ring-[#20AFC5]/20 opacity-100 z-30 scale-[1.02]"
+                              ? "border-[#1599B5] shadow-[0_20px_45px_rgba(21,153,181,0.25)] ring-4 ring-[#20AFC5]/20 opacity-100 z-30"
                               : isSide
-                              ? "bg-white/95 border-[#BEE3EA] shadow-xl opacity-75 hover:opacity-95 z-20"
-                              : "bg-white/80 border-[#E2F2F5] shadow-md opacity-45 hover:opacity-85 z-10"
+                              ? "border-[#BEE3EA] shadow-lg opacity-90 hover:opacity-100 hover:border-[#1599B5] z-20"
+                              : "border-[#E2F2F5] shadow-sm opacity-50 hover:opacity-90 z-10"
                           )}
                           style={{
                             transform: `rotateY(${cardAngle}deg) translateZ(${radius}px)`,
-                            backfaceVisibility: "visible",
+                            backfaceVisibility: "hidden",
+                            WebkitBackfaceVisibility: "hidden",
                           }}
                         >
                           {/* Top Bar: Number Badge + Status */}
