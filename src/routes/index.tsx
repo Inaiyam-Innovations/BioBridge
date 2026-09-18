@@ -1025,7 +1025,7 @@ function Home() {
             const isMentor = panelView === "mentors";
             const totalCount = currentMembers.length;
             const stepAngle = 360 / totalCount;
-            const radius = isMentor ? 300 : 370;
+            const radius = isMentor ? 380 : 470;
 
             const handlePrev = () => {
               setActiveMemberIdx((prev) => (prev - 1 + totalCount) % totalCount);
@@ -1048,25 +1048,25 @@ function Home() {
 
             return (
               <div
-                className="mt-10 relative w-full max-w-5xl mx-auto flex flex-col items-center select-none"
+                className="mt-10 relative w-full max-w-6xl mx-auto flex flex-col items-center select-none"
                 onMouseEnter={() => setIsCarouselPaused(true)}
                 onMouseLeave={() => setIsCarouselPaused(false)}
               >
-                {/* 3D Perspective Stage - Increased Height */}
+                {/* 3D Perspective Stage - Increased Height & Spacing */}
                 <div
-                  className="relative w-full h-[490px] sm:h-[540px] flex items-center justify-center overflow-hidden"
+                  className="relative w-full h-[510px] sm:h-[560px] flex items-center justify-center overflow-hidden"
                   style={{
-                    perspective: "1200px",
+                    perspective: "1300px",
                     perspectiveOrigin: "50% 48%",
                   }}
                 >
                   {/* Radial Ambient Ground Shadow */}
                   <div
-                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[420px] sm:w-[560px] h-[40px] rounded-full bg-[#0B2A4A]/10 blur-2xl pointer-events-none"
+                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[480px] sm:w-[680px] h-[44px] rounded-full bg-[#0B2A4A]/10 blur-2xl pointer-events-none"
                     aria-hidden="true"
                   />
 
-                  {/* 3D Rotator Ring - Increased Size */}
+                  {/* 3D Rotator Ring - Spacious Layout */}
                   <div
                     className="relative w-[280px] sm:w-[320px] h-[410px] sm:h-[440px]"
                     style={{
@@ -1089,7 +1089,7 @@ function Home() {
                           className={cn(
                             "absolute inset-0 rounded-3xl p-5 sm:p-6 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border backdrop-blur-md",
                             isFacingFront
-                              ? "bg-white border-[#1599B5] shadow-[0_22px_48px_rgba(21,153,181,0.28)] ring-4 ring-[#20AFC5]/20 opacity-100 z-30 scale-[1.02]"
+                              ? "bg-white border-[#1599B5] shadow-[0_24px_50px_rgba(21,153,181,0.28)] ring-4 ring-[#20AFC5]/20 opacity-100 z-30 scale-[1.02]"
                               : isSide
                               ? "bg-white/95 border-[#BEE3EA] shadow-xl opacity-75 hover:opacity-95 z-20"
                               : "bg-white/80 border-[#E2F2F5] shadow-md opacity-45 hover:opacity-85 z-10"
@@ -1099,18 +1099,17 @@ function Home() {
                             backfaceVisibility: "visible",
                           }}
                         >
-                          {/* Top Bar: Number Badge + Role */}
+                          {/* Top Bar: Number Badge + Status */}
                           <div className="w-full flex items-center justify-between">
                             <span className="font-mono text-[11px] sm:text-[11.5px] font-extrabold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-3 py-0.5 rounded-full border border-[#BEE3EA]">
                               #{person.num}
                             </span>
-                            <span className="font-mono text-[10.5px] font-bold text-[#64748B] uppercase flex items-center gap-1">
-                              {isMentor ? <Sparkles className="h-3 w-3 text-[#20AFC5]" /> : <Award className="h-3 w-3 text-[#1599B5]" />}
-                              {isMentor ? "Mentor" : "Jury"}
+                            <span className="font-mono text-[10px] sm:text-[10.5px] font-semibold text-[#1599B5] bg-white/90 px-2.5 py-0.5 rounded-full border border-[#BEE3EA]">
+                              Coming Soon
                             </span>
                           </div>
 
-                          {/* Large Portrait Photo Frame (Clean Rectangular / Portrait) */}
+                          {/* Large Portrait Photo Frame */}
                           <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden border border-[#BEE3EA] bg-gradient-to-b from-[#F0FAFC] via-white to-[#E3F4F7] my-3 flex flex-col items-center justify-center shadow-inner">
                             {person.image ? (
                               <img
@@ -1128,26 +1127,20 @@ function Home() {
                                     )}
                                   />
                                 </div>
-                                <span className="mt-3 font-mono text-[12.5px] sm:text-[13.5px] font-extrabold uppercase tracking-wider text-[#0E7E96]">
+                                <span className="mt-3 font-mono text-[13px] sm:text-[14px] font-extrabold uppercase tracking-wider text-[#0E7E96]">
                                   Coming Soon
-                                </span>
-                                <span className="font-mono text-[11px] font-bold text-[#64748B] mt-0.5">
-                                  Member #{person.num}
                                 </span>
                               </div>
                             )}
                           </div>
 
-                          {/* Bottom: Name & Subtitle for Single Person */}
+                          {/* Bottom: Member Name and Coming Soon */}
                           <div className="w-full text-center">
-                            <h4 className="font-display text-[19px] sm:text-[21px] font-extrabold text-[#0B2A4A] tracking-tight truncate">
+                            <h4 className="font-display text-[20px] sm:text-[22px] font-extrabold text-[#0B2A4A] tracking-tight truncate">
                               {person.name}
                             </h4>
-                            <p className="mt-0.5 font-mono text-[12px] sm:text-[12.5px] text-[#1599B5] font-semibold truncate">
-                              {isMentor ? "Biotech Keynote Mentor" : "Grand Finale Evaluator"}
-                            </p>
-                            <span className="mt-1.5 inline-block font-mono text-[10px] text-[#64748B] bg-[#F1F9FA] px-2.5 py-0.5 rounded-md border border-[#E2F2F5]">
-                              {isFacingFront ? "Active Spotlight" : "Click to Rotate"}
+                            <span className="mt-2 inline-block font-mono text-[10.5px] text-[#0E7E96] font-semibold bg-[#EAF7FA] px-3 py-0.5 rounded-full border border-[#BEE3EA]">
+                              Coming Soon
                             </span>
                           </div>
                         </div>
