@@ -23,6 +23,7 @@ import {
   Atom,
   Clock,
   Phone,
+  User,
 } from "lucide-react";
 import { categories, problemsByCategory } from "@/data/problems";
 import DecryptedText from "@/components/decrypted-text";
@@ -1041,13 +1042,13 @@ function Home() {
               <Users className="h-4 w-4 text-[#1599B5]" />
               Executive Evaluation &amp; Mentorship
             </span>
-            <h2 className="mt-4 font-display text-[32px] sm:text-[46px] font-extrabold text-[#0B2A4A] leading-tight tracking-tight">
+            <h2 className="mt-4 font-display text-[32px] sm:text-[44px] font-extrabold text-[#0B2A4A] leading-tight tracking-tight">
               Guided by Experts.{" "}
               <span className="bg-gradient-to-r from-[#1599B5] via-[#20AFC5] to-[#0B2A4A] bg-clip-text text-transparent">
                 Evaluated by Pioneers.
               </span>
             </h2>
-            <p className="mt-3 text-[16px] sm:text-[17.5px] text-[#366273] leading-relaxed">
+            <p className="mt-3 text-[15.5px] sm:text-[17px] text-[#366273] leading-relaxed">
               Meet the 6 grand jury members evaluating the final pitches live on Oct 30 and the 6 keynote mentors guiding the 4-week build sprint.
             </p>
 
@@ -1059,7 +1060,7 @@ function Home() {
                 className={cn(
                   "flex items-center gap-2 rounded-xl px-5 py-2.5 font-mono text-[12px] sm:text-[13px] font-bold transition-all cursor-pointer",
                   panelView === "jury"
-                    ? "bg-[#0B2A4A] text-white shadow-md"
+                    ? "bg-[#0B2A4A] text-white shadow-sm"
                     : "text-[#366273] hover:text-[#0B2A4A] hover:bg-[#F4FAFB]"
                 )}
               >
@@ -1072,7 +1073,7 @@ function Home() {
                 className={cn(
                   "flex items-center gap-2 rounded-xl px-5 py-2.5 font-mono text-[12px] sm:text-[13px] font-bold transition-all cursor-pointer",
                   panelView === "speakers"
-                    ? "bg-[#0B2A4A] text-white shadow-md"
+                    ? "bg-[#0B2A4A] text-white shadow-sm"
                     : "text-[#366273] hover:text-[#0B2A4A] hover:bg-[#F4FAFB]"
                 )}
               >
@@ -1082,80 +1083,50 @@ function Home() {
             </div>
           </div>
 
-          {/* Dynamic 6-Card Grid: Executive Picture + Name + Designation */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-6xl mx-auto">
+          {/* Simple Professional 6-Card Grid: Photo + Name + Designation */}
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person) => (
               <div
                 key={person.num}
-                className="group relative rounded-3xl border border-[#BEE3EA] bg-white p-4 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#1599B5] hover:shadow-[0_20px_50px_-10px_rgba(21,153,181,0.22)] flex flex-col justify-between"
+                className="group relative rounded-2xl border border-[#D9F2F6] bg-white p-6 text-center shadow-xs transition-all duration-300 hover:border-[#1599B5] hover:shadow-md hover:-translate-y-1 flex flex-col items-center justify-between"
               >
-                <div>
-                  {/* Executive Portrait Box */}
-                  <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-b from-[#09223D] via-[#06182B] to-[#030D17] flex items-center justify-center border border-[#1599B5]/30">
-                    {/* Studio Lighting Ambient Radial */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(32,175,197,0.28)_0%,transparent_65%)]" />
-
-                    {/* Subtle Futuristic DNA / Bio Grid Backdrop */}
-                    <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#38BDF8_1px,transparent_1px)] [background-size:16px_16px]" />
-
-                    {person.image ? (
-                      <img
-                        src={person.image}
-                        alt={person.name}
-                        className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
-                    ) : (
-                      /* High-End Executive Placeholder Silhouette Frame */
-                      <div className="relative flex flex-col items-center justify-center text-center p-4">
-                        <div className="relative flex h-28 w-28 sm:h-32 sm:w-32 items-center justify-center rounded-full bg-gradient-to-b from-[#1599B5]/25 to-[#0B2A4A]/90 border-2 border-[#38BDF8]/40 shadow-[0_0_30px_rgba(32,175,197,0.35)] group-hover:border-[#38BDF8] group-hover:scale-105 transition-all duration-500">
-                          <Users className="h-14 w-14 text-[#7DD3FC] opacity-95" />
-                          <span
-                            className="absolute bottom-1 right-1 h-4 w-4 rounded-full bg-emerald-400 border-2 border-[#0B2A4A] shadow-[0_0_8px_#34D399]"
-                            title="Official Panelist Profile"
-                          />
-                        </div>
-                        <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#7DD3FC]/90">
-                          <Sparkles className="h-3 w-3 text-[#38BDF8]" />
-                          Official Portrait
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Top Tag & Number Badges */}
-                    <div className="absolute top-3 left-3 rounded-full bg-[#0B2A4A]/85 border border-white/15 px-2.5 py-0.5 font-mono text-[11px] font-bold text-white/90 backdrop-blur-md">
-                      #{person.num}
+                <div className="w-full flex flex-col items-center">
+                  {/* Clean Professional Circular Photo Frame */}
+                  <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-[#BEE3EA] p-1 bg-white shadow-xs group-hover:border-[#1599B5] transition-colors">
+                    <div className="h-full w-full rounded-full overflow-hidden bg-gradient-to-b from-[#EBF7F9] to-[#D9F2F6] flex items-center justify-center">
+                      {person.image ? (
+                        <img
+                          src={person.image}
+                          alt={person.name}
+                          className="h-full w-full object-cover object-top"
+                        />
+                      ) : (
+                        <User className="h-11 w-11 sm:h-12 sm:w-12 text-[#0E7E96]/60" />
+                      )}
                     </div>
-
-                    <div className="absolute top-3 right-3 rounded-full bg-[#0B2A4A]/85 border border-[#38BDF8]/40 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#38BDF8] backdrop-blur-md">
-                      {person.tag}
-                    </div>
-
-                    {/* Subtle Bottom Vignette */}
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#030D17]/80 to-transparent" />
                   </div>
 
-                  {/* Clean Executive Name & Designation */}
-                  <div className="mt-4 px-1.5 pb-1">
-                    <h3 className="font-display text-[20px] sm:text-[21px] font-extrabold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
-                      {person.name}
-                    </h3>
-                    <p className="mt-1 text-[13.5px] font-bold text-[#0E7E96] leading-snug">
-                      {person.designation}
-                    </p>
-                    <p className="mt-1.5 text-[12.5px] font-medium text-[#475569] flex items-center gap-1.5">
-                      <Building2 className="h-3.5 w-3.5 text-[#1599B5] shrink-0" />
-                      <span>{person.org}</span>
-                    </p>
-                  </div>
+                  {/* Name */}
+                  <h3 className="mt-4 font-display text-[18px] sm:text-[19px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors">
+                    {person.name}
+                  </h3>
+
+                  {/* Designation */}
+                  <p className="mt-1 text-[13px] sm:text-[13.5px] font-semibold text-[#1599B5] leading-snug">
+                    {person.designation}
+                  </p>
+
+                  {/* Organization */}
+                  <p className="mt-1.5 text-[12px] text-[#64748B] flex items-center justify-center gap-1.5">
+                    <Building2 className="h-3.5 w-3.5 text-[#1599B5] shrink-0" />
+                    <span>{person.org}</span>
+                  </p>
                 </div>
 
-                {/* Bottom Cyan Accent Line Indicator */}
-                <div className="mt-4 pt-3 border-t border-[#F0F8FA] flex items-center justify-between text-[11.5px]">
-                  <span className="font-mono text-[10.5px] text-[#7BA1B0] font-semibold uppercase tracking-wider">
-                    {panelView === "jury" ? "Grand Finale Evaluator" : "Weekend Masterclass"}
-                  </span>
-                  <span className="font-mono text-[10.5px] text-[#1599B5] font-bold">
-                    {panelView === "jury" ? "Oct 30 · KSRCT" : "4-Week Build"}
+                {/* Clean Domain Tag */}
+                <div className="mt-5 pt-3 border-t border-[#F1F5F9] w-full flex items-center justify-center">
+                  <span className="inline-flex items-center rounded-full bg-[#F4FAFB] border border-[#D9F2F6] px-3 py-0.5 font-mono text-[10.5px] font-medium text-[#0E7E96]">
+                    {person.tag}
                   </span>
                 </div>
               </div>
@@ -1163,9 +1134,9 @@ function Home() {
           </div>
 
           {/* Clean Subtext Strip */}
-          <div className="mt-12 rounded-2xl border border-[#D9F2F6] bg-gradient-to-r from-[#F4FAFB] via-white to-[#F4FAFB] p-4 text-center max-w-4xl mx-auto">
-            <p className="text-[13px] text-[#366273]">
-              <strong className="text-[#0B2A4A]">Executive Profile Slot:</strong> Individual guest names, designations, corporate affiliations, and official portrait photographs can be plugged into these designated slots anytime.
+          <div className="mt-10 rounded-2xl border border-[#D9F2F6] bg-gradient-to-r from-[#F4FAFB] via-white to-[#F4FAFB] p-4 text-center max-w-3xl mx-auto">
+            <p className="text-[12.5px] text-[#366273]">
+              <strong className="text-[#0B2A4A]">Speaker &amp; Jury Profiles:</strong> Official guest portraits, titles, and affiliations are loaded directly into these slots.
             </p>
           </div>
         </div>
