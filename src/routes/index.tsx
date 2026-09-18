@@ -343,59 +343,80 @@ function SpotlightCarousel({
   // Get slot configuration based on N=4 or N=6
   const getSlotStyle = (slot: number) => {
     if (isN6) {
-      // 6-member layout matching Image 2:
+      // 6-member layout matching Image 2 (contiguous pentagonal round arc):
       // Slot 0: Center Front
-      // Slot 1: Right Front (angled inward)
-      // Slot 2: Right Back (outer edge behind Right Front)
-      // Slot 3: Center Back (behind center)
-      // Slot 4: Left Back (outer edge behind Left Front)
-      // Slot 5: Left Front (angled inward)
+      // Slot 1: Right Front (connected to center's right edge, angled backward)
+      // Slot 2: Right Back (connected to right front's outer edge, angled further)
+      // Slot 3: Center Back (depth scale behind center)
+      // Slot 4: Left Back (connected to left front's outer edge, angled further)
+      // Slot 5: Left Front (connected to center's left edge, angled backward)
       switch (slot) {
         case 0:
           return {
-            transform: "translate3d(-50%, -50%, 0) scale(1) rotateY(0deg)",
-            zIndex: 35,
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "center center",
+            transform: "translate3d(0, -50%, 35px) scale(1) rotateY(0deg)",
+            zIndex: 40,
             opacity: 1,
             isCenter: true,
           };
         case 1:
           return {
-            transform: "translate3d(calc(-50% + var(--front-x)), -50%, 0) scale(0.86) rotateY(-28deg)",
-            zIndex: 25,
-            opacity: 0.92,
+            left: "50%",
+            marginLeft: "calc(var(--cw) / 2)",
+            transformOrigin: "left center",
+            transform: "translate3d(0, -50%, 0) rotateY(-38deg) scale(0.92)",
+            zIndex: 30,
+            opacity: 0.95,
             isCenter: false,
           };
         case 2:
           return {
-            transform: "translate3d(calc(-50% + var(--back-x)), calc(-50% + var(--back-y)), 0) scale(0.72) rotateY(-40deg)",
-            zIndex: 15,
-            opacity: 0.68,
+            left: "50%",
+            marginLeft: "calc(var(--cw) / 2 + var(--cw) * 0.788)",
+            transformOrigin: "left center",
+            transform: "translate3d(0, -50%, calc(-1 * var(--cw) * 0.615)) rotateY(-56deg) scale(0.82)",
+            zIndex: 20,
+            opacity: 0.80,
             isCenter: false,
           };
         case 3:
           return {
-            transform: "translate3d(-50%, calc(-50% + var(--back-y) * 1.5), 0) scale(0.60) rotateY(0deg)",
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "center center",
+            transform: "translate3d(0, calc(-50% - 24px), calc(-1.3 * var(--cw))) scale(0.68) rotateY(0deg)",
             zIndex: 10,
-            opacity: 0.40,
+            opacity: 0.45,
             isCenter: false,
           };
         case 4:
           return {
-            transform: "translate3d(calc(-50% - var(--back-x)), calc(-50% + var(--back-y)), 0) scale(0.72) rotateY(40deg)",
-            zIndex: 15,
-            opacity: 0.68,
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2 - var(--cw) * 0.788)",
+            transformOrigin: "right center",
+            transform: "translate3d(-100%, -50%, calc(-1 * var(--cw) * 0.615)) rotateY(56deg) scale(0.82)",
+            zIndex: 20,
+            opacity: 0.80,
             isCenter: false,
           };
         case 5:
           return {
-            transform: "translate3d(calc(-50% - var(--front-x)), -50%, 0) scale(0.86) rotateY(28deg)",
-            zIndex: 25,
-            opacity: 0.92,
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "right center",
+            transform: "translate3d(-100%, -50%, 0) rotateY(38deg) scale(0.92)",
+            zIndex: 30,
+            opacity: 0.95,
             isCenter: false,
           };
         default:
           return {
-            transform: "translate3d(-50%, -50%, 0) scale(0.6)",
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "center center",
+            transform: "translate3d(0, -50%, -200px) scale(0.6)",
             zIndex: 0,
             opacity: 0,
             isCenter: false,
@@ -410,35 +431,50 @@ function SpotlightCarousel({
       switch (slot) {
         case 0:
           return {
-            transform: "translate3d(-50%, -50%, 0) scale(1) rotateY(0deg)",
-            zIndex: 30,
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "center center",
+            transform: "translate3d(0, -50%, 30px) scale(1) rotateY(0deg)",
+            zIndex: 35,
             opacity: 1,
             isCenter: true,
           };
         case 1:
           return {
-            transform: "translate3d(calc(-50% + var(--side-x)), -50%, 0) scale(0.85) rotateY(-20deg)",
-            zIndex: 20,
-            opacity: 0.88,
+            left: "50%",
+            marginLeft: "calc(var(--cw) / 2)",
+            transformOrigin: "left center",
+            transform: "translate3d(0, -50%, 0) rotateY(-38deg) scale(0.90)",
+            zIndex: 25,
+            opacity: 0.92,
             isCenter: false,
           };
         case 2:
           return {
-            transform: "translate3d(-50%, calc(-50% + var(--back-y)), 0) scale(0.70) rotateY(0deg)",
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "center center",
+            transform: "translate3d(0, calc(-50% - 24px), calc(-1.2 * var(--cw))) scale(0.70) rotateY(0deg)",
             zIndex: 10,
-            opacity: 0.52,
+            opacity: 0.50,
             isCenter: false,
           };
         case 3:
           return {
-            transform: "translate3d(calc(-50% - var(--side-x)), -50%, 0) scale(0.85) rotateY(20deg)",
-            zIndex: 20,
-            opacity: 0.88,
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "right center",
+            transform: "translate3d(-100%, -50%, 0) rotateY(38deg) scale(0.90)",
+            zIndex: 25,
+            opacity: 0.92,
             isCenter: false,
           };
         default:
           return {
-            transform: "translate3d(-50%, -50%, 0) scale(0.6)",
+            left: "50%",
+            marginLeft: "calc(-1 * var(--cw) / 2)",
+            transformOrigin: "center center",
+            transform: "translate3d(0, -50%, -200px) scale(0.6)",
             zIndex: 0,
             opacity: 0,
             isCenter: false,
@@ -449,13 +485,8 @@ function SpotlightCarousel({
 
   return (
     <div className="w-full flex flex-col items-center select-none">
-      {/* 3D Carousel Stage */}
-      <div
-        className={cn(
-          "bio-carousel-stage relative w-full max-w-5xl h-[360px] sm:h-[420px] lg:h-[460px] flex items-center justify-center overflow-hidden sm:overflow-visible",
-          isN6 ? "bio-stage-n6" : "bio-stage-n4"
-        )}
-      >
+      {/* 3D Pentagonal Round Stage */}
+      <div className="bio-pentagon-stage relative w-full max-w-5xl h-[360px] sm:h-[420px] lg:h-[460px] flex items-center justify-center overflow-hidden sm:overflow-visible">
         {members.map((person, idx) => {
           const slot = ((idx - (stepOffset % totalCount)) % totalCount + totalCount) % totalCount;
           const slotStyle = getSlotStyle(slot);
@@ -466,16 +497,19 @@ function SpotlightCarousel({
               key={person.num}
               onClick={() => handleCardClick(idx)}
               className={cn(
-                "absolute left-1/2 top-1/2 flex flex-col items-center transition-all cursor-pointer",
+                "absolute top-1/2 flex flex-col items-center transition-all cursor-pointer",
                 !isCenter && "hover:opacity-100"
               )}
               style={{
-                width: "var(--card-w)",
-                height: "var(--card-h)",
+                width: "var(--cw)",
+                height: "var(--ch)",
+                left: slotStyle.left,
+                marginLeft: slotStyle.marginLeft,
+                transformOrigin: slotStyle.transformOrigin,
                 transform: slotStyle.transform,
                 zIndex: slotStyle.zIndex,
                 opacity: slotStyle.opacity,
-                transition: "transform 700ms cubic-bezier(0.22, 1, 0.36, 1), opacity 700ms ease, box-shadow 700ms ease",
+                transition: "all 700ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
               title={!isCenter ? `Switch to ${roleLabel} #${person.num}` : undefined}
             >
