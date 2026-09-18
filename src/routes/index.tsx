@@ -222,6 +222,120 @@ const WEEKEND_SESSIONS = [
   },
 ];
 
+const SPEAKERS = [
+  {
+    num: "01",
+    name: "Keynote Speaker 01",
+    role: "Biotech Venture Incubation & Commercialization",
+    org: "MARABANU Venture Partner",
+    track: "Venture Building",
+    bio: "Guiding student founders on packaging academic biotech research into defensible, market-ready bio-enterprises.",
+    badge: "Masterclass Mentor",
+  },
+  {
+    num: "02",
+    name: "Keynote Speaker 02",
+    role: "Intellectual Property & Patent Strategy",
+    org: "Senior Patent Attorney · Life Sciences",
+    track: "IPR & Prior Art",
+    bio: "Leading Weekend Session 01 on patent scoping, patentability landscapes, and defensible biochemical IP moats.",
+    badge: "IPR Specialist",
+  },
+  {
+    num: "03",
+    name: "Keynote Speaker 03",
+    role: "Biotech Pitch Deck Architecture Lead",
+    org: "Venture Catalyst & Mentor",
+    track: "Pitch Architecture",
+    bio: "Training teams on translating complex biochemical data into high-conviction investor and grant narratives.",
+    badge: "Pitch Architect",
+  },
+  {
+    num: "04",
+    name: "Keynote Speaker 04",
+    role: "Bio-Safety, CDSCO & Regulatory Affairs",
+    org: "Clinical Regulatory Counsel",
+    track: "Regulatory Compliance",
+    bio: "Advising student innovators on statutory compliance, clinical trials, ethical approvals, and safety roadmaps.",
+    badge: "Regulatory Counsel",
+  },
+  {
+    num: "05",
+    name: "Keynote Speaker 05",
+    role: "Computational Biology & Bio-AI Architect",
+    org: "Department of Biotechnology · KSRCT",
+    track: "Bioinformatics & Bio-AI",
+    bio: "Guiding automated sequence analysis, structural biology modeling, and deep learning algorithms in biology.",
+    badge: "Bio-AI Mentor",
+  },
+  {
+    num: "06",
+    name: "Keynote Speaker 06",
+    role: "State Grant Architect & Non-Dilutive Capital",
+    org: "StartupTN (Government of Tamil Nadu)",
+    track: "Govt Seed Grants",
+    bio: "Navigating state innovation grants, TANSEED pathways, and institutional incubation infrastructure.",
+    badge: "Grant Strategist",
+  },
+];
+
+const JURY_MEMBERS = [
+  {
+    num: "01",
+    name: "Grand Jury Member 01",
+    role: "Head of Evaluation & Venture Jury",
+    org: "MARABANU Investment Committee",
+    track: "Grand Finale Jury",
+    bio: "Evaluating venture scalability, team defensibility, and market commercialization potential on Oct 30.",
+    badge: "Grand Jury Chair",
+  },
+  {
+    num: "02",
+    name: "Grand Jury Member 02",
+    role: "State Innovation & Seed Fund Evaluator",
+    org: "StartupTN (Government of Tamil Nadu)",
+    track: "State Grant Jury",
+    bio: "Assessing policy alignment, regional economic impact, and eligibility for state seed grant funding.",
+    badge: "Ecosystem Jury",
+  },
+  {
+    num: "03",
+    name: "Grand Jury Member 03",
+    role: "Senior Scientific & Academic Evaluator",
+    org: "Department of Biotechnology · KSRCT",
+    track: "Scientific Validation",
+    bio: "Evaluating biological feasibility, experimental rigor, laboratory trials, and methodology soundness.",
+    badge: "Academic Jury",
+  },
+  {
+    num: "04",
+    name: "Grand Jury Member 04",
+    role: "Deep-Tech Early Stage Investor",
+    org: "Biotech Angel Network / Seed Fund",
+    track: "Investment Readiness",
+    bio: "Reviewing unit economics, TAM, risk mitigation, and commercial investment readiness for winning ventures.",
+    badge: "Investor Jury",
+  },
+  {
+    num: "05",
+    name: "Grand Jury Member 05",
+    role: "Healthcare & MedTech Industry Leader",
+    org: "Clinical Diagnostics Consortium",
+    track: "Clinical Viability",
+    bio: "Evaluating clinical applicability, hospital pilot viability, and healthcare practitioner adoption.",
+    badge: "Industry Jury",
+  },
+  {
+    num: "06",
+    name: "Grand Jury Member 06",
+    role: "Agri-Biotech & Sustainability Jury",
+    org: "Agricultural Biotechnology Council",
+    track: "Sustainable Bio-Products",
+    bio: "Reviewing sustainable yields, farmer economics, bio-fertilizer efficacy, and ecological impact.",
+    badge: "Agri-Tech Jury",
+  },
+];
+
 const PARTNERS = [
   {
     name: "K.S. Rangasamy College of Technology",
@@ -278,6 +392,7 @@ const TRACK_ICONS = [FlaskConical, Users, Leaf];
 
 function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [panelView, setPanelView] = useState<"speakers" | "jury">("speakers");
 
   useEffect(() => {
     const video = videoRef.current;
@@ -926,6 +1041,129 @@ function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4B. KEYNOTE SPEAKERS & GRAND JURY FRAMEWORK ── */}
+      <section className="bio-section bg-gradient-to-b from-white via-[#F4FAFB] to-white border-b border-[#BEE3EA]" id="speakers">
+        <div className="bio-container">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#D9F2F6]/90 border border-[#BEE3EA] px-4 py-1.5 font-mono text-[11.5px] font-bold uppercase tracking-wider text-[#0B2A4A] shadow-sm">
+              <Users className="h-4 w-4 text-[#1599B5]" />
+              Mentors &amp; Grand Jury
+            </span>
+            <h2 className="mt-4 font-display text-[32px] sm:text-[46px] font-extrabold text-[#0B2A4A] leading-tight tracking-tight">
+              Guided by Experts.{" "}
+              <span className="bg-gradient-to-r from-[#1599B5] via-[#20AFC5] to-[#0B2A4A] bg-clip-text text-transparent">
+                Evaluated by Pioneers.
+              </span>
+            </h2>
+            <p className="mt-3 text-[16px] sm:text-[17.5px] text-[#366273] leading-relaxed">
+              Meet the 6 keynote speakers mentoring the 4-week weekend masterclasses and the 6 grand jury members
+              evaluating the final pitches live on Oct 30 at KSRCT.
+            </p>
+
+            {/* Interactive Tab Switcher */}
+            <div className="mt-8 inline-flex items-center rounded-2xl border border-[#BEE3EA] bg-white p-1.5 shadow-sm">
+              <button
+                type="button"
+                onClick={() => setPanelView("speakers")}
+                className={cn(
+                  "flex items-center gap-2 rounded-xl px-5 py-2.5 font-mono text-[12px] sm:text-[13px] font-bold transition-all cursor-pointer",
+                  panelView === "speakers"
+                    ? "bg-[#0B2A4A] text-white shadow-md"
+                    : "text-[#366273] hover:text-[#0B2A4A] hover:bg-[#F4FAFB]"
+                )}
+              >
+                <Sparkles className="h-4 w-4 text-[#20AFC5]" />
+                Keynote Speakers (6)
+              </button>
+              <button
+                type="button"
+                onClick={() => setPanelView("jury")}
+                className={cn(
+                  "flex items-center gap-2 rounded-xl px-5 py-2.5 font-mono text-[12px] sm:text-[13px] font-bold transition-all cursor-pointer",
+                  panelView === "jury"
+                    ? "bg-[#0B2A4A] text-white shadow-md"
+                    : "text-[#366273] hover:text-[#0B2A4A] hover:bg-[#F4FAFB]"
+                )}
+              >
+                <Award className="h-4 w-4 text-[#38BDF8]" />
+                Grand Jury Panel (6)
+              </button>
+            </div>
+          </div>
+
+          {/* Dynamic 6-Card Grid */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(panelView === "speakers" ? SPEAKERS : JURY_MEMBERS).map((person) => (
+              <div
+                key={person.num}
+                className="group relative rounded-3xl border border-[#BEE3EA] bg-white/95 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#1599B5] hover:shadow-xl hover:shadow-[#1599B5]/10 flex flex-col justify-between"
+              >
+                <div>
+                  {/* Top Badges & Index */}
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#D9F2F6] px-3 py-1 font-mono text-[10.5px] font-extrabold uppercase tracking-wider text-[#0E7E96] border border-[#BEE3EA]">
+                      {person.badge}
+                    </span>
+                    <span className="font-mono text-[12px] font-bold text-[#1599B5]">
+                      #{person.num}
+                    </span>
+                  </div>
+
+                  {/* Avatar / Portrait Frame with Bioluminescent Ring */}
+                  <div className="mt-5 flex items-center gap-4">
+                    <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#D9F2F6] via-white to-[#EBF7F9] border-2 border-[#1599B5]/40 shadow-inner group-hover:border-[#1599B5] transition-colors">
+                      <Users className="h-7 w-7 text-[#1599B5] opacity-70 group-hover:scale-110 transition-transform" />
+                      <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-emerald-500 border-2 border-white" title="Profile Ready" />
+                    </div>
+                    <div>
+                      <h3 className="text-[18px] font-bold text-[#0B2A4A] group-hover:text-[#1599B5] transition-colors">
+                        {person.name}
+                      </h3>
+                      <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#0E7E96]">
+                        {person.track}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Role Title & Organization */}
+                  <div className="mt-4">
+                    <p className="text-[13.5px] font-semibold text-[#0B2A4A] leading-snug">
+                      {person.role}
+                    </p>
+                    <div className="mt-1.5 flex items-center gap-1.5 text-[12.5px] text-[#366273]">
+                      <Building2 className="h-3.5 w-3.5 text-[#1599B5] shrink-0" />
+                      <span className="truncate">{person.org}</span>
+                    </div>
+                  </div>
+
+                  {/* Bio summary */}
+                  <p className="mt-3.5 text-[13px] text-[#366273] leading-relaxed border-t border-[#F0F8FA] pt-3">
+                    {person.bio}
+                  </p>
+                </div>
+
+                {/* Bottom Status / Announcement Indicator */}
+                <div className="mt-5 pt-3 border-t border-[#EAF4F7] flex items-center justify-between text-[11.5px]">
+                  <span className="font-mono text-[10.5px] text-[#7BA1B0] font-medium">
+                    {panelView === "speakers" ? "4-Week Masterclass" : "Oct 30 Grand Finale"}
+                  </span>
+                  <span className="inline-flex items-center gap-1 font-mono text-[10.5px] font-bold text-[#1599B5] bg-[#F4FAFB] px-2 py-0.5 rounded border border-[#D9F2F6]">
+                    Profile Frame
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Notice Footer Strip */}
+          <div className="mt-10 rounded-2xl border border-[#D9F2F6] bg-gradient-to-r from-[#F4FAFB] via-white to-[#F4FAFB] p-4 text-center">
+            <p className="text-[13px] text-[#366273]">
+              <strong className="text-[#0B2A4A]">Profile Slot Template:</strong> You can provide individual speaker and jury member names, designations, affiliations, and photograph links to replace these placeholder slots anytime.
+            </p>
           </div>
         </div>
       </section>

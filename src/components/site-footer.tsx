@@ -11,6 +11,7 @@ const NAV_SECTIONS = [
       { to: "/problems", label: "Challenges (36)" },
       { to: "/#how-it-works", label: "How It Runs" },
       { to: "/#sessions", label: "Weekend Sessions" },
+      { to: "/#speakers", label: "Speakers & Grand Jury" },
       { to: "/#prizes", label: "Prizes & Incubation" },
       { to: "/#partners", label: "Partners & Consortium" },
     ],
