@@ -31,9 +31,9 @@ function NotFoundComponent() {
           >
             Go home
           </Link>
-        </div>
       </div>
     </div>
+    </div >
   );
 }
 

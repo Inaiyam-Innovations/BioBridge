@@ -244,8 +244,7 @@ const JURY_MEMBERS = [
 const PARTNERS = [
   {
     name: "Department of Biotechnology",
-    highlight: true,
-    accent: "#0E7E96",
+    accent: "#0B2A4A",
     logo: "/ksrct-logo.png",
     logoAlt: "Department of Biotechnology, K.S. Rangasamy College of Technology",
     logoClass: "h-14 sm:h-16 max-w-[240px]",
@@ -1647,12 +1646,7 @@ function Home() {
             {PARTNERS.map((p) => (
               <div
                 key={p.name}
-                className={cn(
-                  "group rounded-2xl border bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:shadow-xl flex flex-col justify-between",
-                  "highlight" in p && p.highlight
-                    ? "border-[#1599B5] ring-2 ring-[#20AFC5]/20 hover:border-[#0E7E96]"
-                    : "border-[#BEE3EA] hover:border-[#1599B5]"
-                )}
+                className="group rounded-2xl border border-[#BEE3EA] bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-[#1599B5] hover:shadow-xl flex flex-col justify-between"
               >
                 <div>
                   {/* Dedicated Large Logo Stage */}
@@ -1667,20 +1661,8 @@ function Home() {
                     />
                   </div>
 
-                  <h3
-                    className={cn(
-                      "text-[20px] font-bold leading-snug",
-                      "highlight" in p && p.highlight
-                        ? "text-[#0E7E96] font-extrabold flex flex-wrap items-center gap-2"
-                        : "text-[#0B2A4A]"
-                    )}
-                  >
+                  <h3 className="text-[20px] font-bold text-[#0B2A4A] leading-snug">
                     {p.name}
-                    {"highlight" in p && p.highlight && (
-                      <span className="inline-flex items-center rounded-md bg-[#E0F7FA] px-2.5 py-0.5 text-[11px] font-mono font-bold text-[#0E7E96] border border-[#BEE3EA]">
-                        Host Department
-                      </span>
-                    )}
                   </h3>
                   {"subName" in p && p.subName ? (
                     <p className="font-mono text-[12px] font-semibold text-[#1599B5] mt-1">{p.subName}</p>
