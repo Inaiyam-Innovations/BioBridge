@@ -16,7 +16,7 @@ type DecryptedTextProps = {
 
 const DEFAULT_CHARACTERS = "ATGCATGCATGC01Δμλ";
 
-export default function DecryptedText({
+export function DecryptedText({
   text,
   speed = 70,
   maxIterations = 18,
@@ -131,3 +131,5 @@ export default function DecryptedText({
     </span>
   );
 }
+
+export default DecryptedText;
