@@ -224,81 +224,21 @@ const WEEKEND_SESSIONS = [
 ];
 
 const SPEAKERS = [
-  {
-    num: "01",
-    name: "Speaker 01",
-    designation: "Biotech Venture Incubation",
-    image: null,
-  },
-  {
-    num: "02",
-    name: "Speaker 02",
-    designation: "IPR & Patent Strategy",
-    image: null,
-  },
-  {
-    num: "03",
-    name: "Speaker 03",
-    designation: "Pitch & Narrative Architecture",
-    image: null,
-  },
-  {
-    num: "04",
-    name: "Speaker 04",
-    designation: "Clinical & Regulatory Affairs",
-    image: null,
-  },
-  {
-    num: "05",
-    name: "Speaker 05",
-    designation: "Bio-AI & Genomics",
-    image: null,
-  },
-  {
-    num: "06",
-    name: "Speaker 06",
-    designation: "StartupTN Seed Grants",
-    image: null,
-  },
+  { num: "01", name: "Speaker 01", image: null },
+  { num: "02", name: "Speaker 02", image: null },
+  { num: "03", name: "Speaker 03", image: null },
+  { num: "04", name: "Speaker 04", image: null },
+  { num: "05", name: "Speaker 05", image: null },
+  { num: "06", name: "Speaker 06", image: null },
 ];
 
 const JURY_MEMBERS = [
-  {
-    num: "01",
-    name: "Jury Member 01",
-    designation: "Venture Partner & Jury Chair",
-    image: null,
-  },
-  {
-    num: "02",
-    name: "Jury Member 02",
-    designation: "StartupTN Seed Fund Evaluator",
-    image: null,
-  },
-  {
-    num: "03",
-    name: "Jury Member 03",
-    designation: "Senior Biotech Evaluator",
-    image: null,
-  },
-  {
-    num: "04",
-    name: "Jury Member 04",
-    designation: "Deep-Tech Angel Investor",
-    image: null,
-  },
-  {
-    num: "05",
-    name: "Jury Member 05",
-    designation: "Clinical & Healthcare Leader",
-    image: null,
-  },
-  {
-    num: "06",
-    name: "Jury Member 06",
-    designation: "Agri-Biotech & Ecology Jury",
-    image: null,
-  },
+  { num: "01", name: "Jury Member 01", image: null },
+  { num: "02", name: "Jury Member 02", image: null },
+  { num: "03", name: "Jury Member 03", image: null },
+  { num: "04", name: "Jury Member 04", image: null },
+  { num: "05", name: "Jury Member 05", image: null },
+  { num: "06", name: "Jury Member 06", image: null },
 ];
 
 const PARTNERS = [
@@ -1056,39 +996,178 @@ function Home() {
             </div>
           </div>
 
-          {/* Minimalist Grid: Round Frame + Coming Soon + Name */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 max-w-5xl mx-auto">
-            {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person) => (
-              <div
-                key={person.num}
-                className="group flex flex-col items-center text-center"
-              >
-                {/* Single Round Photo Frame with 'Coming Soon' inside */}
-                <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5]/40 bg-[#F4FAFB] flex flex-col items-center justify-center text-center p-2 transition-all duration-300 group-hover:border-[#1599B5] group-hover:bg-[#EBF7F9] group-hover:scale-105 shadow-xs">
-                  {person.image ? (
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="h-full w-full rounded-full object-cover"
-                    />
-                  ) : (
-                    <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
-                      Coming Soon
-                    </span>
-                  )}
-                </div>
+          {/* Biological Zig-Zag Layout: Alternating Left and Right with DNA Bio-Connectors */}
+          <div className="relative max-w-xl sm:max-w-2xl mx-auto mt-12">
+            {/* SVG Biological Strand Backbone */}
+            <svg
+              viewBox="0 0 1000 1200"
+              preserveAspectRatio="none"
+              className="absolute inset-0 h-full w-full pointer-events-none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="bioStrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#1599B5" />
+                  <stop offset="50%" stopColor="#20AFC5" />
+                  <stop offset="100%" stopColor="#0B2A4A" />
+                </linearGradient>
+                <linearGradient id="bioSecondaryGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.7" />
+                  <stop offset="100%" stopColor="#1599B5" stopOpacity="0.2" />
+                </linearGradient>
+                <radialGradient id="bioNodeGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.7" />
+                  <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
+                </radialGradient>
+                <radialGradient id="receptorHalo" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#D9F2F6" stopOpacity="0.9" />
+                  <stop offset="60%" stopColor="#1599B5" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
+                </radialGradient>
+              </defs>
 
-                {/* Name */}
-                <h3 className="mt-3 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
-                  {person.name}
-                </h3>
+              {/* Bio-Receptor Rings behind each node position */}
+              {[
+                { cx: 250, cy: 100 },
+                { cx: 750, cy: 300 },
+                { cx: 250, cy: 500 },
+                { cx: 750, cy: 700 },
+                { cx: 250, cy: 900 },
+                { cx: 750, cy: 1100 },
+              ].map((pos, i) => (
+                <g key={i}>
+                  <circle cx={pos.cx} cy={pos.cy} r="66" fill="url(#receptorHalo)" />
+                  <circle cx={pos.cx} cy={pos.cy} r="54" fill="none" stroke="#BEE3EA" strokeWidth="1.5" strokeDasharray="4 4" />
+                </g>
+              ))}
 
-                {/* Designation */}
-                <p className="mt-0.5 text-[11px] sm:text-[11.5px] font-medium text-[#64748B] leading-snug max-w-[150px]">
-                  {person.designation}
-                </p>
-              </div>
-            ))}
+              {/* Secondary Complementary DNA Strand (dashed biological strand) */}
+              <path
+                d="M 250 108 C 500 108, 500 292, 750 292 C 500 292, 500 508, 250 508 C 500 508, 500 692, 750 692 C 500 692, 500 908, 250 908 C 500 908, 500 1092, 750 1092"
+                fill="none"
+                stroke="url(#bioSecondaryGrad)"
+                strokeWidth="2"
+                strokeDasharray="4 4"
+              />
+
+              {/* Primary Biological Strand (Solid DNA Sugar-Phosphate Backbone) */}
+              <path
+                d="M 250 100 C 500 100, 500 300, 750 300 C 500 300, 500 500, 250 500 C 500 500, 500 700, 750 700 C 500 700, 500 900, 250 900 C 500 900, 500 1100, 750 1100"
+                fill="none"
+                stroke="url(#bioStrandGrad)"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+              />
+
+              {/* Molecular Base-Pair Rungs across the biological curves */}
+              {/* Segment 0 -> 1 */}
+              <line x1="330" y1="125" x2="330" y2="135" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="410" y1="160" x2="410" y2="170" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="590" y1="230" x2="590" y2="240" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="670" y1="265" x2="670" y2="275" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+
+              {/* Molecular Synapse Node 1 */}
+              <circle cx="500" cy="200" r="16" fill="url(#bioNodeGlow)" />
+              <circle cx="500" cy="200" r="5.5" fill="#1599B5" stroke="#ffffff" strokeWidth="2" />
+
+              {/* Segment 1 -> 2 */}
+              <line x1="670" y1="325" x2="670" y2="335" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="590" y1="360" x2="590" y2="370" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="410" y1="430" x2="410" y2="440" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="330" y1="465" x2="330" y2="475" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+
+              {/* Molecular Synapse Node 2 */}
+              <circle cx="500" cy="400" r="16" fill="url(#bioNodeGlow)" />
+              <circle cx="500" cy="400" r="5.5" fill="#20AFC5" stroke="#ffffff" strokeWidth="2" />
+
+              {/* Segment 2 -> 3 */}
+              <line x1="330" y1="525" x2="330" y2="535" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="410" y1="560" x2="410" y2="570" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="590" y1="630" x2="590" y2="640" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="670" y1="665" x2="670" y2="675" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+
+              {/* Molecular Synapse Node 3 */}
+              <circle cx="500" cy="600" r="16" fill="url(#bioNodeGlow)" />
+              <circle cx="500" cy="600" r="5.5" fill="#1599B5" stroke="#ffffff" strokeWidth="2" />
+
+              {/* Segment 3 -> 4 */}
+              <line x1="670" y1="725" x2="670" y2="735" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="590" y1="760" x2="590" y2="770" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="410" y1="830" x2="410" y2="840" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="330" y1="865" x2="330" y2="875" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+
+              {/* Molecular Synapse Node 4 */}
+              <circle cx="500" cy="800" r="16" fill="url(#bioNodeGlow)" />
+              <circle cx="500" cy="800" r="5.5" fill="#20AFC5" stroke="#ffffff" strokeWidth="2" />
+
+              {/* Segment 4 -> 5 */}
+              <line x1="330" y1="925" x2="330" y2="935" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="410" y1="960" x2="410" y2="970" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="590" y1="1030" x2="590" y2="1040" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="670" y1="1065" x2="670" y2="1075" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+
+              {/* Molecular Synapse Node 5 */}
+              <circle cx="500" cy="1000" r="16" fill="url(#bioNodeGlow)" />
+              <circle cx="500" cy="1000" r="5.5" fill="#1599B5" stroke="#ffffff" strokeWidth="2" />
+            </svg>
+
+            {/* Alternating Zig-Zag Grid Rows */}
+            <div className="relative z-10 flex flex-col">
+              {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person, idx) => {
+                const isRight = idx % 2 === 1;
+                return (
+                  <div key={person.num} className="grid grid-cols-2 py-6 sm:py-7 items-center">
+                    {/* Left Column Item */}
+                    {!isRight ? (
+                      <div className="flex flex-col items-center justify-center text-center group">
+                        <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-2 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-[#0E7E96] group-hover:shadow-md">
+                          {person.image ? (
+                            <img
+                              src={person.image}
+                              alt={person.name}
+                              className="h-full w-full rounded-full object-cover"
+                            />
+                          ) : (
+                            <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
+                              Coming Soon
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="mt-2.5 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
+                          {person.name}
+                        </h3>
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+
+                    {/* Right Column Item */}
+                    {isRight ? (
+                      <div className="flex flex-col items-center justify-center text-center group">
+                        <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-2 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-[#0E7E96] group-hover:shadow-md">
+                          {person.image ? (
+                            <img
+                              src={person.image}
+                              alt={person.name}
+                              className="h-full w-full rounded-full object-cover"
+                            />
+                          ) : (
+                            <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
+                              Coming Soon
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="mt-2.5 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
+                          {person.name}
+                        </h3>
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
