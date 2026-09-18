@@ -30,18 +30,18 @@ const NAV_SECTIONS = [
 
 const ORGANIZERS = [
   {
-    name: "K.S.Rangasamy College of Technology",
-    sub: "Department of Biotechnology",
+    name: "Department of Biotechnology",
+    sub: "K.S. Rangasamy College of Technology",
     logo: "/ksrct-logo.png",
   },
   {
     name: "MARABANU",
-    sub: "Venture Incubation & Mentorship",
+    sub: "Biotech Venture Builder & Mentorship",
     logo: "/marabanu-logo.png",
   },
   {
     name: "StartupTN Government of Tamil Nadu",
-    sub: "StartupTN (TANSIM)",
+    sub: "State Startup Ecosystem Partner",
     logo: "/startuptn-logo.png",
   },
 ] as const;

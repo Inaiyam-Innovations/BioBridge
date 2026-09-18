@@ -91,7 +91,7 @@ export const ALL_FAQS: FaqEntry[] = [
     keywords: ["prize", "award", "cash", "money", "win", "reward", "10000", "5000", "3000", "venture", "marabanu"],
     question: "What do the winning teams get?",
     answer:
-      "Three cash prizes are awarded on finals day:\n• **1st Prize (Grand Champion)**: ₹10,000 cash\n• **2nd Prize (Runner Up)**: ₹5,000 cash\n• **3rd Prize (Third Place)**: ₹3,000 cash\n\n**The Big Prize:** Beyond the cash, the winning teams enter a **6-Month Venture-Building Engagement** with the MARABANU team to launch winning projects as real-world ventures, with direct pathways toward Tamil Nadu state startup grants via StartupTN.",
+      "Three cash prizes are awarded on finals day:\n• **1st Prize (Grand Champion)**: ₹10,000 cash\n• **2nd Prize (Runner Up)**: ₹5,000 cash\n• **3rd Prize (Third Place)**: ₹3,000 cash\n\n**The Big Prize:** Beyond the cash, the winning teams enter a **6-Month Venture-Building Engagement** with the MARABANU team to launch winning projects as real-world ventures, with mentorship, ecosystem networking, and startup support through StartupTN.",
     followUps: ["Where are the finals?", "How does selection work?", "What are the 4 weekend sessions?"],
   },
   {
@@ -168,7 +168,7 @@ export const ALL_FAQS: FaqEntry[] = [
     keywords: ["partners", "organizers", "marabanu", "startuptn", "ksrct", "who organized"],
     question: "Who is organizing BioBridge 2026?",
     answer:
-      "BioBridge is an initiative organized by a state-level consortium:\n• **MARABANU**: Biotech venture builder providing curriculum, mentorship, jury, and 6-month venture incubation.\n• **StartupTN**: Government of Tamil Nadu startup agency providing jury access, state funding routes, and grant pathways.\n• **K.S.Rangasamy College of Technology (KSRCT)**: Host institution providing finals venue, lab access, and biotechnology department infrastructure.",
+      "BioBridge is an initiative organized by a state-level consortium:\n• **MARABANU**: Biotech venture builder providing curriculum, mentorship, jury, and 6-month venture incubation.\n• **StartupTN**: Government of Tamil Nadu startup agency providing jury interaction, ecosystem networking, and startup support.\n• **Department of Biotechnology (KSRCT)**: Host department providing finals venue, biotech lab access, and academic infrastructure.",
     followUps: ["What do the winning teams get?", "Where are the finals?", "Who can participate?"],
   },
 ];

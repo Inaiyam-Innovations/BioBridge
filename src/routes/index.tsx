@@ -243,13 +243,13 @@ const JURY_MEMBERS = [
 
 const PARTNERS = [
   {
-    name: "K.S. Rangasamy College of Technology",
-    subName: "Department of Biotechnology",
-    accent: "#0B2A4A",
+    name: "Department of Biotechnology",
+    highlight: true,
+    accent: "#0E7E96",
     logo: "/ksrct-logo.png",
     logoAlt: "Department of Biotechnology, K.S. Rangasamy College of Technology",
     logoClass: "h-14 sm:h-16 max-w-[240px]",
-    role: "Campus Venue, Biotech Labs & Innovation Cell",
+    role: "Academic Host, Advanced Biotech Research Labs & Innovation Support",
   },
   {
     name: "MARABANU",
@@ -257,16 +257,15 @@ const PARTNERS = [
     logo: "/marabanu-logo.png",
     logoAlt: "MARABANU",
     logoClass: "h-10 sm:h-12 max-w-[220px]",
-    role: "Venture Incubation, Mentorship & Hackathon Operator",
+    role: "Venture Ecosystem, Sprint Mentorship & Hackathon Partner",
   },
   {
     name: "StartupTN Government of Tamil Nadu",
-    subName: "StartupTN (TANSIM)",
     accent: "#20AFC5",
     logo: "/startuptn-logo.png",
     logoAlt: "StartupTN Government of Tamil Nadu",
     logoClass: "h-14 sm:h-16 max-w-[240px]",
-    role: "Tamil Nadu State Startup Agency & Funding Pathways",
+    role: "State Startup Ecosystem Partner & Innovation Support",
   },
 ];
 
@@ -650,59 +649,6 @@ function Home() {
                 </div>
               );
             })}
-          </div>
-
-          {/* Infographic Telemetry Footer Strip */}
-          <div className="mt-8 rounded-2xl border border-[#BEE3EA] bg-white p-4 shadow-sm sm:p-5">
-            <div className="grid grid-cols-2 gap-4 divide-y sm:divide-y-0 sm:divide-x divide-[#BEE3EA]/60 lg:grid-cols-4">
-              <div className="pt-2 sm:pt-0 sm:px-4 first:pt-0 first:px-0">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#366273] block">
-                  Incubation Protocol
-                </span>
-                <p className="mt-1 font-bold text-[14px] text-[#0B2A4A]">
-                  4-Week Build Sprint + Finals
-                </p>
-                <small className="text-[11.5px] text-[#1599B5] font-medium">
-                  Mentored by MARABANU
-                </small>
-              </div>
-
-              <div className="pt-3 sm:pt-0 sm:px-4">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#366273] block">
-                  Activation Cost
-                </span>
-                <p className="mt-1 font-bold text-[14px] text-emerald-700">
-                  ₹0 Registration (100% Free)
-                </p>
-                <small className="text-[11.5px] text-[#366273] font-medium">
-                  Zero fee at all phases
-                </small>
-              </div>
-
-              <div className="pt-3 sm:pt-0 sm:px-4">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#366273] block">
-                  Cohort Selection Assays
-                </span>
-                <p className="mt-1 font-bold text-[14px] text-[#0B2A4A]">
-                  Top 50 ➔ Top 25 Finalists
-                </p>
-                <small className="text-[11.5px] text-[#1599B5] font-medium">
-                  2-Day review turnaround
-                </small>
-              </div>
-
-              <div className="pt-3 sm:pt-0 sm:px-4">
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#366273] block">
-                  Host &amp; Apex Venue
-                </span>
-                <p className="mt-1 font-bold text-[14px] text-[#0B2A4A]">
-                  K.S.Rangasamy College of Technology
-                </p>
-                <small className="text-[11.5px] text-[#366273] font-medium">
-                  Namakkal, Tamil Nadu
-                </small>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -1376,10 +1322,10 @@ function Home() {
 
             <div className="rounded-2xl border border-[#BEE3EA] bg-white/90 p-4 text-center shadow-sm backdrop-blur-sm">
               <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1599B5] block">
-                Govt Funding
+                Govt Support
               </span>
               <p className="mt-1 text-[22px] sm:text-[26px] font-extrabold text-[#0B2A4A]">StartupTN</p>
-              <small className="text-[11.5px] text-[#366273] font-medium">Direct state routes</small>
+              <small className="text-[11.5px] text-[#366273] font-medium">Ecosystem support</small>
             </div>
 
             <div className="rounded-2xl border border-emerald-200/70 bg-white/90 p-4 text-center shadow-sm backdrop-blur-sm">
@@ -1387,7 +1333,7 @@ function Home() {
                 Registration
               </span>
               <p className="mt-1 text-[22px] sm:text-[26px] font-extrabold text-emerald-800">100% Free</p>
-              <small className="text-[11.5px] text-[#366273] font-medium">Zero equity taken</small>
+              <small className="text-[11.5px] text-emerald-700 font-medium">Open to all students</small>
             </div>
           </div>
 
@@ -1420,7 +1366,7 @@ function Home() {
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4.5 w-4.5 text-[#1599B5] shrink-0" />
-                    <span>Direct access to StartupTN jury networks</span>
+                    <span>StartupTN ecosystem interaction &amp; guidance</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4.5 w-4.5 text-[#1599B5] shrink-0" />
@@ -1461,7 +1407,7 @@ function Home() {
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4.5 w-4.5 text-[#38BDF8] shrink-0" />
-                    <span>Direct pathway to <strong className="text-white">StartupTN state funding grants</strong></span>
+                    <span>Mentorship guidance &amp; <strong className="text-white">StartupTN ecosystem support</strong></span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <CheckCircle2 className="h-4.5 w-4.5 text-[#38BDF8] shrink-0" />
@@ -1564,10 +1510,10 @@ function Home() {
                 <div className="bio-venture-feature-card p-5">
                   <div className="flex items-center gap-2.5">
                     <Building2 className="h-5 w-5 text-[#38BDF8] shrink-0" />
-                    <strong className="text-[15.5px] font-bold text-white">State Funding Routes</strong>
+                    <strong className="text-[15.5px] font-bold text-white">State Ecosystem Pathways</strong>
                   </div>
                   <p className="mt-1 text-[13px] text-[#D6F1FA] leading-snug">
-                    Direct pathways toward StartupTN state grants and venture seed support.
+                    Mentorship, networking, and guidance through the StartupTN startup ecosystem.
                   </p>
                 </div>
 
@@ -1695,16 +1641,18 @@ function Home() {
             <h2 className="text-[32px] font-bold text-[#0B2A4A] sm:text-[46px]">
               Organized By
             </h2>
-            <p className="mt-2 text-[16px] sm:text-[17.5px] text-[#366273]">
-              Organised and operated collaboratively to take campus innovators from prototype to market.
-            </p>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {PARTNERS.map((p) => (
               <div
                 key={p.name}
-                className="group rounded-2xl border border-[#BEE3EA] bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:border-[#1599B5] hover:shadow-xl flex flex-col justify-between"
+                className={cn(
+                  "group rounded-2xl border bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:shadow-xl flex flex-col justify-between",
+                  "highlight" in p && p.highlight
+                    ? "border-[#1599B5] ring-2 ring-[#20AFC5]/20 hover:border-[#0E7E96]"
+                    : "border-[#BEE3EA] hover:border-[#1599B5]"
+                )}
               >
                 <div>
                   {/* Dedicated Large Logo Stage */}
@@ -1719,7 +1667,21 @@ function Home() {
                     />
                   </div>
 
-                  <h3 className="text-[20px] font-bold text-[#0B2A4A] leading-snug">{p.name}</h3>
+                  <h3
+                    className={cn(
+                      "text-[20px] font-bold leading-snug",
+                      "highlight" in p && p.highlight
+                        ? "text-[#0E7E96] font-extrabold flex flex-wrap items-center gap-2"
+                        : "text-[#0B2A4A]"
+                    )}
+                  >
+                    {p.name}
+                    {"highlight" in p && p.highlight && (
+                      <span className="inline-flex items-center rounded-md bg-[#E0F7FA] px-2.5 py-0.5 text-[11px] font-mono font-bold text-[#0E7E96] border border-[#BEE3EA]">
+                        Host Department
+                      </span>
+                    )}
+                  </h3>
                   {"subName" in p && p.subName ? (
                     <p className="font-mono text-[12px] font-semibold text-[#1599B5] mt-1">{p.subName}</p>
                   ) : null}
