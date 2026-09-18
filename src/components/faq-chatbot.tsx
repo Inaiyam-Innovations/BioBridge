@@ -195,7 +195,7 @@ export function FaqChatbot() {
     {
       id: "welcome-1",
       sender: "bot",
-      text: "Hello! 👋 Welcome to **BioBridge 2026**.\n\nI'm your official **BioBridge FAQ Assistant**. You can ask me anything in chat, or switch to the **'Browse All FAQs'** tab above to explore all 15 official questions & answers!",
+      text: "Hello! 👋 I'm **BioBot**, your 3D biotech guide for **BioBridge 2026**!\n\nAsk me anything about registrations, problem tracks, prizes, or the Oct 30 Grand Finale at KSRCT!",
       time: "Just now",
       suggestions: [
         "Zero Entry Fee?",
@@ -368,45 +368,54 @@ export function FaqChatbot() {
 
   return (
     <>
-      {/* ── 1. FLOATING ACTION BUTTON (DOWNSIDE OF ENTIRE SITE) ── */}
-      <div className="fixed bottom-5 right-5 z-50 flex items-center gap-2 md:bottom-6 md:right-6">
+      {/* ── 1. FLOATING 3D MASCOT ACTION BUTTON (DOWNSIDE OF ENTIRE SITE) ── */}
+      <div className="fixed bottom-3 right-3 sm:bottom-4 sm:right-6 z-50 flex items-end gap-3 select-none">
         {!isOpen && (
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="hidden items-center gap-2.5 rounded-full border border-[#BEE3EA] bg-white/[0.95] px-4 py-2.5 text-xs font-bold text-[#0B2A4A] shadow-xl backdrop-blur-md transition-all hover:border-[#1599B5] hover:bg-white hover:scale-105 active:scale-95 sm:flex"
-            aria-label="Open BioBridge FAQ Chatbot"
+            className="hidden items-center gap-2.5 rounded-2xl border border-[#BEE3EA] bg-white/[0.97] px-4 py-2.5 text-xs font-bold text-[#0B2A4A] shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-[#1599B5] hover:bg-white hover:scale-105 active:scale-95 sm:flex cursor-pointer mb-5 animate-mascot-bob"
+            aria-label="Chat with 3D BioBot Assistant"
           >
             <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1599B5] opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#1599B5]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
             </span>
-            <span>Have questions? Chat with FAQ Bot</span>
+            <span>Need help? Chat with BioBot! 🧬</span>
           </button>
         )}
 
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
-          className={cn(
-            "group relative flex h-14 w-14 items-center justify-center rounded-full text-white shadow-[0_8px_25px_-4px_rgba(21,153,181,0.5)] transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#1599B5]/30",
-            isOpen
-              ? "bg-[#0B2A4A] rotate-90"
-              : "bg-gradient-to-tr from-[#0B2A4A] via-[#1599B5] to-[#20AFC5]",
-          )}
-          aria-label={isOpen ? "Close FAQ Assistant" : "Open FAQ Assistant"}
-          title="BioBridge FAQ Assistant"
+          className="group relative cursor-pointer focus:outline-none transition-transform duration-300 active:scale-95"
+          aria-label={isOpen ? "Close FAQ Assistant" : "Open BioBridge 3D Assistant"}
+          title="BioBridge 3D Mascot Assistant"
         >
           {isOpen ? (
-            <X className="h-6 w-6 text-white transition-transform" />
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0B2A4A] text-white shadow-xl hover:bg-[#1599B5] transition-colors border-2 border-white">
+              <X className="h-6 w-6 text-white transition-transform" />
+            </div>
           ) : (
-            <>
-              <Bot className="h-7 w-7 text-white transition-transform group-hover:scale-110" />
-              <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-4 w-4 rounded-full border-2 border-white bg-emerald-500" />
-              </span>
-            </>
+            <div className="relative flex flex-col items-center">
+              {/* Biological energy glow under feet */}
+              <div className="absolute -bottom-1 h-3.5 w-20 rounded-full bg-[#1599B5]/30 blur-sm group-hover:bg-emerald-400/40 group-hover:scale-110 transition-all duration-300" />
+
+              {/* 3D Character Only (Transparent background) with floating & glowing action */}
+              <div className="relative animate-mascot-float transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-2">
+                <img
+                  src="/biotech-mascot.png"
+                  alt="BioBridge 3D Biotech Assistant"
+                  className="h-24 sm:h-32 w-auto object-contain select-none pointer-events-none drop-shadow-xl"
+                />
+
+                {/* Online pulse dot near flask */}
+                <span className="absolute top-1 right-1 sm:top-2 sm:right-2 flex h-3.5 w-3.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-85" />
+                  <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500 shadow-xs" />
+                </span>
+              </div>
+            </div>
           )}
         </button>
       </div>
@@ -422,21 +431,25 @@ export function FaqChatbot() {
           <div className="border-b border-[#BEE3EA] bg-gradient-to-r from-[#0B2A4A] via-[#0E446B] to-[#1599B5] px-4 pt-3.5 pb-2.5 text-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-white/10 p-1 backdrop-blur-sm border border-white/20">
-                  <Bot className="h-5 w-5 text-[#D9F2F6]" />
-                  <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0B2A4A] bg-emerald-400" />
+                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 p-0.5 backdrop-blur-sm border border-white/30 overflow-hidden shadow-inner">
+                  <img
+                    src="/biotech-mascot-head.png"
+                    alt="BioBot 3D Guide"
+                    className="h-full w-full rounded-full object-cover object-top scale-110"
+                  />
+                  <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#0B2A4A] bg-emerald-400" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1.5">
                     <span className="font-display text-[15px] font-bold tracking-tight text-white">
-                      BioBridge FAQ Bot
+                      BioBot 3D Guide
                     </span>
                     <span className="rounded-full bg-emerald-400/20 px-2 py-0.2 text-[9px] font-semibold uppercase tracking-wider text-emerald-300">
                       Online
                     </span>
                   </div>
                   <span className="text-[11px] text-[#D9F2F6]/80">
-                    Official Hackathon Assistant
+                    Official BioBridge Assistant
                   </span>
                 </div>
               </div>
@@ -555,8 +568,12 @@ export function FaqChatbot() {
                         )}
                       >
                         {isBot && (
-                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-[#D9F2F6] text-[#1599B5] border border-[#BEE3EA]">
-                            <Bot className="h-4 w-4" />
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#1599B5] to-[#20AFC5] p-0.5 shadow-xs overflow-hidden border border-white">
+                            <img
+                              src="/biotech-mascot-head.png"
+                              alt="BioBot"
+                              className="h-full w-full rounded-full object-cover object-top scale-115"
+                            />
                           </div>
                         )}
 
@@ -646,8 +663,12 @@ export function FaqChatbot() {
 
                 {isTyping && (
                   <div className="flex items-center gap-2.5 ml-1">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-[#D9F2F6] text-[#1599B5] border border-[#BEE3EA]">
-                      <Bot className="h-4 w-4" />
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-[#1599B5] to-[#20AFC5] p-0.5 shadow-xs overflow-hidden border border-white">
+                      <img
+                        src="/biotech-mascot-head.png"
+                        alt="BioBot"
+                        className="h-full w-full rounded-full object-cover object-top scale-115"
+                      />
                     </div>
                     <div className="flex items-center gap-1.5 rounded-2xl border border-[#BEE3EA] bg-white px-4 py-3 shadow-xs">
                       <span className="h-2 w-2 animate-bounce rounded-full bg-[#1599B5]" />

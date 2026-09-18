@@ -1861,3 +1861,42 @@
 ::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--primary) 50%, var(--border));
 }
+
+/* ════════════════════════════════════
+   3D MASCOT ANIMATIONS
+════════════════════════════════════ */
+
+@keyframes mascot-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1.5deg);
+  }
+}
+
+@keyframes mascot-glow {
+  0%, 100% {
+    filter: drop-shadow(0 8px 16px rgba(21, 153, 181, 0.45)) drop-shadow(0 0 12px rgba(16, 185, 129, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 14px 24px rgba(21, 153, 181, 0.7)) drop-shadow(0 0 20px rgba(16, 185, 129, 0.6));
+  }
+}
+
+@keyframes mascot-bob {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+.animate-mascot-float {
+  animation: mascot-float 3.5s ease-in-out infinite, mascot-glow 3.5s ease-in-out infinite;
+}
+
+.animate-mascot-bob {
+  animation: mascot-bob 2.5s ease-in-out infinite;
+}
