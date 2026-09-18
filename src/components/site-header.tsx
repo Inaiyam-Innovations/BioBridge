@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { href: "/problems", label: "Challenges", isRoute: true },
   { href: "/#how-it-works", label: "How It Works", isRoute: false },
   { href: "/#sessions", label: "Sessions", isRoute: false },
-  { href: "/#speakers", label: "Speakers & Jury", isRoute: false },
+  { href: "/#mentors", label: "Mentors & Jury", isRoute: false },
   { href: "/#prizes", label: "Prizes", isRoute: false },
   { href: "/#partners", label: "Partners", isRoute: false },
   { href: "/#faq", label: "FAQs", isRoute: false },

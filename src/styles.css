@@ -1900,3 +1900,16 @@
 .animate-mascot-bob {
   animation: mascot-bob 2.5s ease-in-out infinite;
 }
+
+@keyframes pentagon-progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-pentagon-progress {
+  animation: pentagon-progress 3.5s linear forwards;
+}

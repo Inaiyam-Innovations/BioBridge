@@ -11,6 +11,8 @@ import {
   ShieldCheck,
   CheckCircle2,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Building2,
   Lightbulb,
   Star,
@@ -223,17 +225,11 @@ const WEEKEND_SESSIONS = [
   },
 ];
 
-const SPEAKERS = [
-  { num: "01", name: "Speaker 01", image: null },
-  { num: "02", name: "Speaker 02", image: null },
-  { num: "03", name: "Speaker 03", image: null },
-  { num: "04", name: "Speaker 04", image: null },
-  { num: "05", name: "Speaker 05", image: null },
-  { num: "06", name: "Speaker 06", image: null },
-  { num: "07", name: "Speaker 07", image: null },
-  { num: "08", name: "Speaker 08", image: null },
-  { num: "09", name: "Speaker 09", image: null },
-  { num: "10", name: "Speaker 10", image: null },
+const MENTORS = [
+  { num: "01", name: "Mentor 01", image: null },
+  { num: "02", name: "Mentor 02", image: null },
+  { num: "03", name: "Mentor 03", image: null },
+  { num: "04", name: "Mentor 04", image: null },
 ];
 
 const JURY_MEMBERS = [
@@ -301,7 +297,21 @@ const TRACK_ICONS = [FlaskConical, Users, Leaf];
 
 function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [panelView, setPanelView] = useState<"jury" | "speakers">("jury");
+  const [panelView, setPanelView] = useState<"mentors" | "jury">("mentors");
+  const [activeMemberIdx, setActiveMemberIdx] = useState(0);
+  const [rotationAngle, setRotationAngle] = useState(0);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+
+  useEffect(() => {
+    if (isCarouselPaused) return;
+    const currentCount = panelView === "mentors" ? MENTORS.length : JURY_MEMBERS.length;
+    const stepAngle = 360 / currentCount;
+    const timer = setInterval(() => {
+      setActiveMemberIdx((prev) => (prev + 1) % currentCount);
+      setRotationAngle((prev) => prev - stepAngle);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [panelView, isCarouselPaused]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -954,26 +964,48 @@ function Home() {
         </div>
       </section>
 
-      {/* ── 4B. KEYNOTE SPEAKERS & GRAND JURY FRAMEWORK ── */}
-      <section className="py-14 sm:py-16 bg-white border-b border-[#BEE3EA]" id="speakers">
+      {/* ── 4B. KEYNOTE MENTORS & GRAND JURY PENTAGON SHOWCASE ── */}
+      <section className="py-14 sm:py-16 bg-white border-b border-[#BEE3EA]" id="mentors">
+        <span id="speakers" className="sr-only">Mentors and Jury</span>
         <div className="bio-container">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
               <Users className="h-3.5 w-3.5" />
-              Evaluation &amp; Mentorship
+              Mentorship &amp; Evaluation
             </span>
             <h2 className="mt-2.5 font-display text-[28px] sm:text-[36px] font-extrabold text-[#0B2A4A] tracking-tight">
-              Grand Jury &amp; Keynote Speakers
+              Keynote Mentors &amp; Grand Jury
             </h2>
             <p className="mt-2 text-[14px] sm:text-[15px] text-[#64748B]">
-              Distinguished experts evaluating the Oct 30 Grand Finale at KSRCT.
+              Distinguished experts guiding student biotech innovators through the 4-week sprint and Grand Finale on Oct 30 at KSRCT.
             </p>
 
-            {/* Minimal Interactive Tab Switcher */}
+            {/* Minimal Interactive Tab Switcher: Mentors FIRST, Jury NEXT */}
             <div className="mt-6 inline-flex items-center rounded-full border border-[#BEE3EA] bg-[#F8FCFD] p-1 shadow-xs">
               <button
                 type="button"
-                onClick={() => setPanelView("jury")}
+                onClick={() => {
+                  setPanelView("mentors");
+                  setActiveMemberIdx(0);
+                  setRotationAngle(0);
+                }}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
+                  panelView === "mentors"
+                    ? "bg-[#0B2A4A] text-white shadow-xs"
+                    : "text-[#64748B] hover:text-[#0B2A4A]"
+                )}
+              >
+                <Sparkles className="h-3.5 w-3.5 text-[#20AFC5]" />
+                Keynote Mentors (4)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setPanelView("jury");
+                  setActiveMemberIdx(0);
+                  setRotationAngle(0);
+                }}
                 className={cn(
                   "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
                   panelView === "jury"
@@ -984,240 +1016,244 @@ function Home() {
                 <Award className="h-3.5 w-3.5 text-[#38BDF8]" />
                 Grand Jury (6)
               </button>
-              <button
-                type="button"
-                onClick={() => setPanelView("speakers")}
-                className={cn(
-                  "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
-                  panelView === "speakers"
-                    ? "bg-[#0B2A4A] text-white shadow-xs"
-                    : "text-[#64748B] hover:text-[#0B2A4A]"
-                )}
-              >
-                <Sparkles className="h-3.5 w-3.5 text-[#20AFC5]" />
-                Keynote Speakers (10)
-              </button>
             </div>
           </div>
 
-          {/* Professional Horizontal DNA Double-Helix Zig-Zag */}
+          {/* 3D Polygon Carousel Showcase (One Front, Remaining in Sides & Back) */}
           {(() => {
-            const currentMembers = panelView === "jury" ? JURY_MEMBERS : SPEAKERS;
-            const count = currentMembers.length;
-            const step = 200;
-            const height = 360;
-            const y_mid = 180;
-            const amplitude = 72;
+            const currentMembers = panelView === "mentors" ? MENTORS : JURY_MEMBERS;
+            const isMentor = panelView === "mentors";
+            const totalCount = currentMembers.length;
+            const stepAngle = 360 / totalCount;
+            const radius = isMentor ? 240 : 280;
 
-            // Generate Strand 1 & Strand 2 intertwining paths
-            let s1_path = `M 0 ${y_mid}`;
-            let s2_path = `M 0 ${y_mid}`;
-            for (let i = 0; i < count; i++) {
-              const isTop1 = i % 2 === 0;
-              const prevX = i === 0 ? 0 : (i - 0.5) * step;
-              const prevY1 = i === 0 ? y_mid : (i - 1) % 2 === 0 ? y_mid - amplitude : y_mid + amplitude;
-              const prevY2 = i === 0 ? y_mid : (i - 1) % 2 === 0 ? y_mid + amplitude : y_mid - amplitude;
-              const targetX = (i + 0.5) * step;
-              const targetY1 = isTop1 ? y_mid - amplitude : y_mid + amplitude;
-              const targetY2 = isTop1 ? y_mid + amplitude : y_mid - amplitude;
-              const cpX = (prevX + targetX) / 2;
-              s1_path += ` C ${cpX} ${prevY1}, ${cpX} ${targetY1}, ${targetX} ${targetY1}`;
-              s2_path += ` C ${cpX} ${prevY2}, ${cpX} ${targetY2}, ${targetX} ${targetY2}`;
-            }
-            const lastX = (count - 0.5) * step;
-            const endX = count * step;
-            const lastY1 = (count - 1) % 2 === 0 ? y_mid - amplitude : y_mid + amplitude;
-            const lastY2 = (count - 1) % 2 === 0 ? y_mid + amplitude : y_mid - amplitude;
-            s1_path += ` C ${(lastX + endX) / 2} ${lastY1}, ${(lastX + endX) / 2} ${y_mid}, ${endX} ${y_mid}`;
-            s2_path += ` C ${(lastX + endX) / 2} ${lastY2}, ${(lastX + endX) / 2} ${y_mid}, ${endX} ${y_mid}`;
+            const handlePrev = () => {
+              setActiveMemberIdx((prev) => (prev - 1 + totalCount) % totalCount);
+              setRotationAngle((prev) => prev + stepAngle);
+            };
 
-            // Generate vertical base-pair ladder rungs connecting the two strands
-            const rungs = [];
-            for (let px = 20; px < endX; px += 24) {
-              const angle = (px / step) * Math.PI;
-              const ry1 = y_mid - amplitude * Math.cos(angle);
-              const ry2 = y_mid + amplitude * Math.cos(angle);
-              if (Math.abs(ry1 - ry2) > 14) {
-                rungs.push({ x: px, y1: ry1, y2: ry2 });
-              }
-            }
+            const handleNext = () => {
+              setActiveMemberIdx((prev) => (prev + 1) % totalCount);
+              setRotationAngle((prev) => prev - stepAngle);
+            };
 
-            // Crossing molecular nodes where strands intertwine
-            const crossings = [];
-            for (let i = 1; i < count; i++) {
-              crossings.push(i * step);
-            }
+            const handleSelectCard = (targetIdx: number) => {
+              if (targetIdx === activeMemberIdx) return;
+              let diff = targetIdx - activeMemberIdx;
+              if (diff > totalCount / 2) diff -= totalCount;
+              if (diff < -totalCount / 2) diff += totalCount;
+              setRotationAngle((prev) => prev - diff * stepAngle);
+              setActiveMemberIdx(targetIdx);
+            };
 
             return (
-              <div className="mt-8 w-full overflow-x-auto scrollbar-none pb-4 pt-2 select-none">
+              <div
+                className="mt-10 relative w-full max-w-5xl mx-auto flex flex-col items-center select-none"
+                onMouseEnter={() => setIsCarouselPaused(true)}
+                onMouseLeave={() => setIsCarouselPaused(false)}
+              >
+                {/* 3D Perspective Stage */}
                 <div
-                  className="relative mx-auto"
+                  className="relative w-full h-[400px] sm:h-[430px] flex items-center justify-center overflow-hidden"
                   style={{
-                    minWidth: count === 6 ? "940px" : "1500px",
-                    maxWidth: count === 6 ? "1200px" : "1750px",
+                    perspective: "1100px",
+                    perspectiveOrigin: "50% 48%",
                   }}
                 >
-                  {/* SVG Horizontal DNA Double-Helix */}
-                  <svg
-                    viewBox={`0 0 ${count * step} ${height}`}
-                    preserveAspectRatio="none"
-                    className="absolute inset-0 h-full w-full pointer-events-none"
-                    aria-hidden="true"
-                  >
-                    <defs>
-                      <linearGradient id="dnaStrand1" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#0B2A4A" />
-                        <stop offset="30%" stopColor="#1599B5" />
-                        <stop offset="70%" stopColor="#20AFC5" />
-                        <stop offset="100%" stopColor="#0B2A4A" />
-                      </linearGradient>
-
-                      <linearGradient id="dnaStrand2" x1="100%" y1="0%" x2="0%" y2="0%">
-                        <stop offset="0%" stopColor="#0E7E96" />
-                        <stop offset="40%" stopColor="#38BDF8" />
-                        <stop offset="70%" stopColor="#1599B5" />
-                        <stop offset="100%" stopColor="#0E7E96" />
-                      </linearGradient>
-
-                      <radialGradient id="dnaReceptorGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.4" />
-                        <stop offset="60%" stopColor="#1599B5" stopOpacity="0.1" />
-                        <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
-                      </radialGradient>
-                    </defs>
-
-                    {/* DNA Base-Pair Ladder Rungs */}
-                    {rungs.map((rung, i) => (
-                      <g key={i} opacity="0.65">
-                        <line
-                          x1={rung.x}
-                          y1={rung.y1}
-                          x2={rung.x}
-                          y2={rung.y2}
-                          stroke="#1599B5"
-                          strokeWidth="1.5"
-                          strokeDasharray="2 2"
-                        />
-                        <circle cx={rung.x} cy={rung.y1} r="2.5" fill="#1599B5" />
-                        <circle cx={rung.x} cy={rung.y2} r="2.5" fill="#20AFC5" />
-                      </g>
-                    ))}
-
-                    {/* DNA Strand 2 (Complementary Helical Ribbon) */}
-                    <path
-                      d={s2_path}
-                      fill="none"
-                      stroke="url(#dnaStrand2)"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      opacity="0.85"
-                    />
-
-                    {/* DNA Strand 1 (Primary Helical Ribbon with Bio-Glow) */}
-                    <path
-                      d={s1_path}
-                      fill="none"
-                      stroke="url(#dnaStrand1)"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      className="filter drop-shadow-[0_0_6px_rgba(21,153,181,0.4)]"
-                    />
-
-                    {/* Crossing Molecular Nodes */}
-                    {crossings.map((cx, i) => (
-                      <g key={i}>
-                        <circle cx={cx} cy={y_mid} r="7" fill="#EAF7FA" stroke="#1599B5" strokeWidth="1.5" />
-                        <circle cx={cx} cy={y_mid} r="3" fill="#0B2A4A" />
-                      </g>
-                    ))}
-
-                    {/* Circular Bio-Receptor Docking Rings behind each node */}
-                    {currentMembers.map((_, idx) => {
-                      const isTop = idx % 2 === 0;
-                      const cx = (idx + 0.5) * step;
-                      const cy = isTop ? y_mid - amplitude : y_mid + amplitude;
-                      return (
-                        <g key={idx}>
-                          <circle cx={cx} cy={cy} r="48" fill="url(#dnaReceptorGlow)" />
-                          <circle cx={cx} cy={cy} r="42" fill="none" stroke="#BEE3EA" strokeWidth="1" strokeDasharray="3 3" />
-                        </g>
-                      );
-                    })}
-                  </svg>
-
-                  {/* HTML Alternating Top and Bottom Members Grid */}
+                  {/* Radial Ambient Ground Shadow */}
                   <div
-                    className="relative z-10 grid h-[360px]"
-                    style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[340px] sm:w-[440px] h-[36px] rounded-full bg-[#0B2A4A]/10 blur-xl pointer-events-none"
+                    aria-hidden="true"
+                  />
+
+                  {/* 3D Rotator Ring */}
+                  <div
+                    className="relative w-[230px] sm:w-[250px] h-[330px] sm:h-[340px]"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transform: `translateZ(-${radius}px) rotateY(${rotationAngle}deg)`,
+                      transition: "transform 0.75s cubic-bezier(0.2, 0.8, 0.25, 1)",
+                    }}
                   >
                     {currentMembers.map((person, idx) => {
-                      const isTop = idx % 2 === 0;
+                      const cardAngle = (idx * 360) / totalCount;
+                      const effectiveAngle = ((cardAngle + (rotationAngle % 360) + 360) % 360);
+                      const distFromFront = Math.min(effectiveAngle, 360 - effectiveAngle);
+                      const isFacingFront = distFromFront < 32;
+                      const isSide = distFromFront >= 32 && distFromFront <= 110;
+
                       return (
-                        <div key={person.num} className="flex flex-col items-center justify-between text-center px-1">
-                          {isTop ? (
-                            <>
-                              {/* Top Member: Name & Badge Above */}
-                              <div className="h-[70px] flex flex-col justify-end items-center pb-1.5">
-                                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2 py-0.5 rounded-full border border-[#BEE3EA]">
-                                  #{person.num}
-                                </span>
-                                <h3 className="mt-1 font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight max-w-[130px]">
-                                  {person.name}
-                                </h3>
-                              </div>
-
-                              {/* Round Frame at Top Crest */}
-                              <div className="group relative h-[72px] w-[72px] sm:h-20 sm:w-20 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-md transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
-                                {person.image ? (
-                                  <img
-                                    src={person.image}
-                                    alt={person.name}
-                                    className="h-full w-full rounded-full object-cover"
-                                  />
-                                ) : (
-                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
-                                    Coming Soon
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Spacer below to maintain height balance */}
-                              <div className="h-[218px]" />
-                            </>
-                          ) : (
-                            <>
-                              {/* Spacer above */}
-                              <div className="h-[218px]" />
-
-                              {/* Round Frame at Bottom Trough */}
-                              <div className="group relative h-[72px] w-[72px] sm:h-20 sm:w-20 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-md transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
-                                {person.image ? (
-                                  <img
-                                    src={person.image}
-                                    alt={person.name}
-                                    className="h-full w-full rounded-full object-cover"
-                                  />
-                                ) : (
-                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
-                                    Coming Soon
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Bottom Member: Name & Badge Below */}
-                              <div className="h-[70px] flex flex-col justify-start items-center pt-1.5">
-                                <h3 className="font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight max-w-[130px]">
-                                  {person.name}
-                                </h3>
-                                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2 py-0.5 rounded-full border border-[#BEE3EA]">
-                                  #{person.num}
-                                </span>
-                              </div>
-                            </>
+                        <div
+                          key={person.num}
+                          onClick={() => handleSelectCard(idx)}
+                          className={cn(
+                            "absolute inset-0 rounded-2xl p-4 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border backdrop-blur-md",
+                            isFacingFront
+                              ? "bg-white border-[#1599B5] shadow-[0_16px_36px_rgba(21,153,181,0.28)] ring-2 ring-[#20AFC5]/30 opacity-100 z-30"
+                              : isSide
+                              ? "bg-white/90 border-[#BEE3EA] shadow-md opacity-75 hover:opacity-95 z-20"
+                              : "bg-white/70 border-[#E2F2F5] shadow-xs opacity-40 hover:opacity-80 z-10"
                           )}
+                          style={{
+                            transform: `rotateY(${cardAngle}deg) translateZ(${radius}px)`,
+                            backfaceVisibility: "visible",
+                          }}
+                        >
+                          {/* Top Bar: Number Badge + Category */}
+                          <div className="w-full flex items-center justify-between">
+                            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2 py-0.5 rounded-full border border-[#BEE3EA]">
+                              #{person.num}
+                            </span>
+                            <span className="font-mono text-[9.5px] font-bold text-[#64748B] uppercase">
+                              {isMentor ? "Mentor" : "Jury"}
+                            </span>
+                          </div>
+
+                          {/* Single Person Frame: Pentagon Photo / Avatar Frame */}
+                          <div className="relative h-36 w-36 sm:h-40 sm:w-40 flex items-center justify-center my-1">
+                            {/* SVG Pentagon Border & 5 Biological Corner Nodes */}
+                            <svg
+                              viewBox="0 0 100 100"
+                              className="absolute inset-0 h-full w-full pointer-events-none z-20 overflow-visible"
+                            >
+                              <polygon
+                                points="50,4 93.8,35.8 77,87.2 23,87.2 6.2,35.8"
+                                fill="none"
+                                stroke={isFacingFront ? "#1599B5" : "#BEE3EA"}
+                                strokeWidth={isFacingFront ? "2.5" : "1.5"}
+                                strokeDasharray={isFacingFront ? "none" : "3 2"}
+                              />
+                              {[
+                                [50, 4],
+                                [93.8, 35.8],
+                                [77, 87.2],
+                                [23, 87.2],
+                                [6.2, 35.8],
+                              ].map(([cx, cy], i) => (
+                                <circle
+                                  key={i}
+                                  cx={cx}
+                                  cy={cy}
+                                  r={isFacingFront ? "2.6" : "1.8"}
+                                  fill={isFacingFront ? "#20AFC5" : "#94A3B8"}
+                                  stroke="#FFFFFF"
+                                  strokeWidth="1"
+                                />
+                              ))}
+                            </svg>
+
+                            {/* Clipped Pentagon Container */}
+                            <div
+                              className={cn(
+                                "absolute inset-[4px] flex flex-col items-center justify-center text-center p-2 z-10 transition-colors shadow-inner",
+                                isFacingFront
+                                  ? "bg-gradient-to-b from-[#EBF7F9] via-white to-[#E1F3F6]"
+                                  : "bg-gradient-to-b from-[#F4FAFB] via-white to-[#EDF6F8]"
+                              )}
+                              style={{
+                                clipPath: "polygon(50% 4%, 93.8% 35.8%, 77% 87.2%, 23% 87.2%, 6.2% 35.8%)",
+                              }}
+                            >
+                              {person.image ? (
+                                <img
+                                  src={person.image}
+                                  alt={person.name}
+                                  className="h-full w-full object-cover"
+                                />
+                              ) : (
+                                <div className="flex flex-col items-center justify-center select-none pt-1">
+                                  <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-white/90 border border-[#BEE3EA] flex items-center justify-center shadow-2xs">
+                                    <Dna
+                                      className={cn(
+                                        "h-4 w-4 sm:h-5 sm:w-5",
+                                        isFacingFront ? "text-[#1599B5] animate-pulse" : "text-[#64748B]"
+                                      )}
+                                    />
+                                  </div>
+                                  <span className="mt-1.5 font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#0E7E96]">
+                                    Coming Soon
+                                  </span>
+                                  <span className="font-mono text-[8.5px] font-bold text-[#64748B]">
+                                    #{person.num}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Bottom: Name & Subtitle for Single Person */}
+                          <div className="w-full text-center">
+                            <h4 className="font-display text-[15px] sm:text-[16px] font-extrabold text-[#0B2A4A] tracking-tight truncate">
+                              {person.name}
+                            </h4>
+                            <p className="mt-0.5 font-mono text-[10.5px] text-[#1599B5] font-semibold truncate">
+                              {isMentor ? "Keynote Mentor" : "Grand Jury Member"}
+                            </p>
+                            <span className="mt-1 inline-block font-mono text-[9px] text-[#64748B] bg-[#F1F9FA] px-2 py-0.5 rounded-md border border-[#E2F2F5]">
+                              {isFacingFront ? "Active Front" : "Click to Rotate"}
+                            </span>
+                          </div>
                         </div>
                       );
                     })}
+                  </div>
+                </div>
+
+                {/* 3D Carousel Controls (< O > like sample) */}
+                <div className="mt-4 flex flex-col items-center gap-2.5">
+                  <div className="flex items-center gap-4 bg-white/95 px-4 py-2 rounded-full border border-[#BEE3EA] shadow-sm">
+                    {/* Prev button */}
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      aria-label="Previous frame"
+                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#0B2A4A] hover:bg-[#EAF7FA] hover:text-[#1599B5] transition-colors cursor-pointer active:scale-95"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+
+                    {/* Indicator dots for each member */}
+                    <div className="flex items-center gap-1.5">
+                      {currentMembers.map((_, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => handleSelectCard(idx)}
+                          aria-label={`Go to slide ${idx + 1}`}
+                          className={cn(
+                            "transition-all duration-300 rounded-full cursor-pointer",
+                            idx === activeMemberIdx
+                              ? "h-2.5 w-6 bg-[#1599B5]"
+                              : "h-2.5 w-2.5 bg-[#CBD5E1] hover:bg-[#94A3B8]"
+                          )}
+                        />
+                      ))}
+                    </div>
+
+                    {/* Next button */}
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      aria-label="Next frame"
+                      className="flex h-8 w-8 items-center justify-center rounded-full text-[#0B2A4A] hover:bg-[#EAF7FA] hover:text-[#1599B5] transition-colors cursor-pointer active:scale-95"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+
+                  {/* Auto-scroll Status & Interaction Hint */}
+                  <div className="flex items-center gap-2 text-[11px] sm:text-[11.5px] font-mono text-[#64748B]">
+                    <span
+                      className={cn(
+                        "h-2 w-2 rounded-full",
+                        isCarouselPaused ? "bg-amber-400" : "bg-[#20AFC5] animate-pulse"
+                      )}
+                    />
+                    <span>
+                      {isCarouselPaused ? "Auto-scroll Paused" : "3D Auto-Rotating Carousel"}
+                    </span>
+                    <span>•</span>
+                    <span>Click any side frame to bring to front</span>
                   </div>
                 </div>
               </div>
