@@ -1025,7 +1025,7 @@ function Home() {
             const isMentor = panelView === "mentors";
             const totalCount = currentMembers.length;
             const stepAngle = 360 / totalCount;
-            const radius = isMentor ? 240 : 280;
+            const radius = isMentor ? 300 : 370;
 
             const handlePrev = () => {
               setActiveMemberIdx((prev) => (prev - 1 + totalCount) % totalCount);
@@ -1052,23 +1052,23 @@ function Home() {
                 onMouseEnter={() => setIsCarouselPaused(true)}
                 onMouseLeave={() => setIsCarouselPaused(false)}
               >
-                {/* 3D Perspective Stage */}
+                {/* 3D Perspective Stage - Increased Height */}
                 <div
-                  className="relative w-full h-[400px] sm:h-[430px] flex items-center justify-center overflow-hidden"
+                  className="relative w-full h-[490px] sm:h-[540px] flex items-center justify-center overflow-hidden"
                   style={{
-                    perspective: "1100px",
+                    perspective: "1200px",
                     perspectiveOrigin: "50% 48%",
                   }}
                 >
                   {/* Radial Ambient Ground Shadow */}
                   <div
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[340px] sm:w-[440px] h-[36px] rounded-full bg-[#0B2A4A]/10 blur-xl pointer-events-none"
+                    className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[420px] sm:w-[560px] h-[40px] rounded-full bg-[#0B2A4A]/10 blur-2xl pointer-events-none"
                     aria-hidden="true"
                   />
 
-                  {/* 3D Rotator Ring */}
+                  {/* 3D Rotator Ring - Increased Size */}
                   <div
-                    className="relative w-[230px] sm:w-[250px] h-[330px] sm:h-[340px]"
+                    className="relative w-[280px] sm:w-[320px] h-[410px] sm:h-[440px]"
                     style={{
                       transformStyle: "preserve-3d",
                       transform: `translateZ(-${radius}px) rotateY(${rotationAngle}deg)`,
@@ -1087,110 +1087,67 @@ function Home() {
                           key={person.num}
                           onClick={() => handleSelectCard(idx)}
                           className={cn(
-                            "absolute inset-0 rounded-2xl p-4 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border backdrop-blur-md",
+                            "absolute inset-0 rounded-3xl p-5 sm:p-6 flex flex-col items-center justify-between text-center transition-all duration-500 cursor-pointer border backdrop-blur-md",
                             isFacingFront
-                              ? "bg-white border-[#1599B5] shadow-[0_16px_36px_rgba(21,153,181,0.28)] ring-2 ring-[#20AFC5]/30 opacity-100 z-30"
+                              ? "bg-white border-[#1599B5] shadow-[0_22px_48px_rgba(21,153,181,0.28)] ring-4 ring-[#20AFC5]/20 opacity-100 z-30 scale-[1.02]"
                               : isSide
-                              ? "bg-white/90 border-[#BEE3EA] shadow-md opacity-75 hover:opacity-95 z-20"
-                              : "bg-white/70 border-[#E2F2F5] shadow-xs opacity-40 hover:opacity-80 z-10"
+                              ? "bg-white/95 border-[#BEE3EA] shadow-xl opacity-75 hover:opacity-95 z-20"
+                              : "bg-white/80 border-[#E2F2F5] shadow-md opacity-45 hover:opacity-85 z-10"
                           )}
                           style={{
                             transform: `rotateY(${cardAngle}deg) translateZ(${radius}px)`,
                             backfaceVisibility: "visible",
                           }}
                         >
-                          {/* Top Bar: Number Badge + Category */}
+                          {/* Top Bar: Number Badge + Role */}
                           <div className="w-full flex items-center justify-between">
-                            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2 py-0.5 rounded-full border border-[#BEE3EA]">
+                            <span className="font-mono text-[11px] sm:text-[11.5px] font-extrabold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-3 py-0.5 rounded-full border border-[#BEE3EA]">
                               #{person.num}
                             </span>
-                            <span className="font-mono text-[9.5px] font-bold text-[#64748B] uppercase">
+                            <span className="font-mono text-[10.5px] font-bold text-[#64748B] uppercase flex items-center gap-1">
+                              {isMentor ? <Sparkles className="h-3 w-3 text-[#20AFC5]" /> : <Award className="h-3 w-3 text-[#1599B5]" />}
                               {isMentor ? "Mentor" : "Jury"}
                             </span>
                           </div>
 
-                          {/* Single Person Frame: Pentagon Photo / Avatar Frame */}
-                          <div className="relative h-36 w-36 sm:h-40 sm:w-40 flex items-center justify-center my-1">
-                            {/* SVG Pentagon Border & 5 Biological Corner Nodes */}
-                            <svg
-                              viewBox="0 0 100 100"
-                              className="absolute inset-0 h-full w-full pointer-events-none z-20 overflow-visible"
-                            >
-                              <polygon
-                                points="50,4 93.8,35.8 77,87.2 23,87.2 6.2,35.8"
-                                fill="none"
-                                stroke={isFacingFront ? "#1599B5" : "#BEE3EA"}
-                                strokeWidth={isFacingFront ? "2.5" : "1.5"}
-                                strokeDasharray={isFacingFront ? "none" : "3 2"}
+                          {/* Large Portrait Photo Frame (Clean Rectangular / Portrait) */}
+                          <div className="relative w-full h-52 sm:h-60 rounded-2xl overflow-hidden border border-[#BEE3EA] bg-gradient-to-b from-[#F0FAFC] via-white to-[#E3F4F7] my-3 flex flex-col items-center justify-center shadow-inner">
+                            {person.image ? (
+                              <img
+                                src={person.image}
+                                alt={person.name}
+                                className="h-full w-full object-cover"
                               />
-                              {[
-                                [50, 4],
-                                [93.8, 35.8],
-                                [77, 87.2],
-                                [23, 87.2],
-                                [6.2, 35.8],
-                              ].map(([cx, cy], i) => (
-                                <circle
-                                  key={i}
-                                  cx={cx}
-                                  cy={cy}
-                                  r={isFacingFront ? "2.6" : "1.8"}
-                                  fill={isFacingFront ? "#20AFC5" : "#94A3B8"}
-                                  stroke="#FFFFFF"
-                                  strokeWidth="1"
-                                />
-                              ))}
-                            </svg>
-
-                            {/* Clipped Pentagon Container */}
-                            <div
-                              className={cn(
-                                "absolute inset-[4px] flex flex-col items-center justify-center text-center p-2 z-10 transition-colors shadow-inner",
-                                isFacingFront
-                                  ? "bg-gradient-to-b from-[#EBF7F9] via-white to-[#E1F3F6]"
-                                  : "bg-gradient-to-b from-[#F4FAFB] via-white to-[#EDF6F8]"
-                              )}
-                              style={{
-                                clipPath: "polygon(50% 4%, 93.8% 35.8%, 77% 87.2%, 23% 87.2%, 6.2% 35.8%)",
-                              }}
-                            >
-                              {person.image ? (
-                                <img
-                                  src={person.image}
-                                  alt={person.name}
-                                  className="h-full w-full object-cover"
-                                />
-                              ) : (
-                                <div className="flex flex-col items-center justify-center select-none pt-1">
-                                  <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-white/90 border border-[#BEE3EA] flex items-center justify-center shadow-2xs">
-                                    <Dna
-                                      className={cn(
-                                        "h-4 w-4 sm:h-5 sm:w-5",
-                                        isFacingFront ? "text-[#1599B5] animate-pulse" : "text-[#64748B]"
-                                      )}
-                                    />
-                                  </div>
-                                  <span className="mt-1.5 font-mono text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-[#0E7E96]">
-                                    Coming Soon
-                                  </span>
-                                  <span className="font-mono text-[8.5px] font-bold text-[#64748B]">
-                                    #{person.num}
-                                  </span>
+                            ) : (
+                              <div className="flex flex-col items-center justify-center select-none p-4">
+                                <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-white border border-[#BEE3EA] flex items-center justify-center shadow-xs">
+                                  <Dna
+                                    className={cn(
+                                      "h-8 w-8 sm:h-10 sm:w-10",
+                                      isFacingFront ? "text-[#1599B5] animate-pulse" : "text-[#64748B]"
+                                    )}
+                                  />
                                 </div>
-                              )}
-                            </div>
+                                <span className="mt-3 font-mono text-[12.5px] sm:text-[13.5px] font-extrabold uppercase tracking-wider text-[#0E7E96]">
+                                  Coming Soon
+                                </span>
+                                <span className="font-mono text-[11px] font-bold text-[#64748B] mt-0.5">
+                                  Member #{person.num}
+                                </span>
+                              </div>
+                            )}
                           </div>
 
                           {/* Bottom: Name & Subtitle for Single Person */}
                           <div className="w-full text-center">
-                            <h4 className="font-display text-[15px] sm:text-[16px] font-extrabold text-[#0B2A4A] tracking-tight truncate">
+                            <h4 className="font-display text-[19px] sm:text-[21px] font-extrabold text-[#0B2A4A] tracking-tight truncate">
                               {person.name}
                             </h4>
-                            <p className="mt-0.5 font-mono text-[10.5px] text-[#1599B5] font-semibold truncate">
-                              {isMentor ? "Keynote Mentor" : "Grand Jury Member"}
+                            <p className="mt-0.5 font-mono text-[12px] sm:text-[12.5px] text-[#1599B5] font-semibold truncate">
+                              {isMentor ? "Biotech Keynote Mentor" : "Grand Finale Evaluator"}
                             </p>
-                            <span className="mt-1 inline-block font-mono text-[9px] text-[#64748B] bg-[#F1F9FA] px-2 py-0.5 rounded-md border border-[#E2F2F5]">
-                              {isFacingFront ? "Active Front" : "Click to Rotate"}
+                            <span className="mt-1.5 inline-block font-mono text-[10px] text-[#64748B] bg-[#F1F9FA] px-2.5 py-0.5 rounded-md border border-[#E2F2F5]">
+                              {isFacingFront ? "Active Spotlight" : "Click to Rotate"}
                             </span>
                           </div>
                         </div>
