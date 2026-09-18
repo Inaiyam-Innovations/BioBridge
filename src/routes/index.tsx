@@ -35,7 +35,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BIO BRIDGE | National Student Biotech Sprint 2026" },
+      { title: "BioBridge | National Student Biotech Sprint 2026" },
       {
         name: "description",
         content:
@@ -248,7 +248,7 @@ const PARTNERS = [
     logo: "/ksrct-logo.png",
     logoAlt: "Department of Biotechnology, K.S. Rangasamy College of Technology",
     logoClass: "h-14 sm:h-16 max-w-[240px]",
-    role: "Academic Host, Advanced Biotech Research Labs & Innovation Support",
+    role: "K.S. Rangasamy College of Technology",
   },
   {
     name: "MARABANU",
@@ -256,7 +256,7 @@ const PARTNERS = [
     logo: "/marabanu-logo.png",
     logoAlt: "MARABANU",
     logoClass: "h-10 sm:h-12 max-w-[220px]",
-    role: "Venture Ecosystem, Sprint Mentorship & Hackathon Partner",
+    role: "Biotech Venture Builder & Mentorship",
   },
   {
     name: "StartupTN Government of Tamil Nadu",
@@ -264,7 +264,7 @@ const PARTNERS = [
     logo: "/startuptn-logo.png",
     logoAlt: "StartupTN Government of Tamil Nadu",
     logoClass: "h-14 sm:h-16 max-w-[240px]",
-    role: "State Startup Ecosystem Partner & Innovation Support",
+    role: "State Startup Ecosystem Partner",
   },
 ];
 
@@ -1803,7 +1803,7 @@ function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Register for BIO BRIDGE <ArrowRight size={17} />
+              Register for BioBridge <ArrowRight size={17} />
             </a>
             <Link to="/problems" className="bio-button bio-button-ghost text-white border-white/20">
               Browse 36 Challenges

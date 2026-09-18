@@ -161,17 +161,14 @@ export function SiteFooter() {
               {ORGANIZERS.map((org) => (
                 <div
                   key={org.name}
-                  className="flex items-center gap-3 rounded-xl border border-[#BEE3EA] bg-white/90 p-2.5 shadow-sm transition-all hover:border-[#1599B5]"
+                  className="flex items-center justify-center rounded-xl border border-[#BEE3EA] bg-white p-3 shadow-xs transition-all hover:border-[#1599B5] hover:shadow-sm"
+                  title={org.name}
                 >
                   <img
                     src={org.logo}
                     alt={org.name}
-                    className="h-7 max-w-[90px] object-contain shrink-0"
+                    className="h-9 max-h-9 max-w-[180px] w-auto object-contain"
                   />
-                  <div className="min-w-0">
-                    <p className="text-[12px] font-bold text-[#0B2A4A] truncate">{org.name}</p>
-                    <p className="font-mono text-[10px] text-[#366273] truncate">{org.sub}</p>
-                  </div>
                 </div>
               ))}
             </div>
