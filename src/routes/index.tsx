@@ -146,42 +146,42 @@ const QUICK_SPECS = [
 const STAGES = [
   {
     num: "01",
-    phase: "Launch",
+    phase: "Launch & Track Selection",
     timing: "Day zero",
     summary:
-      "The poster goes out with the application link and the event website. The website carries the full set of problem statements across the six biotech categories and the open bio track, so teams choose a statement before they apply rather than after.",
+      "Launched by Singai G. Ramachandran, Chairperson, StartupTN. Explore the full set of 36 problem statements across the six biotech categories and the open bio track on this website. Review all challenges and select your problem statement with your team before you apply rather than after.",
     badge: "36 Problem Statements Live",
   },
   {
     num: "02",
-    phase: "Application window",
+    phase: "Application Window",
     timing: "2 weeks",
     summary:
-      "Teams of two to four students apply through the form. Along with the form they submit a one-pager on their idea, written to a template we supply — so every application arrives in a comparable shape and can be read quickly. No registration fee at any stage.",
+      "Form your team of two to four students and apply through the official online form. Submit a one-pager outlining your biotech idea using our supplied template so your application can be evaluated quickly and fairly. There is no registration fee at any stage.",
     badge: "Submit One-Pager",
   },
   {
     num: "03",
-    phase: "Rolling selection",
+    phase: "Rolling Selection",
     timing: "Within 2 days of close",
     summary:
-      "Applications are reviewed as they arrive rather than in one batch at the end, which is what makes the two-day turnaround possible. The top 50 teams are intimated within two days of the window closing.",
+      "Submit early — applications are reviewed as they arrive on a rolling basis. Look out for your selection intimation; the top 50 shortlisted teams will be officially notified within two days of the application window closing.",
     badge: "Top 50 Shortlisted",
   },
   {
     num: "04",
-    phase: "Build phase",
+    phase: "Build Phase",
     timing: "4 weeks",
     summary:
-      "The 50 selected teams build their product. Four online sessions run across the weekends of this period and attendance is mandatory for every member of every team — not just the team lead.",
+      "If shortlisted among the top 50, build and validate your working biotech product over 4 focused sprint weeks. Attend the four online weekend masterclass sessions — attendance is strictly mandatory for every member of your team, not just the team lead.",
     badge: "4 Mandatory Weekends",
   },
   {
     num: "05",
-    phase: "Submission and second cut",
+    phase: "Submission and Second Cut",
     timing: "End of build phase",
     summary:
-      "Teams submit a pitch deck to a supplied template, along with a product demo or video. From these, the top 25 teams are shortlisted and called to the finals.",
+      "Submit your final pitch deck built using our supplied template, accompanied by your working product demo or video. From these submissions, the top 25 teams will be shortlisted and invited to the in-person Grand Finale.",
     badge: "Top 25 Finalists",
   },
   {
@@ -189,7 +189,7 @@ const STAGES = [
     phase: "Finals Day (Oct 30)",
     timing: "Oct 30 · 1-day in-person event",
     summary:
-      "The 25 finalist teams present in person during the one-day grand finale on October 30. Three prizes are awarded, and the winning teams enter a six-month venture-building engagement with the MARABANU team.",
+      "Present your solution in person before the Grand Jury during the one-day Grand Finale on October 30 at KSRCT. Compete for top prizes and secure an exclusive six-month venture-building incubation engagement with MARABANU.",
     badge: "Oct 30 · 1-Day Finals & Venture Sprint",
   },
 ];
@@ -1033,7 +1033,7 @@ function Home() {
                 How the event runs, <span className="bio-gradient-text">stage by stage.</span>
               </h2>
               <p className="mt-2.5 text-[16px] sm:text-[17.5px] text-[#366273]">
-                From launch and rolling selection through the 4-week build phase to in-person finals.
+                Your participant roadmap: from launch and rolling selection through the 4-week build phase to in-person finals.
               </p>
             </div>
 
