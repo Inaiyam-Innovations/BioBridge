@@ -230,6 +230,10 @@ const SPEAKERS = [
   { num: "04", name: "Speaker 04", image: null },
   { num: "05", name: "Speaker 05", image: null },
   { num: "06", name: "Speaker 06", image: null },
+  { num: "07", name: "Speaker 07", image: null },
+  { num: "08", name: "Speaker 08", image: null },
+  { num: "09", name: "Speaker 09", image: null },
+  { num: "10", name: "Speaker 10", image: null },
 ];
 
 const JURY_MEMBERS = [
@@ -966,7 +970,7 @@ function Home() {
             </p>
 
             {/* Minimal Interactive Tab Switcher */}
-            <div className="mt-6 inline-flex items-center rounded-full border border-[#BEE3EA] bg-[#F8FCFD] p-1">
+            <div className="mt-6 inline-flex items-center rounded-full border border-[#BEE3EA] bg-[#F8FCFD] p-1 shadow-xs">
               <button
                 type="button"
                 onClick={() => setPanelView("jury")}
@@ -991,184 +995,232 @@ function Home() {
                 )}
               >
                 <Sparkles className="h-3.5 w-3.5 text-[#20AFC5]" />
-                Keynote Speakers (6)
+                Keynote Speakers (10)
               </button>
             </div>
           </div>
 
-          {/* Biological Zig-Zag Layout: Alternating Left and Right with DNA Bio-Connectors */}
-          <div className="relative max-w-xl sm:max-w-2xl mx-auto mt-12">
-            {/* SVG Biological Strand Backbone */}
-            <svg
-              viewBox="0 0 1000 1200"
-              preserveAspectRatio="none"
-              className="absolute inset-0 h-full w-full pointer-events-none"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="bioStrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#1599B5" />
-                  <stop offset="50%" stopColor="#20AFC5" />
-                  <stop offset="100%" stopColor="#0B2A4A" />
-                </linearGradient>
-                <linearGradient id="bioSecondaryGrad" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.7" />
-                  <stop offset="100%" stopColor="#1599B5" stopOpacity="0.2" />
-                </linearGradient>
-                <radialGradient id="bioNodeGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.7" />
-                  <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
-                </radialGradient>
-                <radialGradient id="receptorHalo" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#D9F2F6" stopOpacity="0.9" />
-                  <stop offset="60%" stopColor="#1599B5" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
-                </radialGradient>
-              </defs>
+          {/* Biological Sinusoidal Roadmap Wave: Full Horizontal Page Flow */}
+          {(() => {
+            const currentMembers = panelView === "jury" ? JURY_MEMBERS : SPEAKERS;
+            const count = currentMembers.length;
+            const step = 200;
 
-              {/* Bio-Receptor Rings behind each node position */}
-              {[
-                { cx: 250, cy: 100 },
-                { cx: 750, cy: 300 },
-                { cx: 250, cy: 500 },
-                { cx: 750, cy: 700 },
-                { cx: 250, cy: 900 },
-                { cx: 750, cy: 1100 },
-              ].map((pos, i) => (
-                <g key={i}>
-                  <circle cx={pos.cx} cy={pos.cy} r="66" fill="url(#receptorHalo)" />
-                  <circle cx={pos.cx} cy={pos.cy} r="54" fill="none" stroke="#BEE3EA" strokeWidth="1.5" strokeDasharray="4 4" />
-                </g>
-              ))}
+            // Generate continuous sinusoidal biological wave
+            let wavePath = "M 0 210";
+            for (let i = 0; i < count; i++) {
+              const isTop = i % 2 === 0;
+              const prevX = i === 0 ? 0 : (i - 0.5) * step;
+              const prevY = i === 0 ? 210 : (i - 1) % 2 === 0 ? 130 : 290;
+              const targetX = (i + 0.5) * step;
+              const targetY = isTop ? 130 : 290;
+              const cpX = (prevX + targetX) / 2;
+              wavePath += ` C ${cpX} ${prevY}, ${cpX} ${targetY}, ${targetX} ${targetY}`;
+            }
+            const lastX = (count - 0.5) * step;
+            const lastY = (count - 1) % 2 === 0 ? 130 : 290;
+            const endX = count * step;
+            wavePath += ` C ${(lastX + endX) / 2} ${lastY}, ${(lastX + endX) / 2} 210, ${endX} 210`;
 
-              {/* Secondary Complementary DNA Strand (dashed biological strand) */}
-              <path
-                d="M 250 108 C 500 108, 500 292, 750 292 C 500 292, 500 508, 250 508 C 500 508, 500 692, 750 692 C 500 692, 500 908, 250 908 C 500 908, 500 1092, 750 1092"
-                fill="none"
-                stroke="url(#bioSecondaryGrad)"
-                strokeWidth="2"
-                strokeDasharray="4 4"
-              />
+            // Generate curved biological guide arcs connecting nodes
+            const connectorArcs = [];
+            for (let i = 0; i < count - 1; i++) {
+              const isTop = i % 2 === 0;
+              const x0 = (i + 0.5) * step;
+              const x1 = (i + 1.5) * step;
+              if (isTop) {
+                connectorArcs.push({
+                  id: `arc-${i}`,
+                  d: `M ${x0 - 20} 175 C ${x0 + 20} 240, ${x1 - 60} 230, ${x1 - 25} 245`,
+                });
+              } else {
+                connectorArcs.push({
+                  id: `arc-${i}`,
+                  d: `M ${x0 + 20} 245 C ${x0 + 60} 180, ${x1 - 20} 190, ${x1 + 15} 175`,
+                });
+              }
+            }
 
-              {/* Primary Biological Strand (Solid DNA Sugar-Phosphate Backbone) */}
-              <path
-                d="M 250 100 C 500 100, 500 300, 750 300 C 500 300, 500 500, 250 500 C 500 500, 500 700, 750 700 C 500 700, 500 900, 250 900 C 500 900, 500 1100, 750 1100"
-                fill="none"
-                stroke="url(#bioStrandGrad)"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-              />
+            return (
+              <div className="mt-8 w-full overflow-x-auto scrollbar-none pb-4 pt-2">
+                <div
+                  className="relative mx-auto"
+                  style={{
+                    minWidth: count === 6 ? "960px" : "1500px",
+                    maxWidth: count === 6 ? "1200px" : "1750px",
+                  }}
+                >
+                  {/* SVG Sinusoidal Biological Ribbon */}
+                  <svg
+                    viewBox={`0 0 ${count * step} 420`}
+                    preserveAspectRatio="none"
+                    className="absolute inset-0 h-full w-full pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="bioRibbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#0B2A4A" />
+                        <stop offset="25%" stopColor="#1599B5" />
+                        <stop offset="50%" stopColor="#20AFC5" />
+                        <stop offset="75%" stopColor="#1599B5" />
+                        <stop offset="100%" stopColor="#0B2A4A" />
+                      </linearGradient>
 
-              {/* Molecular Base-Pair Rungs across the biological curves */}
-              {/* Segment 0 -> 1 */}
-              <line x1="330" y1="125" x2="330" y2="135" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="410" y1="160" x2="410" y2="170" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="590" y1="230" x2="590" y2="240" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="670" y1="265" x2="670" y2="275" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+                      <radialGradient id="bioNodeGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.8" />
+                        <stop offset="60%" stopColor="#1599B5" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
+                      </radialGradient>
 
-              {/* Molecular Synapse Node 1 */}
-              <circle cx="500" cy="200" r="16" fill="url(#bioNodeGlow)" />
-              <circle cx="500" cy="200" r="5.5" fill="#1599B5" stroke="#ffffff" strokeWidth="2" />
+                      <marker
+                        id="bioArrow"
+                        viewBox="0 0 10 10"
+                        refX="6"
+                        refY="5"
+                        markerWidth="6"
+                        markerHeight="6"
+                        orient="auto-start-reverse"
+                      >
+                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1599B5" />
+                      </marker>
+                    </defs>
 
-              {/* Segment 1 -> 2 */}
-              <line x1="670" y1="325" x2="670" y2="335" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="590" y1="360" x2="590" y2="370" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="410" y1="430" x2="410" y2="440" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="330" y1="465" x2="330" y2="475" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Bio-Ribbon Highway Wave with Gradient */}
+                    <path
+                      d={wavePath}
+                      fill="none"
+                      stroke="url(#bioRibbonGrad)"
+                      strokeWidth="38"
+                      strokeLinecap="round"
+                      className="filter drop-shadow-[0_8px_16px_rgba(21,153,181,0.25)]"
+                    />
 
-              {/* Molecular Synapse Node 2 */}
-              <circle cx="500" cy="400" r="16" fill="url(#bioNodeGlow)" />
-              <circle cx="500" cy="400" r="5.5" fill="#20AFC5" stroke="#ffffff" strokeWidth="2" />
+                    {/* Ribbon Outer Accent Borders */}
+                    <path
+                      d={wavePath}
+                      fill="none"
+                      stroke="#67E8F9"
+                      strokeWidth="1.5"
+                      strokeDasharray="4 4"
+                      opacity="0.45"
+                    />
 
-              {/* Segment 2 -> 3 */}
-              <line x1="330" y1="525" x2="330" y2="535" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="410" y1="560" x2="410" y2="570" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="590" y1="630" x2="590" y2="640" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="670" y1="665" x2="670" y2="675" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Central Dashed Nucleotide Base-Pair Sequence */}
+                    <path
+                      d={wavePath}
+                      fill="none"
+                      stroke="#FFFFFF"
+                      strokeWidth="3"
+                      strokeDasharray="9 9"
+                      opacity="0.9"
+                    />
 
-              {/* Molecular Synapse Node 3 */}
-              <circle cx="500" cy="600" r="16" fill="url(#bioNodeGlow)" />
-              <circle cx="500" cy="600" r="5.5" fill="#1599B5" stroke="#ffffff" strokeWidth="2" />
+                    {/* Curved Biological Directional Guide Arcs with Arrowhead */}
+                    {connectorArcs.map((arc) => (
+                      <path
+                        key={arc.id}
+                        d={arc.d}
+                        fill="none"
+                        stroke="#1599B5"
+                        strokeWidth="1.5"
+                        strokeDasharray="3 3"
+                        markerEnd="url(#bioArrow)"
+                        opacity="0.75"
+                      />
+                    ))}
 
-              {/* Segment 3 -> 4 */}
-              <line x1="670" y1="725" x2="670" y2="735" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="590" y1="760" x2="590" y2="770" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="410" y1="830" x2="410" y2="840" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="330" y1="865" x2="330" y2="875" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Receptor Rings behind the circles */}
+                    {currentMembers.map((_, idx) => {
+                      const isTop = idx % 2 === 0;
+                      const cx = (idx + 0.5) * step;
+                      const cy = isTop ? 130 : 290;
+                      return (
+                        <g key={idx}>
+                          <circle cx={cx} cy={cy} r="52" fill="url(#bioNodeGlow)" />
+                          <circle cx={cx} cy={cy} r="45" fill="none" stroke="#BEE3EA" strokeWidth="1" strokeDasharray="3 3" />
+                        </g>
+                      );
+                    })}
+                  </svg>
 
-              {/* Molecular Synapse Node 4 */}
-              <circle cx="500" cy="800" r="16" fill="url(#bioNodeGlow)" />
-              <circle cx="500" cy="800" r="5.5" fill="#20AFC5" stroke="#ffffff" strokeWidth="2" />
+                  {/* HTML Grid of Columns with Alternating Top and Bottom Frames */}
+                  <div
+                    className="relative z-10 grid h-[420px]"
+                    style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
+                  >
+                    {currentMembers.map((person, idx) => {
+                      const isTop = idx % 2 === 0;
+                      return (
+                        <div key={person.num} className="flex flex-col items-center justify-between text-center px-1">
+                          {isTop ? (
+                            <>
+                              {/* Text Above */}
+                              <div className="h-[90px] flex flex-col justify-end items-center pb-2.5">
+                                <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2.5 py-0.5 rounded-full border border-[#BEE3EA] shadow-xs">
+                                  #{person.num}
+                                </span>
+                                <h3 className="mt-1.5 font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight">
+                                  {person.name}
+                                </h3>
+                              </div>
 
-              {/* Segment 4 -> 5 */}
-              <line x1="330" y1="925" x2="330" y2="935" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="410" y1="960" x2="410" y2="970" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="590" y1="1030" x2="590" y2="1040" stroke="#0E7E96" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="670" y1="1065" x2="670" y2="1075" stroke="#1599B5" strokeWidth="2.5" strokeLinecap="round" />
+                              {/* Circular Frame on Crest */}
+                              <div className="group relative h-20 w-20 sm:h-22 sm:w-22 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-lg transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
+                                {person.image ? (
+                                  <img
+                                    src={person.image}
+                                    alt={person.name}
+                                    className="h-full w-full rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </div>
 
-              {/* Molecular Synapse Node 5 */}
-              <circle cx="500" cy="1000" r="16" fill="url(#bioNodeGlow)" />
-              <circle cx="500" cy="1000" r="5.5" fill="#1599B5" stroke="#ffffff" strokeWidth="2" />
-            </svg>
-
-            {/* Alternating Zig-Zag Grid Rows */}
-            <div className="relative z-10 flex flex-col">
-              {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person, idx) => {
-                const isRight = idx % 2 === 1;
-                return (
-                  <div key={person.num} className="grid grid-cols-2 py-6 sm:py-7 items-center">
-                    {/* Left Column Item */}
-                    {!isRight ? (
-                      <div className="flex flex-col items-center justify-center text-center group">
-                        <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-2 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-[#0E7E96] group-hover:shadow-md">
-                          {person.image ? (
-                            <img
-                              src={person.image}
-                              alt={person.name}
-                              className="h-full w-full rounded-full object-cover"
-                            />
+                              {/* Empty bottom spacer */}
+                              <div className="h-[170px]" />
+                            </>
                           ) : (
-                            <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
-                              Coming Soon
-                            </span>
+                            <>
+                              {/* Empty top spacer */}
+                              <div className="h-[170px]" />
+
+                              {/* Circular Frame on Trough */}
+                              <div className="group relative h-20 w-20 sm:h-22 sm:w-22 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-lg transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
+                                {person.image ? (
+                                  <img
+                                    src={person.image}
+                                    alt={person.name}
+                                    className="h-full w-full rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Text Below */}
+                              <div className="h-[90px] flex flex-col justify-start items-center pt-2.5">
+                                <h3 className="font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight">
+                                  {person.name}
+                                </h3>
+                                <span className="mt-1.5 font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2.5 py-0.5 rounded-full border border-[#BEE3EA] shadow-xs">
+                                  #{person.num}
+                                </span>
+                              </div>
+                            </>
                           )}
                         </div>
-                        <h3 className="mt-2.5 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
-                          {person.name}
-                        </h3>
-                      </div>
-                    ) : (
-                      <div />
-                    )}
-
-                    {/* Right Column Item */}
-                    {isRight ? (
-                      <div className="flex flex-col items-center justify-center text-center group">
-                        <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-2 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-[#0E7E96] group-hover:shadow-md">
-                          {person.image ? (
-                            <img
-                              src={person.image}
-                              alt={person.name}
-                              className="h-full w-full rounded-full object-cover"
-                            />
-                          ) : (
-                            <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
-                              Coming Soon
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="mt-2.5 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
-                          {person.name}
-                        </h3>
-                      </div>
-                    ) : (
-                      <div />
-                    )}
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
