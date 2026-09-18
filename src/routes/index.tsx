@@ -1000,227 +1000,47 @@ function Home() {
             </div>
           </div>
 
-          {/* Biological Sinusoidal Roadmap Wave: Full Horizontal Page Flow */}
-          {(() => {
-            const currentMembers = panelView === "jury" ? JURY_MEMBERS : SPEAKERS;
-            const count = currentMembers.length;
-            const step = 200;
-
-            // Generate continuous sinusoidal biological wave
-            let wavePath = "M 0 210";
-            for (let i = 0; i < count; i++) {
-              const isTop = i % 2 === 0;
-              const prevX = i === 0 ? 0 : (i - 0.5) * step;
-              const prevY = i === 0 ? 210 : (i - 1) % 2 === 0 ? 130 : 290;
-              const targetX = (i + 0.5) * step;
-              const targetY = isTop ? 130 : 290;
-              const cpX = (prevX + targetX) / 2;
-              wavePath += ` C ${cpX} ${prevY}, ${cpX} ${targetY}, ${targetX} ${targetY}`;
-            }
-            const lastX = (count - 0.5) * step;
-            const lastY = (count - 1) % 2 === 0 ? 130 : 290;
-            const endX = count * step;
-            wavePath += ` C ${(lastX + endX) / 2} ${lastY}, ${(lastX + endX) / 2} 210, ${endX} 210`;
-
-            // Generate curved biological guide arcs connecting nodes
-            const connectorArcs = [];
-            for (let i = 0; i < count - 1; i++) {
-              const isTop = i % 2 === 0;
-              const x0 = (i + 0.5) * step;
-              const x1 = (i + 1.5) * step;
-              if (isTop) {
-                connectorArcs.push({
-                  id: `arc-${i}`,
-                  d: `M ${x0 - 20} 175 C ${x0 + 20} 240, ${x1 - 60} 230, ${x1 - 25} 245`,
-                });
-              } else {
-                connectorArcs.push({
-                  id: `arc-${i}`,
-                  d: `M ${x0 + 20} 245 C ${x0 + 60} 180, ${x1 - 20} 190, ${x1 + 15} 175`,
-                });
-              }
-            }
-
-            return (
-              <div className="mt-8 w-full overflow-x-auto scrollbar-none pb-4 pt-2">
-                <div
-                  className="relative mx-auto"
-                  style={{
-                    minWidth: count === 6 ? "960px" : "1500px",
-                    maxWidth: count === 6 ? "1200px" : "1750px",
-                  }}
-                >
-                  {/* SVG Sinusoidal Biological Ribbon */}
-                  <svg
-                    viewBox={`0 0 ${count * step} 420`}
-                    preserveAspectRatio="none"
-                    className="absolute inset-0 h-full w-full pointer-events-none"
-                    aria-hidden="true"
-                  >
-                    <defs>
-                      <linearGradient id="bioRibbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#0B2A4A" />
-                        <stop offset="25%" stopColor="#1599B5" />
-                        <stop offset="50%" stopColor="#20AFC5" />
-                        <stop offset="75%" stopColor="#1599B5" />
-                        <stop offset="100%" stopColor="#0B2A4A" />
-                      </linearGradient>
-
-                      <radialGradient id="bioNodeGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.8" />
-                        <stop offset="60%" stopColor="#1599B5" stopOpacity="0.2" />
-                        <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
-                      </radialGradient>
-
-                      <marker
-                        id="bioArrow"
-                        viewBox="0 0 10 10"
-                        refX="6"
-                        refY="5"
-                        markerWidth="6"
-                        markerHeight="6"
-                        orient="auto-start-reverse"
-                      >
-                        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1599B5" />
-                      </marker>
-                    </defs>
-
-                    {/* Bio-Ribbon Highway Wave with Gradient */}
-                    <path
-                      d={wavePath}
-                      fill="none"
-                      stroke="url(#bioRibbonGrad)"
-                      strokeWidth="38"
-                      strokeLinecap="round"
-                      className="filter drop-shadow-[0_8px_16px_rgba(21,153,181,0.25)]"
+          {/* Professional Minimalist Grid: Round Frames + Coming Soon + Name */}
+          <div
+            className={cn(
+              "mt-10 max-w-5xl mx-auto grid gap-6 sm:gap-8",
+              panelView === "jury"
+                ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
+                : "grid-cols-2 sm:grid-cols-3 md:grid-cols-5"
+            )}
+          >
+            {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person) => (
+              <div
+                key={person.num}
+                className="group flex flex-col items-center text-center"
+              >
+                {/* Clean Professional Round Frame with 'Coming Soon' */}
+                <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5]/40 bg-[#F4FAFB] flex flex-col items-center justify-center text-center p-2 shadow-xs transition-all duration-300 group-hover:border-[#1599B5] group-hover:bg-[#EBF7F9] group-hover:scale-105">
+                  {person.image ? (
+                    <img
+                      src={person.image}
+                      alt={person.name}
+                      className="h-full w-full rounded-full object-cover"
                     />
-
-                    {/* Ribbon Outer Accent Borders */}
-                    <path
-                      d={wavePath}
-                      fill="none"
-                      stroke="#67E8F9"
-                      strokeWidth="1.5"
-                      strokeDasharray="4 4"
-                      opacity="0.45"
-                    />
-
-                    {/* Central Dashed Nucleotide Base-Pair Sequence */}
-                    <path
-                      d={wavePath}
-                      fill="none"
-                      stroke="#FFFFFF"
-                      strokeWidth="3"
-                      strokeDasharray="9 9"
-                      opacity="0.9"
-                    />
-
-                    {/* Curved Biological Directional Guide Arcs with Arrowhead */}
-                    {connectorArcs.map((arc) => (
-                      <path
-                        key={arc.id}
-                        d={arc.d}
-                        fill="none"
-                        stroke="#1599B5"
-                        strokeWidth="1.5"
-                        strokeDasharray="3 3"
-                        markerEnd="url(#bioArrow)"
-                        opacity="0.75"
-                      />
-                    ))}
-
-                    {/* Receptor Rings behind the circles */}
-                    {currentMembers.map((_, idx) => {
-                      const isTop = idx % 2 === 0;
-                      const cx = (idx + 0.5) * step;
-                      const cy = isTop ? 130 : 290;
-                      return (
-                        <g key={idx}>
-                          <circle cx={cx} cy={cy} r="52" fill="url(#bioNodeGlow)" />
-                          <circle cx={cx} cy={cy} r="45" fill="none" stroke="#BEE3EA" strokeWidth="1" strokeDasharray="3 3" />
-                        </g>
-                      );
-                    })}
-                  </svg>
-
-                  {/* HTML Grid of Columns with Alternating Top and Bottom Frames */}
-                  <div
-                    className="relative z-10 grid h-[420px]"
-                    style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
-                  >
-                    {currentMembers.map((person, idx) => {
-                      const isTop = idx % 2 === 0;
-                      return (
-                        <div key={person.num} className="flex flex-col items-center justify-between text-center px-1">
-                          {isTop ? (
-                            <>
-                              {/* Text Above */}
-                              <div className="h-[90px] flex flex-col justify-end items-center pb-2.5">
-                                <span className="font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2.5 py-0.5 rounded-full border border-[#BEE3EA] shadow-xs">
-                                  #{person.num}
-                                </span>
-                                <h3 className="mt-1.5 font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight">
-                                  {person.name}
-                                </h3>
-                              </div>
-
-                              {/* Circular Frame on Crest */}
-                              <div className="group relative h-20 w-20 sm:h-22 sm:w-22 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-lg transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
-                                {person.image ? (
-                                  <img
-                                    src={person.image}
-                                    alt={person.name}
-                                    className="h-full w-full rounded-full object-cover"
-                                  />
-                                ) : (
-                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
-                                    Coming Soon
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Empty bottom spacer */}
-                              <div className="h-[170px]" />
-                            </>
-                          ) : (
-                            <>
-                              {/* Empty top spacer */}
-                              <div className="h-[170px]" />
-
-                              {/* Circular Frame on Trough */}
-                              <div className="group relative h-20 w-20 sm:h-22 sm:w-22 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-lg transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
-                                {person.image ? (
-                                  <img
-                                    src={person.image}
-                                    alt={person.name}
-                                    className="h-full w-full rounded-full object-cover"
-                                  />
-                                ) : (
-                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
-                                    Coming Soon
-                                  </span>
-                                )}
-                              </div>
-
-                              {/* Text Below */}
-                              <div className="h-[90px] flex flex-col justify-start items-center pt-2.5">
-                                <h3 className="font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight">
-                                  {person.name}
-                                </h3>
-                                <span className="mt-1.5 font-mono text-[10.5px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2.5 py-0.5 rounded-full border border-[#BEE3EA] shadow-xs">
-                                  #{person.num}
-                                </span>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
+                  ) : (
+                    <>
+                      <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
+                        Coming Soon
+                      </span>
+                      <span className="font-mono text-[9px] text-[#7BA1B0] font-medium mt-0.5">
+                        #{person.num}
+                      </span>
+                    </>
+                  )}
                 </div>
+
+                {/* Name */}
+                <h3 className="mt-3 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
+                  {person.name}
+                </h3>
               </div>
-            );
-          })()}
+            ))}
+          </div>
         </div>
       </section>
 
