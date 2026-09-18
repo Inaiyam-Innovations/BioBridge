@@ -226,50 +226,38 @@ const WEEKEND_SESSIONS = [
 const SPEAKERS = [
   {
     num: "01",
-    name: "Distinguished Speaker 01",
-    designation: "Biotech Venture Incubation Specialist",
-    org: "MARABANU Venture Partner",
-    tag: "Venture Building",
+    name: "Speaker 01",
+    designation: "Biotech Venture Incubation",
     image: null,
   },
   {
     num: "02",
-    name: "Distinguished Speaker 02",
-    designation: "Senior Patent Attorney · Life Sciences",
-    org: "Biotech IP Law Cell",
-    tag: "IPR & Patents",
+    name: "Speaker 02",
+    designation: "IPR & Patent Strategy",
     image: null,
   },
   {
     num: "03",
-    name: "Distinguished Speaker 03",
-    designation: "Pitch Deck Architecture Mentor",
-    org: "Startup Catalyst Network",
-    tag: "Pitch Narrative",
+    name: "Speaker 03",
+    designation: "Pitch & Narrative Architecture",
     image: null,
   },
   {
     num: "04",
-    name: "Distinguished Speaker 04",
-    designation: "Clinical Regulatory Affairs Counsel",
-    org: "Bio-Safety & CDSCO Advisory",
-    tag: "Regulatory Clearance",
+    name: "Speaker 04",
+    designation: "Clinical & Regulatory Affairs",
     image: null,
   },
   {
     num: "05",
-    name: "Distinguished Speaker 05",
-    designation: "Computational Biology & Bio-AI Architect",
-    org: "Department of Biotechnology · KSRCT",
-    tag: "Bio-AI & Genomics",
+    name: "Speaker 05",
+    designation: "Bio-AI & Genomics",
     image: null,
   },
   {
     num: "06",
-    name: "Distinguished Speaker 06",
-    designation: "State Innovation Grant Strategist",
-    org: "StartupTN (Government of Tamil Nadu)",
-    tag: "State Seed Grants",
+    name: "Speaker 06",
+    designation: "StartupTN Seed Grants",
     image: null,
   },
 ];
@@ -277,50 +265,38 @@ const SPEAKERS = [
 const JURY_MEMBERS = [
   {
     num: "01",
-    name: "Distinguished Jury 01",
-    designation: "Head of Evaluation & Venture Partner",
-    org: "MARABANU Investment Committee",
-    tag: "Venture Scalability",
+    name: "Jury Member 01",
+    designation: "Venture Partner & Jury Chair",
     image: null,
   },
   {
     num: "02",
-    name: "Distinguished Jury 02",
-    designation: "State Innovation & Seed Fund Evaluator",
-    org: "StartupTN (Government of Tamil Nadu)",
-    tag: "Government Grants",
+    name: "Jury Member 02",
+    designation: "StartupTN Seed Fund Evaluator",
     image: null,
   },
   {
     num: "03",
-    name: "Distinguished Jury 03",
-    designation: "Senior Scientific & Academic Evaluator",
-    org: "Department of Biotechnology · KSRCT",
-    tag: "Scientific Rigor",
+    name: "Jury Member 03",
+    designation: "Senior Biotech Evaluator",
     image: null,
   },
   {
     num: "04",
-    name: "Distinguished Jury 04",
-    designation: "Deep-Tech Early Stage Investor",
-    org: "Biotech Angel Network / Seed Fund",
-    tag: "Investment Readiness",
+    name: "Jury Member 04",
+    designation: "Deep-Tech Angel Investor",
     image: null,
   },
   {
     num: "05",
-    name: "Distinguished Jury 05",
-    designation: "Healthcare & MedTech Industry Leader",
-    org: "Clinical Diagnostics Consortium",
-    tag: "Clinical Viability",
+    name: "Jury Member 05",
+    designation: "Clinical & Healthcare Leader",
     image: null,
   },
   {
     num: "06",
-    name: "Distinguished Jury 06",
-    designation: "Agri-Biotech & Sustainability Jury",
-    org: "Bio-Economy Innovation Council",
-    tag: "Agri-Tech & Ecology",
+    name: "Jury Member 06",
+    designation: "Agri-Biotech & Ecology Jury",
     image: null,
   },
 ];
@@ -1035,109 +1011,84 @@ function Home() {
       </section>
 
       {/* ── 4B. KEYNOTE SPEAKERS & GRAND JURY FRAMEWORK ── */}
-      <section className="bio-section bg-gradient-to-b from-white via-[#F4FAFB] to-white border-b border-[#BEE3EA]" id="speakers">
+      <section className="py-14 sm:py-16 bg-white border-b border-[#BEE3EA]" id="speakers">
         <div className="bio-container">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#D9F2F6]/90 border border-[#BEE3EA] px-4 py-1.5 font-mono text-[11.5px] font-bold uppercase tracking-wider text-[#0B2A4A] shadow-sm">
-              <Users className="h-4 w-4 text-[#1599B5]" />
-              Executive Evaluation &amp; Mentorship
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
+              <Users className="h-3.5 w-3.5" />
+              Evaluation &amp; Mentorship
             </span>
-            <h2 className="mt-4 font-display text-[32px] sm:text-[44px] font-extrabold text-[#0B2A4A] leading-tight tracking-tight">
-              Guided by Experts.{" "}
-              <span className="bg-gradient-to-r from-[#1599B5] via-[#20AFC5] to-[#0B2A4A] bg-clip-text text-transparent">
-                Evaluated by Pioneers.
-              </span>
+            <h2 className="mt-2.5 font-display text-[28px] sm:text-[36px] font-extrabold text-[#0B2A4A] tracking-tight">
+              Grand Jury &amp; Keynote Speakers
             </h2>
-            <p className="mt-3 text-[15.5px] sm:text-[17px] text-[#366273] leading-relaxed">
-              Meet the 6 grand jury members evaluating the final pitches live on Oct 30 and the 6 keynote mentors guiding the 4-week build sprint.
+            <p className="mt-2 text-[14px] sm:text-[15px] text-[#64748B]">
+              Distinguished experts evaluating the Oct 30 Grand Finale at KSRCT.
             </p>
 
-            {/* Interactive Tab Switcher */}
-            <div className="mt-8 inline-flex items-center rounded-2xl border border-[#BEE3EA] bg-white p-1.5 shadow-sm">
+            {/* Minimal Interactive Tab Switcher */}
+            <div className="mt-6 inline-flex items-center rounded-full border border-[#BEE3EA] bg-[#F8FCFD] p-1">
               <button
                 type="button"
                 onClick={() => setPanelView("jury")}
                 className={cn(
-                  "flex items-center gap-2 rounded-xl px-5 py-2.5 font-mono text-[12px] sm:text-[13px] font-bold transition-all cursor-pointer",
+                  "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
                   panelView === "jury"
-                    ? "bg-[#0B2A4A] text-white shadow-sm"
-                    : "text-[#366273] hover:text-[#0B2A4A] hover:bg-[#F4FAFB]"
+                    ? "bg-[#0B2A4A] text-white shadow-xs"
+                    : "text-[#64748B] hover:text-[#0B2A4A]"
                 )}
               >
-                <Award className="h-4 w-4 text-[#38BDF8]" />
-                Grand Jury Panel (6)
+                <Award className="h-3.5 w-3.5 text-[#38BDF8]" />
+                Grand Jury (6)
               </button>
               <button
                 type="button"
                 onClick={() => setPanelView("speakers")}
                 className={cn(
-                  "flex items-center gap-2 rounded-xl px-5 py-2.5 font-mono text-[12px] sm:text-[13px] font-bold transition-all cursor-pointer",
+                  "flex items-center gap-1.5 rounded-full px-4 sm:px-5 py-1.5 font-mono text-[11.5px] sm:text-[12px] font-bold transition-all cursor-pointer",
                   panelView === "speakers"
-                    ? "bg-[#0B2A4A] text-white shadow-sm"
-                    : "text-[#366273] hover:text-[#0B2A4A] hover:bg-[#F4FAFB]"
+                    ? "bg-[#0B2A4A] text-white shadow-xs"
+                    : "text-[#64748B] hover:text-[#0B2A4A]"
                 )}
               >
-                <Sparkles className="h-4 w-4 text-[#20AFC5]" />
+                <Sparkles className="h-3.5 w-3.5 text-[#20AFC5]" />
                 Keynote Speakers (6)
               </button>
             </div>
           </div>
 
-          {/* Simple Professional 6-Card Grid: Photo + Name + Designation */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* Minimalist Grid: Round Frame + Coming Soon + Name */}
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person) => (
               <div
                 key={person.num}
-                className="group relative rounded-2xl border border-[#D9F2F6] bg-white p-6 text-center shadow-xs transition-all duration-300 hover:border-[#1599B5] hover:shadow-md hover:-translate-y-1 flex flex-col items-center justify-between"
+                className="group flex flex-col items-center text-center"
               >
-                <div className="w-full flex flex-col items-center">
-                  {/* Clean Professional Circular Photo Frame */}
-                  <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-[#BEE3EA] p-1 bg-white shadow-xs group-hover:border-[#1599B5] transition-colors">
-                    <div className="h-full w-full rounded-full overflow-hidden bg-gradient-to-b from-[#EBF7F9] to-[#D9F2F6] flex items-center justify-center">
-                      {person.image ? (
-                        <img
-                          src={person.image}
-                          alt={person.name}
-                          className="h-full w-full object-cover object-top"
-                        />
-                      ) : (
-                        <User className="h-11 w-11 sm:h-12 sm:w-12 text-[#0E7E96]/60" />
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Name */}
-                  <h3 className="mt-4 font-display text-[18px] sm:text-[19px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors">
-                    {person.name}
-                  </h3>
-
-                  {/* Designation */}
-                  <p className="mt-1 text-[13px] sm:text-[13.5px] font-semibold text-[#1599B5] leading-snug">
-                    {person.designation}
-                  </p>
-
-                  {/* Organization */}
-                  <p className="mt-1.5 text-[12px] text-[#64748B] flex items-center justify-center gap-1.5">
-                    <Building2 className="h-3.5 w-3.5 text-[#1599B5] shrink-0" />
-                    <span>{person.org}</span>
-                  </p>
+                {/* Single Round Photo Frame with 'Coming Soon' inside */}
+                <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5]/40 bg-[#F4FAFB] flex flex-col items-center justify-center text-center p-2 transition-all duration-300 group-hover:border-[#1599B5] group-hover:bg-[#EBF7F9] group-hover:scale-105 shadow-xs">
+                  {person.image ? (
+                    <img
+                      src={person.image}
+                      alt={person.name}
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
+                      Coming Soon
+                    </span>
+                  )}
                 </div>
 
-                {/* Clean Domain Tag */}
-                <div className="mt-5 pt-3 border-t border-[#F1F5F9] w-full flex items-center justify-center">
-                  <span className="inline-flex items-center rounded-full bg-[#F4FAFB] border border-[#D9F2F6] px-3 py-0.5 font-mono text-[10.5px] font-medium text-[#0E7E96]">
-                    {person.tag}
-                  </span>
-                </div>
+                {/* Name */}
+                <h3 className="mt-3 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
+                  {person.name}
+                </h3>
+
+                {/* Designation */}
+                <p className="mt-0.5 text-[11px] sm:text-[11.5px] font-medium text-[#64748B] leading-snug max-w-[150px]">
+                  {person.designation}
+                </p>
               </div>
             ))}
-          </div>
-
-          {/* Clean Subtext Strip */}
-          <div className="mt-10 rounded-2xl border border-[#D9F2F6] bg-gradient-to-r from-[#F4FAFB] via-white to-[#F4FAFB] p-4 text-center max-w-3xl mx-auto">
-            <p className="text-[12.5px] text-[#366273]">
-              <strong className="text-[#0B2A4A]">Speaker &amp; Jury Profiles:</strong> Official guest portraits, titles, and affiliations are loaded directly into these slots.
-            </p>
           </div>
         </div>
       </section>
