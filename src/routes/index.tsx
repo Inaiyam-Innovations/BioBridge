@@ -1000,47 +1000,229 @@ function Home() {
             </div>
           </div>
 
-          {/* Professional Minimalist Grid: Round Frames + Coming Soon + Name */}
-          <div
-            className={cn(
-              "mt-10 max-w-5xl mx-auto grid gap-6 sm:gap-8",
-              panelView === "jury"
-                ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
-                : "grid-cols-2 sm:grid-cols-3 md:grid-cols-5"
-            )}
-          >
-            {(panelView === "jury" ? JURY_MEMBERS : SPEAKERS).map((person) => (
-              <div
-                key={person.num}
-                className="group flex flex-col items-center text-center"
-              >
-                {/* Clean Professional Round Frame with 'Coming Soon' */}
-                <div className="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 border-dashed border-[#1599B5]/40 bg-[#F4FAFB] flex flex-col items-center justify-center text-center p-2 shadow-xs transition-all duration-300 group-hover:border-[#1599B5] group-hover:bg-[#EBF7F9] group-hover:scale-105">
-                  {person.image ? (
-                    <img
-                      src={person.image}
-                      alt={person.name}
-                      className="h-full w-full rounded-full object-cover"
-                    />
-                  ) : (
-                    <>
-                      <span className="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#1599B5]">
-                        Coming Soon
-                      </span>
-                      <span className="font-mono text-[9px] text-[#7BA1B0] font-medium mt-0.5">
-                        #{person.num}
-                      </span>
-                    </>
-                  )}
-                </div>
+          {/* Professional Horizontal DNA Double-Helix Zig-Zag */}
+          {(() => {
+            const currentMembers = panelView === "jury" ? JURY_MEMBERS : SPEAKERS;
+            const count = currentMembers.length;
+            const step = 200;
+            const height = 360;
+            const y_mid = 180;
+            const amplitude = 72;
 
-                {/* Name */}
-                <h3 className="mt-3 font-display text-[14px] sm:text-[15px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-snug">
-                  {person.name}
-                </h3>
+            // Generate Strand 1 & Strand 2 intertwining paths
+            let s1_path = `M 0 ${y_mid}`;
+            let s2_path = `M 0 ${y_mid}`;
+            for (let i = 0; i < count; i++) {
+              const isTop1 = i % 2 === 0;
+              const prevX = i === 0 ? 0 : (i - 0.5) * step;
+              const prevY1 = i === 0 ? y_mid : (i - 1) % 2 === 0 ? y_mid - amplitude : y_mid + amplitude;
+              const prevY2 = i === 0 ? y_mid : (i - 1) % 2 === 0 ? y_mid + amplitude : y_mid - amplitude;
+              const targetX = (i + 0.5) * step;
+              const targetY1 = isTop1 ? y_mid - amplitude : y_mid + amplitude;
+              const targetY2 = isTop1 ? y_mid + amplitude : y_mid - amplitude;
+              const cpX = (prevX + targetX) / 2;
+              s1_path += ` C ${cpX} ${prevY1}, ${cpX} ${targetY1}, ${targetX} ${targetY1}`;
+              s2_path += ` C ${cpX} ${prevY2}, ${cpX} ${targetY2}, ${targetX} ${targetY2}`;
+            }
+            const lastX = (count - 0.5) * step;
+            const endX = count * step;
+            const lastY1 = (count - 1) % 2 === 0 ? y_mid - amplitude : y_mid + amplitude;
+            const lastY2 = (count - 1) % 2 === 0 ? y_mid + amplitude : y_mid - amplitude;
+            s1_path += ` C ${(lastX + endX) / 2} ${lastY1}, ${(lastX + endX) / 2} ${y_mid}, ${endX} ${y_mid}`;
+            s2_path += ` C ${(lastX + endX) / 2} ${lastY2}, ${(lastX + endX) / 2} ${y_mid}, ${endX} ${y_mid}`;
+
+            // Generate vertical base-pair ladder rungs connecting the two strands
+            const rungs = [];
+            for (let px = 20; px < endX; px += 24) {
+              const angle = (px / step) * Math.PI;
+              const ry1 = y_mid - amplitude * Math.cos(angle);
+              const ry2 = y_mid + amplitude * Math.cos(angle);
+              if (Math.abs(ry1 - ry2) > 14) {
+                rungs.push({ x: px, y1: ry1, y2: ry2 });
+              }
+            }
+
+            // Crossing molecular nodes where strands intertwine
+            const crossings = [];
+            for (let i = 1; i < count; i++) {
+              crossings.push(i * step);
+            }
+
+            return (
+              <div className="mt-8 w-full overflow-x-auto scrollbar-none pb-4 pt-2 select-none">
+                <div
+                  className="relative mx-auto"
+                  style={{
+                    minWidth: count === 6 ? "940px" : "1500px",
+                    maxWidth: count === 6 ? "1200px" : "1750px",
+                  }}
+                >
+                  {/* SVG Horizontal DNA Double-Helix */}
+                  <svg
+                    viewBox={`0 0 ${count * step} ${height}`}
+                    preserveAspectRatio="none"
+                    className="absolute inset-0 h-full w-full pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="dnaStrand1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#0B2A4A" />
+                        <stop offset="30%" stopColor="#1599B5" />
+                        <stop offset="70%" stopColor="#20AFC5" />
+                        <stop offset="100%" stopColor="#0B2A4A" />
+                      </linearGradient>
+
+                      <linearGradient id="dnaStrand2" x1="100%" y1="0%" x2="0%" y2="0%">
+                        <stop offset="0%" stopColor="#0E7E96" />
+                        <stop offset="40%" stopColor="#38BDF8" />
+                        <stop offset="70%" stopColor="#1599B5" />
+                        <stop offset="100%" stopColor="#0E7E96" />
+                      </linearGradient>
+
+                      <radialGradient id="dnaReceptorGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.4" />
+                        <stop offset="60%" stopColor="#1599B5" stopOpacity="0.1" />
+                        <stop offset="100%" stopColor="#1599B5" stopOpacity="0" />
+                      </radialGradient>
+                    </defs>
+
+                    {/* DNA Base-Pair Ladder Rungs */}
+                    {rungs.map((rung, i) => (
+                      <g key={i} opacity="0.65">
+                        <line
+                          x1={rung.x}
+                          y1={rung.y1}
+                          x2={rung.x}
+                          y2={rung.y2}
+                          stroke="#1599B5"
+                          strokeWidth="1.5"
+                          strokeDasharray="2 2"
+                        />
+                        <circle cx={rung.x} cy={rung.y1} r="2.5" fill="#1599B5" />
+                        <circle cx={rung.x} cy={rung.y2} r="2.5" fill="#20AFC5" />
+                      </g>
+                    ))}
+
+                    {/* DNA Strand 2 (Complementary Helical Ribbon) */}
+                    <path
+                      d={s2_path}
+                      fill="none"
+                      stroke="url(#dnaStrand2)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      opacity="0.85"
+                    />
+
+                    {/* DNA Strand 1 (Primary Helical Ribbon with Bio-Glow) */}
+                    <path
+                      d={s1_path}
+                      fill="none"
+                      stroke="url(#dnaStrand1)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      className="filter drop-shadow-[0_0_6px_rgba(21,153,181,0.4)]"
+                    />
+
+                    {/* Crossing Molecular Nodes */}
+                    {crossings.map((cx, i) => (
+                      <g key={i}>
+                        <circle cx={cx} cy={y_mid} r="7" fill="#EAF7FA" stroke="#1599B5" strokeWidth="1.5" />
+                        <circle cx={cx} cy={y_mid} r="3" fill="#0B2A4A" />
+                      </g>
+                    ))}
+
+                    {/* Circular Bio-Receptor Docking Rings behind each node */}
+                    {currentMembers.map((_, idx) => {
+                      const isTop = idx % 2 === 0;
+                      const cx = (idx + 0.5) * step;
+                      const cy = isTop ? y_mid - amplitude : y_mid + amplitude;
+                      return (
+                        <g key={idx}>
+                          <circle cx={cx} cy={cy} r="48" fill="url(#dnaReceptorGlow)" />
+                          <circle cx={cx} cy={cy} r="42" fill="none" stroke="#BEE3EA" strokeWidth="1" strokeDasharray="3 3" />
+                        </g>
+                      );
+                    })}
+                  </svg>
+
+                  {/* HTML Alternating Top and Bottom Members Grid */}
+                  <div
+                    className="relative z-10 grid h-[360px]"
+                    style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
+                  >
+                    {currentMembers.map((person, idx) => {
+                      const isTop = idx % 2 === 0;
+                      return (
+                        <div key={person.num} className="flex flex-col items-center justify-between text-center px-1">
+                          {isTop ? (
+                            <>
+                              {/* Top Member: Name & Badge Above */}
+                              <div className="h-[70px] flex flex-col justify-end items-center pb-1.5">
+                                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2 py-0.5 rounded-full border border-[#BEE3EA]">
+                                  #{person.num}
+                                </span>
+                                <h3 className="mt-1 font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight max-w-[130px]">
+                                  {person.name}
+                                </h3>
+                              </div>
+
+                              {/* Round Frame at Top Crest */}
+                              <div className="group relative h-[72px] w-[72px] sm:h-20 sm:w-20 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-md transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
+                                {person.image ? (
+                                  <img
+                                    src={person.image}
+                                    alt={person.name}
+                                    className="h-full w-full rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Spacer below to maintain height balance */}
+                              <div className="h-[218px]" />
+                            </>
+                          ) : (
+                            <>
+                              {/* Spacer above */}
+                              <div className="h-[218px]" />
+
+                              {/* Round Frame at Bottom Trough */}
+                              <div className="group relative h-[72px] w-[72px] sm:h-20 sm:w-20 rounded-full border-2 border-dashed border-[#1599B5] bg-white flex flex-col items-center justify-center text-center p-1.5 shadow-md transition-all duration-300 hover:scale-110 hover:border-[#0E7E96] hover:shadow-xl cursor-pointer">
+                                {person.image ? (
+                                  <img
+                                    src={person.image}
+                                    alt={person.name}
+                                    className="h-full w-full rounded-full object-cover"
+                                  />
+                                ) : (
+                                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5]">
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Bottom Member: Name & Badge Below */}
+                              <div className="h-[70px] flex flex-col justify-start items-center pt-1.5">
+                                <h3 className="font-display text-[13.5px] sm:text-[14.5px] font-bold text-[#0B2A4A] tracking-tight group-hover:text-[#1599B5] transition-colors leading-tight max-w-[130px]">
+                                  {person.name}
+                                </h3>
+                                <span className="mt-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#1599B5] bg-[#EAF7FA] px-2 py-0.5 rounded-full border border-[#BEE3EA]">
+                                  #{person.num}
+                                </span>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })()}
         </div>
       </section>
 
