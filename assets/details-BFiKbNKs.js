@@ -1,0 +1,1 @@
+import{r as e,t}from"./react-yIOJJ3r4.js";var n=e(t());function r(){return(0,n.useEffect)(()=>{window.location.replace(`/#how-it-works`)},[]),null}export{r as component};
