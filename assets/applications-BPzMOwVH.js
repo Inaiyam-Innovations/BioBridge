@@ -1,0 +1,1 @@
+var e=()=>typeof window<`u`&&!!window.localStorage;function t(){if(!e())return[];try{let e=window.localStorage.getItem(`biobridge:applications`);return e?JSON.parse(e):[]}catch{return[]}}function n(e){let n=e.trim().toUpperCase();return t().find(e=>e.applicationId.toUpperCase()===n)}var r=`2026-10-30T09:00:00+05:30`;export{n,t as r,r as t};

@@ -1,0 +1,1 @@
+import{r as e,t}from"./react-yIOJJ3r4.js";import{u as n}from"./index-syOMK-83.js";var r=e(t());function i(){let e=n();return(0,r.useEffect)(()=>{e({to:`/`}),setTimeout(()=>{window.dispatchEvent(new CustomEvent(`open-biobridge-faq`,{detail:{tab:`all-faqs`}}))},100)},[e]),null}export{i as component};
