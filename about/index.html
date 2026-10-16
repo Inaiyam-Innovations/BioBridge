@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preload" as="image" href="../biobridge-wordmark.png" />
+    <link rel="preload" as="image" href="/biobridge-startup-summit-logo.png" />
     <link rel="preload" as="image" href="../ksrct-logo.png" />
     <link rel="preload" as="image" href="../marabanu-logo.png" />
     <link rel="preload" as="image" href="../startuptn-logo.png" />
@@ -69,7 +69,69 @@
       href="https://fonts.gstatic.com"
       crossorigin="anonymous"
     />
-  </head>
+  
+<style>
+  .bio-nav-link { white-space: nowrap !important; flex-shrink: 0 !important; }
+  .bio-footer-grid {
+    display: grid !important;
+    gap: 2rem !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+  @media (min-width: 640px) {
+    .bio-footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 2.25rem !important;
+    }
+  }
+  @media (min-width: 1024px) {
+    .bio-footer-grid {
+      grid-template-columns: 4.8fr 2.1fr 2.3fr 3.2fr !important;
+      gap: 2.75rem !important;
+    }
+  }
+  .footer-organizer-card {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 66px !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid #BEE3EA !important;
+    border-radius: 1rem !important;
+    padding: 8px 18px !important;
+    box-shadow: 0 1px 3px rgba(11, 42, 74, 0.04) !important;
+    transition: all 0.25s ease !important;
+  }
+  .footer-organizer-card:hover {
+    border-color: #1599B5 !important;
+    box-shadow: 0 4px 12px rgba(21, 153, 181, 0.12) !important;
+    transform: translateY(-1px) !important;
+  }
+  .footer-logo-ksrct {
+    height: 38px !important;
+    max-height: 38px !important;
+    max-width: 84% !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+  .footer-logo-marabanu {
+    height: 23px !important;
+    max-height: 23px !important;
+    max-width: 78% !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+  .footer-logo-startuptn {
+    height: 32px !important;
+    max-height: 32px !important;
+    max-width: 76% !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+</style>
+</head>
   <body>
     <div class="relative flex min-h-screen flex-col">
       <div
@@ -91,109 +153,53 @@
           "
         ></div>
       </div>
-      <header
-        class="sticky top-0 z-50 w-full border-b transition-all duration-300 border-[#BEE3EA]/60 bg-white/[0.95] backdrop-blur-md"
-      >
-        <div
-          class="mx-auto flex h-[60px] max-w-7xl items-center justify-between gap-4 px-5 md:px-8"
-        >
-          <a
-            aria-label="BioBridge home"
-            href="/"
-            class="group flex shrink-0 items-center transition-transform duration-200 hover:scale-[1.02]"
-            ><img
-              src="../biobridge-wordmark.png"
-              alt="BioBridge — Ideas for a healthier tomorrow"
-              class="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_1px_2px_rgba(11,42,74,0.06)]"
-              draggable="false"
-          /></a>
-          <nav
-            class="hidden items-center gap-0.5 lg:flex"
-            aria-label="Main navigation"
-          >
-            <a
-              href="/#home"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >Home</a
-            ><a
-              href="/problems"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium transition-colors text-[#366273] hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >Challenges</a
-            ><a
-              href="/#how-it-works"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >How It Works</a
-            ><a
-              href="/#sessions"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >Sessions</a
-            ><a
-              href="/#mentors"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >Mentors &amp; Jury</a
-            ><a
-              href="/#prizes"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >Prizes</a
-            ><a
-              href="/#partners"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >Partners</a
-            ><a
-              href="/#faq"
-              class="rounded-lg px-3 py-2 text-[13px] font-medium text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]"
-              >FAQs</a
-            >
-          </nav>
-          <div class="hidden items-center gap-2 lg:flex">
-            <a
-              href="https://unstop.com/p/biobridge-bio-innovation-hackathon-2026-ks-rangasamy-college-of-technology-ksrct-namakkal-1755864?lb=gRm2vex&amp;utm_medium=Share&amp;utm_source=WhatsApp"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-[#1599B5] px-4 py-2 text-[13px] font-semibold text-white transition-all hover:bg-[#0E7E96] hover:shadow-[0_4px_14px_-4px_rgba(21,153,181,0.5)]"
-              >Register Now<svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-chevron-right h-3.5 w-3.5"
-                aria-hidden="true"
-              >
-                <path d="m9 18 6-6-6-6"></path></svg
-            ></a>
-          </div>
-          <button
-            type="button"
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="mobile-navigation"
-            class="flex h-9 w-9 items-center justify-center rounded-lg border border-[#BEE3EA] bg-white text-[#0B2A4A] transition-colors hover:bg-[#D9F2F6] lg:hidden"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-menu h-[18px] w-[18px]"
-              aria-hidden="true"
-            >
-              <path d="M4 5h16"></path>
-              <path d="M4 12h16"></path>
-              <path d="M4 19h16"></path>
-            </svg>
-          </button>
-        </div>
-      </header>
+      
+<header class="sticky top-0 z-50 w-full border-b transition-all duration-300 bio-site-header border-[#BEE3EA]/80 bg-white/[0.97] backdrop-blur-md">
+  <div class="mx-auto flex h-[90px] sm:h-[98px] max-w-7xl w-full items-center justify-between gap-2 xl:gap-4 px-5 sm:px-6 md:px-8">
+    <a aria-label="BioBridge Startup Summit 2026 home" class="group flex shrink-0 items-center transition-transform duration-200 hover:scale-[1.02]" href="/" data-status="active">
+      <img src="/biobridge-startup-summit-logo.png" alt="BioBridge Startup Summit 2026" class="h-11 sm:h-12 w-auto object-contain drop-shadow-[0_1px_2px_rgba(11,42,74,0.06)]" draggable="false"/>
+    </a>
+    <nav class="hidden items-center gap-0.5 xl:gap-1.5 lg:flex" aria-label="Main navigation">
+      <a href="/#home" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Home</a>
+      <a href="/#speakers" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Speakers &amp; Mentors</a>
+      <a href="/#overview" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Overview</a>
+      <a href="/#highlights" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Highlights</a>
+      <a href="/#registration" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Registration</a>
+      <a href="/#sessions" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Sessions</a>
+      <a href="/#partners" class="bio-nav-link rounded-lg px-2.5 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#366273] transition-colors hover:bg-[#EDF7F9] hover:text-[#0B2A4A]">Partners</a>
+      <a href="/problems" class="bio-nav-link rounded-lg px-3 py-1.5 text-[13px] xl:text-[13.5px] font-semibold text-[#1599B5] bg-[#D9F2F6]/70 transition-colors hover:bg-[#D9F2F6] hover:text-[#0B2A4A] inline-flex items-center gap-1.5"><span class="h-1.5 w-1.5 rounded-full bg-[#1599B5]"></span>BioBridge Hackathon</a>
+    </nav>
+    <div class="hidden items-center gap-2.5 lg:flex shrink-0">
+      <a href="https://form.startuptn.in/BSS" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap inline-flex items-center gap-2 rounded-xl bg-[#1599B5] px-4 py-2 xl:px-5 xl:py-2.5 text-[13px] xl:text-[13.5px] font-semibold text-white shadow-sm shadow-[#1599B5]/20 transition-all hover:bg-[#0E7E96] hover:shadow-md hover:shadow-[#1599B5]/30">
+        <span>Register for the Summit</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+      </a>
+    </div>
+    <button type="button" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" class="flex h-10 w-10 items-center justify-center rounded-lg border border-[#BEE3EA] bg-white text-[#0B2A4A] transition-colors hover:bg-[#D9F2F6] lg:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+    </button>
+  </div>
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="hidden border-t border-[#BEE3EA] bg-white px-6 py-5 shadow-xl backdrop-blur-md lg:hidden">
+    <div class="flex flex-col gap-2">
+      <a href="/#home" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Home</a>
+      <a href="/#speakers" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Speakers &amp; Mentors</a>
+      <a href="/#overview" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Overview</a>
+      <a href="/#highlights" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Highlights</a>
+      <a href="/#registration" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Registration</a>
+      <a href="/#sessions" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Sessions</a>
+      <a href="/#partners" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#0B2A4A] hover:bg-[#EDF7F9]">Partners</a>
+      <a href="/problems" class="mobile-nav-link rounded-lg px-3 py-2 text-[14.5px] font-semibold text-[#1599B5] bg-[#D9F2F6]/60 hover:bg-[#D9F2F6] flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-[#1599B5]"></span>BioBridge Hackathon</a>
+      <div class="pt-3 mt-2 border-t border-[#E2E8F0]">
+        <a href="https://form.startuptn.in/BSS" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-xl bg-[#1599B5] px-5 py-3 text-[14.5px] font-bold text-white shadow-sm hover:bg-[#0E7E96]">
+          <span>Register for the Summit</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
       <main class="flex-1">
         <!--$-->
         <script>
@@ -235,386 +241,166 @@
         </script>
         <!--/$-->
       </main>
-      <footer
-        class="mt-24 border-t border-[#BEE3EA] bg-gradient-to-b from-[#F4FAFB] via-[#EDF7F9] to-[#E3F2F6]"
-      >
-        <div
-          class="border-b border-[#BEE3EA]/80 bg-white/70 py-6 backdrop-blur-sm"
-        >
-          <div class="mx-auto max-w-7xl px-5 md:px-8">
-            <div
-              class="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-[#BEE3EA] bg-white p-5 shadow-sm"
-            >
-              <div class="flex items-center gap-3.5">
-                <div
-                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1599B5]/10 text-[#1599B5] border border-[#1599B5]/20"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-building-2 h-5 w-5"
-                  >
-                    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
-                    <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
-                    <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
-                    <path d="M10 6h4"></path>
-                    <path d="M10 10h4"></path>
-                    <path d="M10 14h4"></path>
-                    <path d="M10 18h4"></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 class="text-sm font-bold text-[#0B2A4A]">
-                    Need Accommodation?
-                  </h4>
-                  <p class="text-xs font-medium text-[#366273]">
-                    Fill out this form if accomodation needed
-                  </p>
-                </div>
-              </div>
-              <a
-                href="https://forms.gle/F1EYaVUyG2EK3DsUA"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#1599B5] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#0E7E96]"
-                >Fill out Accommodation Form
-              </a>
-            </div>
+      
+<!-- Accommodation Banner -->
+<div class="border-b border-[#BEE3EA]/80 bg-white/70 py-6 backdrop-blur-sm">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-[#BEE3EA] bg-white p-5 shadow-sm transition-all hover:border-[#1599B5] hover:shadow-md">
+      <div class="flex items-center gap-3.5">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1599B5]/10 text-[#1599B5] border border-[#1599B5]/20">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2 h-5 w-5"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-[#0B2A4A]">Need Accommodation?</h4>
+          <p class="text-xs font-medium text-[#366273]">Fill out this form if accomodation needed</p>
+        </div>
+      </div>
+      <a href="https://form.startuptn.in/BSS" target="_blank" rel="noopener noreferrer" class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#1599B5] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#0E7E96]">
+        Fill out Accommodation Form
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="border-t border-[#BEE3EA] bg-[#EDF7FA]">
+  <div class="mx-auto max-w-7xl px-6 py-14 sm:py-16 md:px-8">
+    <div class="bio-footer-grid">
+      <!-- Col 1: Brand & Contact Info -->
+      <div class="space-y-4">
+        <a href="/" class="inline-flex items-center gap-2">
+          <img src="/biobridge-startup-summit-logo.png" alt="BioBridge Startup Summit 2026" class="h-11 sm:h-12 w-auto object-contain" />
+        </a>
+        <p class="text-[14px] leading-relaxed text-[#366273] max-w-md">
+          A national summit connecting biotechnology, HealthTech, and life-sciences startups with incubation centres, investors, and corporate leaders to advance bio-innovation from lab to market.
+        </p>
+
+        <!-- Organizers Contact -->
+        <div class="pt-2">
+          <div class="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#1599B5] mb-4 sm:mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span>ORGANIZERS CONTACT</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <a href="tel:+919751664966" class="inline-flex items-center gap-1.5 rounded-full border border-[#BEE3EA] bg-white px-3.5 py-1.5 text-[12.5px] font-mono font-medium text-[#0B2A4A] shadow-xs hover:border-[#1599B5] hover:text-[#1599B5] transition-colors whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone text-[#1599B5]"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+91 9751664966</span>
+            </a>
+            <a href="tel:+919489243775" class="inline-flex items-center gap-1.5 rounded-full border border-[#BEE3EA] bg-white px-3.5 py-1.5 text-[12.5px] font-mono font-medium text-[#0B2A4A] shadow-xs hover:border-[#1599B5] hover:text-[#1599B5] transition-colors whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone text-[#1599B5]"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>+91 9489243775</span>
+            </a>
+            <a href="https://form.startuptn.in/BSS" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-full bg-[#1599B5] px-4 py-1.5 text-[12.5px] font-semibold text-white shadow-xs hover:bg-[#0E7E96] transition-colors whitespace-nowrap">
+              <span>Register for Summit</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg>
+            </a>
           </div>
         </div>
-        <div class="mx-auto max-w-7xl px-5 py-14 sm:py-16 md:px-8">
-          <div class="grid gap-10 lg:grid-cols-12">
-            <div class="lg:col-span-5 flex flex-col items-start">
-              <a
-                aria-label="BioBridge home"
-                href="/"
-                class="group inline-flex items-center transition-transform hover:scale-[1.01]"
-                ><img
-                  src="../biobridge-wordmark.png"
-                  alt="BioBridge — Ideas for a healthier tomorrow"
-                  class="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_2px_4px_rgba(11,42,74,0.06)]"
-                  draggable="false"
-              /></a>
-              <p
-                class="mt-4 max-w-md text-[14px] leading-relaxed text-[#366273]"
-              >
-                A national student biotechnology hackathon uniting biology,
-                technology, and commercial rigour to take campus innovators from
-                prototype to market.
-              </p>
-              <div class="mt-5 flex flex-col gap-2.5">
-                <div
-                  class="flex items-center gap-1.5 text-xs font-semibold text-[#1599B5]"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-phone h-3.5 w-3.5"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
-                    ></path></svg
-                  ><span class="font-mono text-[11px] uppercase tracking-wider"
-                    >Organizers Contact</span
-                  >
-                </div>
-                <div class="flex flex-wrap items-center gap-2.5">
-                  <a
-                    href="tel:+919751664966"
-                    class="inline-flex items-center gap-2 rounded-xl border border-[#BEE3EA] bg-white px-3.5 py-2 text-xs font-semibold text-[#0B2A4A] shadow-sm transition-all hover:border-[#1599B5] hover:text-[#1599B5] hover:shadow"
-                    ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-phone h-3.5 w-3.5 text-[#1599B5]"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
-                      ></path></svg
-                    >+91 9751664966</a
-                  ><a
-                    href="tel:+919489243775"
-                    class="inline-flex items-center gap-2 rounded-xl border border-[#BEE3EA] bg-white px-3.5 py-2 text-xs font-semibold text-[#0B2A4A] shadow-sm transition-all hover:border-[#1599B5] hover:text-[#1599B5] hover:shadow"
-                    ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-phone h-3.5 w-3.5 text-[#1599B5]"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
-                      ></path></svg
-                    >+91 9489243775</a
-                  ><a
-                    href="https://unstop.com/p/biobridge-bio-innovation-hackathon-2026-ks-rangasamy-college-of-technology-ksrct-namakkal-1755864?lb=gRm2vex&amp;utm_medium=Share&amp;utm_source=WhatsApp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 rounded-xl bg-[#1599B5] px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#0E7E96] hover:shadow"
-                    >Register on Unstop<svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-arrow-up-right h-3.5 w-3.5"
-                      aria-hidden="true"
-                    >
-                      <path d="M7 7h10v10"></path>
-                      <path d="M7 17 17 7"></path></svg
-                  ></a>
-                </div>
-              </div>
-              <div
-                class="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#D9F2F6]/60 px-3 py-1.5 border border-[#BEE3EA]"
-              >
-                <span
-                  class="h-2 w-2 rounded-full bg-[#059669] animate-pulse"
-                ></span
-                ><span
-                  class="font-mono text-[11px] font-bold text-[#0E7E96] uppercase tracking-wide"
-                  >Finals (1-Day Event): Oct 30 · Department of Biotechnology,
-                  K.S.Rangasamy College of Technology</span
-                >
-              </div>
-            </div>
-            <div class="lg:col-span-4 grid grid-cols-2 gap-6">
-              <div>
-                <p
-                  class="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#1599B5]"
-                >
-                  Programme
-                </p>
-                <ul class="space-y-2.5">
-                  <li>
-                    <a
-                      href="/problems"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Challenges (36)</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/#how-it-works"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >How It Runs</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/#sessions"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Weekend Sessions</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/#mentors"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Mentors &amp; Grand Jury</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/#prizes"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Prizes &amp; Incubation</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/#partners"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Partners &amp; Consortium</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <p
-                  class="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#1599B5]"
-                >
-                  Participate
-                </p>
-                <ul class="space-y-2.5">
-                  <li>
-                    <a
-                      href="https://unstop.com/p/biobridge-bio-innovation-hackathon-2026-ks-rangasamy-college-of-technology-ksrct-namakkal-1755864?lb=gRm2vex&amp;utm_medium=Share&amp;utm_source=WhatsApp"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1 text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Register on Unstop<svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-external-link h-3 w-3 opacity-60"
-                        aria-hidden="true"
-                      >
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14 21 3"></path>
-                        <path
-                          d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                        ></path></svg
-                    ></a>
-                  </li>
-                  <li>
-                    <a
-                      href="/status"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Check Application Status</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/terms"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Terms &amp; Conditions</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/#faq"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Frequently Asked Questions</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/problems"
-                      class="text-[13.5px] font-medium text-[#366273] transition-colors hover:text-[#1599B5]"
-                      >Download Challenge Directory</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="lg:col-span-3">
-              <p
-                class="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#1599B5]"
-              >
-                Jointly Organized By
-              </p>
-              <div class="flex flex-col gap-2.5">
-                <div
-                  class="flex items-center justify-center rounded-xl border border-[#BEE3EA] bg-white p-3 shadow-xs transition-all hover:border-[#1599B5] hover:shadow-sm"
-                  title="Department of Biotechnology"
-                >
-                  <img
-                    src="../ksrct-logo.png"
-                    alt="Department of Biotechnology"
-                    class="h-9 max-h-9 max-w-[180px] w-auto object-contain"
-                  />
-                </div>
-                <div
-                  class="flex items-center justify-center rounded-xl border border-[#BEE3EA] bg-white p-3 shadow-xs transition-all hover:border-[#1599B5] hover:shadow-sm"
-                  title="MARABANU"
-                >
-                  <img
-                    src="../marabanu-logo.png"
-                    alt="MARABANU"
-                    class="h-9 max-h-9 max-w-[180px] w-auto object-contain"
-                  />
-                </div>
-                <div
-                  class="flex items-center justify-center rounded-xl border border-[#BEE3EA] bg-white p-3 shadow-xs transition-all hover:border-[#1599B5] hover:shadow-sm"
-                  title="StartupTN Government of Tamil Nadu"
-                >
-                  <img
-                    src="../startuptn-logo.png"
-                    alt="StartupTN Government of Tamil Nadu"
-                    class="h-9 max-h-9 max-w-[180px] w-auto object-contain"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+
+        <!-- Finals Banner Pill -->
+        <div class="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#BEE3EA] bg-[#DDF1F6] px-3.5 py-2">
+          <span class="h-2 w-2 rounded-full bg-emerald-500 shrink-0"></span>
+          <span class="font-mono text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#0E7E96]">
+            SUMMIT (1-DAY EVENT): OCT 30 · DEPARTMENT OF BIOTECHNOLOGY, K.S. RANGASAMY COLLEGE OF TECHNOLOGY
+          </span>
         </div>
-        <div class="border-t border-[#BEE3EA] bg-[#D9F2F6]">
-          <div
-            class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-4 md:px-8"
-          >
-            <p
-              class="font-mono text-[11px] uppercase tracking-[0.15em] text-[#366273]"
-            >
-              © 2026 BioBridge · All rights reserved
-            </p>
-            <div class="flex items-center gap-2.5">
-              <span
-                class="font-mono text-[11px] uppercase tracking-wider text-[#366273]"
-                >Designed &amp; Developed by</span
-              ><a
-                href="https://www.inaiyam.org.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group inline-flex items-center rounded-lg border border-[#BEE3EA] bg-white px-2.5 py-1 shadow-sm transition-all hover:border-[#1599B5] hover:shadow"
-                title="Inaiyam Innovations — www.inaiyam.org.in"
-                ><img
-                  src="../inaiyam-logo.png"
-                  alt="Inaiyam Innovations"
-                  class="h-5 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-              /></a>
-            </div>
-            <div class="flex flex-wrap items-center gap-4">
-              <a
-                href="/terms"
-                class="font-mono text-[11px] text-[#366273] transition-colors hover:text-[#1599B5]"
-                >Terms &amp; Conditions</a
-              ><a
-                class="font-mono text-[11px] text-[#366273] transition-colors hover:text-[#1599B5] active"
-                href="/about"
-                data-status="active"
-                aria-current="page"
-                >About</a
-              ><a
-                href="/faq"
-                class="font-mono text-[11px] text-[#366273] transition-colors hover:text-[#1599B5]"
-                >FAQs</a
-              >
-              <p class="font-mono text-[11px] text-[#366273]/80">
-                Data stored locally on this device
-              </p>
-            </div>
-          </div>
+      </div>
+
+      <!-- Col 2: PROGRAMME -->
+      <div class="w-full">
+        <h4 class="font-mono text-[11.5px] font-bold uppercase tracking-[0.2em] text-[#1599B5] mb-6 sm:mb-7">PROGRAMME</h4>
+        <ul class="space-y-2 text-[13.5px] text-[#366273]">
+          <li><a href="/#overview" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Event Overview</a></li>
+          <li><a href="/#highlights" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Summit Highlights</a></li>
+          <li><a href="/#speakers" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Speakers &amp; Mentors</a></li>
+          <li><a href="/#sessions" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Summit Sessions</a></li>
+          <li><a href="/problems" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">BioBridge Hackathon</a></li>
+          <li><a href="/#partners" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Partners &amp; Consortium</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: PARTICIPATE -->
+      <div class="w-full">
+        <h4 class="font-mono text-[11.5px] font-bold uppercase tracking-[0.2em] text-[#1599B5] mb-6 sm:mb-7">PARTICIPATE</h4>
+        <ul class="space-y-2 text-[13.5px] text-[#366273]">
+          <li>
+            <a href="https://form.startuptn.in/BSS" target="_blank" rel="noopener noreferrer" class="hover:text-[#1599B5] transition-colors inline-flex items-center gap-1 font-semibold text-[#1599B5] whitespace-nowrap">
+              <span>Register for Summit</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+            </a>
+          </li>
+          <li><a href="/#registration" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Startup Registration</a></li>
+          <li><a href="/#registration" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Incubation Centres</a></li>
+          <li><a href="/problems" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Hackathon Details</a></li>
+          <li><a href="/status" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Check Application Status</a></li>
+          <li><a href="/terms" class="hover:text-[#1599B5] transition-colors whitespace-nowrap">Terms &amp; Conditions</a></li>
+          <li>
+            <a href="https://form.startuptn.in/BSS" target="_blank" rel="noopener noreferrer" class="hover:text-[#1599B5] transition-colors inline-flex items-center gap-1 text-[12.5px] text-[#4B5563] whitespace-nowrap">
+              <span>Accommodation form</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 4: JOINTLY ORGANIZED BY (3 white cards) -->
+      <div class="w-full">
+        <h4 class="font-mono text-[11.5px] font-bold uppercase tracking-[0.2em] text-[#1599B5] mb-6 sm:mb-7">JOINTLY ORGANIZED BY</h4>
+        <div class="space-y-3 w-full">
+          <!-- Card 1: KSRCT -->
+          <a href="/#partners" class="footer-organizer-card group">
+            <img src="/ksrct-logo.png" alt="K.S. Rangasamy College of Technology" class="footer-logo-ksrct transition-transform group-hover:scale-105" />
+          </a>
+          <!-- Card 2: MARABANU -->
+          <a href="/#partners" class="footer-organizer-card group">
+            <img src="/marabanu-logo.png" alt="MARABANU" class="footer-logo-marabanu transition-transform group-hover:scale-105" />
+          </a>
+          <!-- Card 3: StartupTN -->
+          <a href="/#partners" class="footer-organizer-card group">
+            <img src="/startuptn-logo.png" alt="StartupTN" class="footer-logo-startuptn transition-transform group-hover:scale-105" />
+          </a>
         </div>
-      </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub-footer Bar -->
+  <div class="border-t border-[#BEE3EA] bg-[#DDF1F6]/90 py-4">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 md:px-8">
+      <p class="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#366273]">© 2026 BIOBRIDGE · ALL RIGHTS RESERVED</p>
+      <div class="flex items-center gap-2.5">
+        <span class="font-mono text-[11px] font-bold uppercase tracking-wider text-[#366273]">DESIGNED &amp; DEVELOPED BY</span>
+        <a href="https://www.inaiyam.org.in" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center rounded-xl border border-[#BEE3EA] bg-white px-3 py-1 shadow-xs transition-all hover:border-[#1599B5]" title="Inaiyam Innovations — www.inaiyam.org.in">
+          <img src="/inaiyam-logo.png" alt="Inaiyam Innovations" class="h-5 w-auto object-contain transition-transform duration-200 group-hover:scale-105"/>
+        </a>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 text-xs">
+        <a href="/terms" class="font-mono text-[11px] font-semibold text-[#366273] transition-colors hover:text-[#1599B5]">Terms &amp; Conditions</a>
+        <a href="/#overview" class="font-mono text-[11px] font-semibold text-[#366273] transition-colors hover:text-[#1599B5]">About</a>
+        <a href="/faq" class="font-mono text-[11px] font-semibold text-[#366273] transition-colors hover:text-[#1599B5]">FAQs</a>
+        <span class="font-mono text-[11px] text-[#366273]/80">Data stored locally on this device</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  var menuBtn = document.getElementById('mobile-menu-btn');
+  var menuDrawer = document.getElementById('mobile-nav-drawer');
+  if (menuBtn && menuDrawer) {
+    menuBtn.addEventListener('click', function() {
+      var isHidden = menuDrawer.classList.contains('hidden');
+      if (isHidden) {
+        menuDrawer.classList.remove('hidden');
+        menuBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        menuDrawer.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+</script>
+
       <div
         class="fixed bottom-3 right-3 sm:bottom-4 sm:right-6 z-50 flex items-end gap-3 select-none"
       >
@@ -630,7 +416,7 @@
             ><span
               class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"
             ></span></span
-          ><span>Need help? Chat with BioBot! 🧬</span></button
+          ><span>Need help? Chat with BioBot! <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block text-[#1599B5] ml-1"><path d="m8 14-6 6"/><path d="m14 8 6-6"/><path d="m18 10-6 6"/><path d="m10 18-6-6"/><path d="m6 6 12 12"/><path d="m18 6-6 6"/><path d="m12 12-6 6"/></svg></span></button
         ><button
           type="button"
           class="group relative cursor-pointer focus:outline-none transition-transform duration-300 active:scale-95"
@@ -725,28 +511,6 @@
       document.currentScript.remove();
     </script>
     <script type="module" async="" src="../assets/index-syOMK-83.js"></script>
-    <script id="accommodation-script">
-      (function () {
-        const h =
-          '<div class="mx-auto max-w-7xl px-5 md:px-8"><div class="flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-[#BEE3EA] bg-white p-5 shadow-sm transition-all hover:border-[#1599B5] hover:shadow-md"><div class="flex items-center gap-3.5"><div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1599B5]/10 text-[#1599B5] border border-[#1599B5]/20"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2 h-5 w-5"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg></div><div><h4 class="text-sm font-bold text-[#0B2A4A]">Need Accommodation?</h4><p class="text-xs font-medium text-[#366273]">Fill out this form if accomodation needed</p></div></div><a href="https://forms.gle/F1EYaVUyG2EK3DsUA" target="_blank" rel="noopener noreferrer" class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#1599B5] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#0E7E96]">Fill out Accommodation Form</a></div></div>';
-        function e() {
-          if (document.getElementById("accommodation-card")) return;
-          const f = document.querySelector("footer");
-          if (!f) return;
-          const d = document.createElement("div");
-          d.id = "accommodation-card";
-          d.className =
-            "border-b border-[#BEE3EA]/80 bg-white/70 py-6 backdrop-blur-sm";
-          d.innerHTML = h;
-          f.insertBefore(d, f.firstChild);
-        }
-        e();
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", e);
-        }
-        window.addEventListener("load", e);
-        setInterval(e, 500);
-      })();
-    </script>
+    
   </body>
 </html>

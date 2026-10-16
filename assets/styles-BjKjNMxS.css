@@ -7568,3 +7568,8 @@
     opacity: 0;
   }
 }
+
+
+/* Custom single line partner rules */
+.grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+.partner-single-row { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)) !important; align-items: stretch !important; width: 100% !important; }
